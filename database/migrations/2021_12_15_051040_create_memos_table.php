@@ -18,8 +18,6 @@ class CreateMemosTable extends Migration
             $table->unsignedInteger('parent_id')->nullable();
             $table->string('title',20)->default('無題のメモ')->nullable();
             $table->string('content');
-            $table->boolean('heart')->default(false);
-            $table->boolean('inspiration')->default(false);
             $table->timestamps();
         });
     }

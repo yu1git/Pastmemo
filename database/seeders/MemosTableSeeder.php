@@ -18,8 +18,6 @@ class MemosTableSeeder extends Seeder
             'parent_id' => null,
             'title' => 'あ',
             'content' => 'あいうえお',
-            'heart' => false,
-            'inspiration' => false, 
             'created_at' => now(),
             'updated_at' => now(),
         ];
@@ -29,8 +27,6 @@ class MemosTableSeeder extends Seeder
             'parent_id' => 1,
             'title' => 'か',
             'content' => 'かきくけこ',
-            'heart' => false,
-            'inspiration' => false, 
             'created_at' => now(),
             'updated_at' => now(),
         ];

@@ -17,3 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// function mapApiRoutes()
+// {
+//     Route::prefix('api')
+//          ->middleware('web') // ★ 'api' → 'web' に変更
+//          ->namespace($this->namespace)
+//          ->group(base_path('routes/api.php'));
+// }
+
+Route::post('/register', 'Auth\RegisterController@register')->name('register');
