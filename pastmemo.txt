@@ -17,7 +17,7 @@
 ＜？になった＞
 ・"export 'createRouter' was not found in 'vue-router' エラーが出てくる。
 npm install -D vue-routerでルーターを入れたが、npm install -D vue-router@nextにしないといけなかった。そのまま上書きしがエラーがでる。npm remove vue-routerで消して、もう一度npm install -D vue-router@nextするも、ERROR in ./node_modules/vue-router/dist/vue-router.esm.jsエラー。npm run watchを止めて、もう一度npm run watchをすると、なおっている
-
+→vueが2になってたから消して3を入れなおしたらrouterがないエラー
 
 セキュリティ：
 (1) 機密性の高いデータを保存しない (必要なければ)。 
