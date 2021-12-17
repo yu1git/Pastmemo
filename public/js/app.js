@@ -17632,11 +17632,10 @@ var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_2__.createRouter)({
   history: (0,vue_router__WEBPACK_IMPORTED_MODULE_2__.createWebHistory)(),
   routes: [{
     path: '/',
-    name: 'index',
+    //nameはかかない
     component: _pages_MemoList_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }, {
     path: '/login',
-    name: 'index',
     component: _pages_Login_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   }]
 });

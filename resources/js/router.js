@@ -9,12 +9,11 @@ export const router = createRouter({
     routes : [
     {
         path: '/',
-        name: 'index',
+        //nameはかかない
         component: MemoList
     },
     {
         path: '/login',
-        name: 'index',
         component: Login
     }
     ]

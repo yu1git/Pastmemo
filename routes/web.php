@@ -17,8 +17,10 @@ use Illuminate\Support\Facades\Route;
 //     return view('index');
 // })->where('any', '.+');
 
-Route::get('/{any?}', fn() => view('index'))->where('any', '.+');
+Route::get('/{any}', function(){
+    return view('index');
+})->where('any', '.*');
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
