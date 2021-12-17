@@ -95,5 +95,8 @@ npm install -D vue-routerでルーターを入れたが、npm install -D vue-rou
 テスト
     テストライブラリを使う
 
-    テストコードを作成
-    $ php artisan make:test RegisterApiTest
+    インメモリを使う？
+
+    Registerすべて消す？使ってないファイル消す方法探す？
+
+

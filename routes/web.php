@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\TestController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,6 +22,18 @@ Route::get('/{any}', function(){
     return view('index');
 })->where('any', '.*');
 
-// Auth::routes();
+//Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Auth::routes(['verify' => true]);	// メール認証を有効化
+
+Route::middleware('auth')->group(function(){
+    // 要ユーザ認証
+    Route::get('/test', [TestController::class, 'index'])->name('test.index');
+    Route::middleware('verified')->group(function(){
+        // 要メール認証
+        Route::get('/test/create', [TestController::class, 'create'])->name('test.create');
+    });
+});
