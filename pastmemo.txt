@@ -88,9 +88,12 @@ npm install -D vue-routerでルーターを入れたが、npm install -D vue-rou
     php artisan migrate:fresh --seed
 
     コントローラーを作る
-    php artisan make:controller コントローラー名(UserController)
+    php artisan make:controller コントローラー名(UserController) --api
 
     routes/web.phpにルート情報を追加
+
+    バリデーションのためにフォームリクエストクラスを作成
+    $ php artisan make:request リクエスト名(CreateMemoRequest)
 
 テスト
     テストライブラリを使う

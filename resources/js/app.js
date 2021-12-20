@@ -12,9 +12,9 @@ createApp(App)
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-// require('./bootstrap');
+//require('./bootstrap');
 
-// window.Vue = require('vue').default;
+//window.Vue = require('vue').default;
 
 /**
  * The following block of code may be used to automatically register your
