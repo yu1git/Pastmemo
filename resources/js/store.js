@@ -11,13 +11,18 @@ export const store = createStore({
         }
     },
     // getters: ()=>{
+    //     getPastMemo: (state) => (id) =>{
+    //         return state.memos.id( Math.floor(Math.random() * 10));
+    //    }
     // },
     // stateの更新
     mutations: {
         setMemos: (state,memos)=> {
             state.memos = memos
         },
-        
+        getRandomMemo(state){
+            state.randomMemo =
+        },
         // count: (state, n)=> {
         //     state.counter += n
         // },
@@ -51,8 +56,6 @@ export const store = createStore({
             // context.commit('count', n)
             // context.commit('say','add' + n + '!')
         },
-        getPastMemo: ({commit})=>{
-            
-        }
+        
     }
 })

@@ -23,7 +23,7 @@ import dayjs from 'dayjs'
 export default {
     name: 'memoList',
     components:{
-        
+        //PastMemo,
     },
     methods:{
       makeDate:function(date){
