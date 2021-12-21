@@ -19,6 +19,22 @@
 npm install -D vue-routerでルーターを入れたが、npm install -D vue-router@nextにしないといけなかった。そのまま上書きしがエラーがでる。npm remove vue-routerで消して、もう一度npm install -D vue-router@nextするも、ERROR in ./node_modules/vue-router/dist/vue-router.esm.jsエラー。npm run watchを止めて、もう一度npm run watchをすると、なおっている
 →vueが2になってたから消して3を入れなおしたらrouterがないエラー
 
+・npm install vuex@nextを一度消してnpm remove vuex、npm install -D vuex@next
+→vuexについてhttps://reffect.co.jp/vue/understaind-vue-basic
+
+・UTCの日付形式（例：2021-07-21T04:37:47.000000Z）になってしまいます。
+→Vueのday.jsでformatを変えるか、laravelで変えるか？
+→vueのday.jsで
+<small class="card-text">{{ makeDate(memo.updated_at) }}</small>
+<script>
+    methods:{
+      makeDate:function(date){
+        return dayjs(date).format('YYYY/MM/DD HH:mm:ss')
+      }
+    },
+</script>
+
+
 セキュリティ：
 (1) 機密性の高いデータを保存しない (必要なければ)。 
 (2) ユーザーに与えるアクセス権 はできるだけ小さくする。 
@@ -43,7 +59,7 @@ npm install -D vue-routerでルーターを入れたが、npm install -D vue-rou
     ・ユーザーはパスワードを忘れた場合には再登録することができる。
 
     ＜メモ＞
-    ・タイトル、メモ、更新日、作成日、追記したものは親ID、過去メモとして表示するか否か設定を持つ。
+    ・タイトル、メモ、更新日、作成日、過去メモとして表示するか否か設定を持つ。
 
     ・メモを保存せず終了、戻るボタンを押したら、注意メッセージ
 

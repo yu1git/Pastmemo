@@ -37,7 +37,6 @@ class MemosTableSeeder extends Seeder
         $faker = \Faker\Factory::create('ja_JP');
         for ($i = 0; $i < 10; $i++){
             $param = [
-                'parent_id' => $faker->randomDigit,
                 'title' => $faker->realText(10),
                 'content' => $faker->realText(20),
                 'created_at' => now(),

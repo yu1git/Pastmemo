@@ -15,7 +15,6 @@ class CreateMemosTable extends Migration
     {
         Schema::create('memos', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('parent_id')->nullable();
             $table->string('title',20)->default('無題のメモ')->nullable();
             $table->string('content');
             $table->timestamps();
