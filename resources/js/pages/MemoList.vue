@@ -8,22 +8,26 @@
         <h5 class="card-title">{{ memo.title }}</h5>
         <p class="card-text">{{ memo.content }}</p>
         <small class="card-text">{{ makeDate(memo.updated_at) }}</small>
+        <p>{{$store.state.randomMemo}}</p>
       </div>
     </div>
-  
+    
+    </div>
+    <div class="row">
+      <PastMemo />
     </div>
     </div>
   </div>
 </template>
 
 <script>
-//import PastMemo from '/components/pastmemo'
+import PastMemo from '../components/PastMemo.vue'
 import dayjs from 'dayjs'
 
 export default {
     name: 'memoList',
     components:{
-        //PastMemo,
+        PastMemo,
     },
     methods:{
       makeDate:function(date){

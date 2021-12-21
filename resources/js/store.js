@@ -1,13 +1,14 @@
 //import { reactive } from "vue";
 import {createStore} from 'vuex'
 import axios from 'axios'
-//import dayjs from 'dayjs'
 
 export const store = createStore({
     // 保管する値を用意
     state: ()=>{
         return{
             memos:[],
+            maxMemo:0,
+            randomMemo:0,
         }
     },
     // getters: ()=>{
@@ -20,8 +21,11 @@ export const store = createStore({
         setMemos: (state,memos)=> {
             state.memos = memos
         },
-        getRandomMemo(state){
-            state.randomMemo =
+        setMaxMemo: (state, maxMemo)=> {
+            state.maxMemo = maxMemo
+        },
+        getRandomMemo: (state)=> {
+            state.randomMemo = Math.random() * Math.floor(state.maxMemo);
         },
         // count: (state, n)=> {
         //     state.counter += n
@@ -38,7 +42,8 @@ export const store = createStore({
     actions: {
         getMemos: ({commit})=>{
             return axios.get("http://127.0.0.1:8000/api/memos").then(response => {
-                commit('setMemos',response.data)
+                commit('setMemos',response.data);
+                commit('setMaxMemo', response.data.length);
             })
             // const url = "http://127.0.0.1:8000/api/memos";
             // const getAPI = async () => {
