@@ -78,6 +78,12 @@ npm install -D vue-routerでルーターを入れたが、npm install -D vue-rou
     php artisan serve
     npm run watch
 
+        ・メモを作成、編集、削除
+        ・ユーザー認証
+        ・検索機能
+        ・上部メニューにアイコン追加、いい感じに見えるように整理
+
+
     モデルとマイグレーションを同時に作成
     php artisan make:model 名(最初大文字。単数形) --migration
 
