@@ -36,6 +36,11 @@ npm install -D vue-routerでルーターを入れたが、npm install -D vue-rou
 
 ・ランダムな数字をセットするのをstoreのactionsにするか、mutationsにするか悩んだが、最初の読み込み時のみactionから呼び出せばいいので、mutationsに。
 
+＜参考＞
+・jsonからとってきてデータ一覧を表示
+https://blog.capilano-fw.com/?p=432#Vue
+・vuexのstoreでconsole.logを書く場所
+https://dev83.com/vue-vuex04/
 
 セキュリティ：
 (1) 機密性の高いデータを保存しない (必要なければ)。 
@@ -50,8 +55,6 @@ npm install -D vue-routerでルーターを入れたが、npm install -D vue-rou
     ＜ユーザーができること＞
     ・メモを作成、編集、削除、一覧表示できる。
 
-    ・過去のメモに追記できる
-
     ・過去メモ表示を非表示
 
     ・ユーザーごとにアカウントを持ち、ログインしたユーザーは自分のメモだけを閲覧または編集することができる。
@@ -59,7 +62,7 @@ npm install -D vue-routerでルーターを入れたが、npm install -D vue-rou
     ・ユーザーはパスワードを忘れた場合には再登録することができる。
 
     ＜メモ＞
-    ・タイトル、メモ、更新日、作成日、過去メモとして表示するか否か設定を持つ。
+    ・タイトル、メモの中身、更新日、作成日、過去メモとして表示するか否か設定を持つ。
 
     ・メモを保存せず終了、戻るボタンを押したら、注意メッセージ
 
@@ -81,6 +84,7 @@ npm install -D vue-routerでルーターを入れたが、npm install -D vue-rou
         ・メモを作成、編集、削除
         ・ユーザー認証
         ・検索機能
+        ・過去メモ表示・非表示
         ・上部メニューにアイコン追加、いい感じに見えるように整理
 
 
@@ -108,6 +112,8 @@ npm install -D vue-routerでルーターを入れたが、npm install -D vue-rou
 
     バリデーションのためにフォームリクエストクラスを作成
     $ php artisan make:request リクエスト名(CreateMemoRequest)
+
+    pages/にページ追加→router.jsを編集
 
 テスト
     テストライブラリを使う

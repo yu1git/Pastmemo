@@ -5,7 +5,7 @@
                 ホーム
             </RouterLink>
             <form class="d-flex"><input class="form-control" type="search" placeholder="検索..." aria-label="検索..."></form>
-            <RouterLink class="nav-link" to="#">New</RouterLink>
+            <RouterLink class="nav-link" to="/memoForm">New</RouterLink>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="ナビゲーションの切替">
             <span class="navbar-toggler-icon"></span>
             </button>
