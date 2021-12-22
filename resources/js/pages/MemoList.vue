@@ -1,21 +1,25 @@
 <template>
-  <div class="container">
-    <h1>Memo List</h1>
+  <div class="container-fluid">
     <div class="row">
-    <div class="col-sm-2" style="width: 15rem; margin-top:20px; " v-for="memo in $store.state.memos" v-bind:key="memo.id">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">{{ memo.title }}</h5>
-        <p class="card-text">{{ memo.content }}</p>
-        <small class="card-text">{{ makeDate(memo.updated_at) }}</small>
-        <p>{{$store.state.randomMemo}}</p>
+      <div class="col-md-8">
+        <h1 class="text-center">Memo List</h1>
+        <div class="row">
+          <div class="col-sm-2 col-xs-6" style="width: 12rem; margin-top:20px; " v-for="memo in $store.state.memos" v-bind:key="memo.id">
+            <div class="card">
+              <div class="card-body">
+                <h6 class="card-title">{{ memo.title }}</h6>
+                <p class="card-text">{{ memo.content }}</p>
+                <div class="text-end">
+                  <small class="card-text">{{ makeDate(memo.updated_at) }}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    
-    </div>
-    <div class="row">
-      <PastMemo />
-    </div>
+      <div class="col-md-4">
+        <PastMemo />
+      </div>
     </div>
   </div>
 </template>
@@ -30,7 +34,7 @@ export default {
         PastMemo,
     },
     methods:{
-      makeDate:function(date){
+      makeDate(date){
         return dayjs(date).format('YYYY/MM/DD HH:mm')
       }
     },
@@ -40,7 +44,7 @@ export default {
     //     }
     // },
     mounted(){
-      this.$store.dispatch('getMemos')
+      this.$store.dispatch('getMemos');
     }
     
 }

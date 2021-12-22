@@ -24,8 +24,9 @@ export const store = createStore({
         setMaxMemo: (state, maxMemo)=> {
             state.maxMemo = maxMemo
         },
-        getRandomMemo: (state)=> {
-            state.randomMemo = Math.random() * Math.floor(state.maxMemo);
+        setRandomMemo: (state)=> {
+            let r =  Math.floor(Math.random() *state.maxMemo);
+            state.randomMemo = r
         },
         // count: (state, n)=> {
         //     state.counter += n
@@ -44,7 +45,9 @@ export const store = createStore({
             return axios.get("http://127.0.0.1:8000/api/memos").then(response => {
                 commit('setMemos',response.data);
                 commit('setMaxMemo', response.data.length);
+                commit('setRandomMemo');
             })
+        },
             // const url = "http://127.0.0.1:8000/api/memos";
             // const getAPI = async () => {
             //     const result = await axios.get(url);
@@ -56,11 +59,6 @@ export const store = createStore({
             //     return {
             //         getAPI,
             //     }
-
-            // let n = Math.floor(Math.random() * 10)
-            // context.commit('count', n)
-            // context.commit('say','add' + n + '!')
-        },
-        
     }
 })
+

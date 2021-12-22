@@ -28,11 +28,13 @@ npm install -D vue-routerでルーターを入れたが、npm install -D vue-rou
 <small class="card-text">{{ makeDate(memo.updated_at) }}</small>
 <script>
     methods:{
-      makeDate:function(date){
+      makeDate(date){
         return dayjs(date).format('YYYY/MM/DD HH:mm:ss')
       }
     },
 </script>
+
+・ランダムな数字をセットするのをstoreのactionsにするか、mutationsにするか悩んだが、最初の読み込み時のみactionから呼び出せばいいので、mutationsに。
 
 
 セキュリティ：
@@ -48,13 +50,11 @@ npm install -D vue-routerでルーターを入れたが、npm install -D vue-rou
     ＜ユーザーができること＞
     ・メモを作成、編集、削除、一覧表示できる。
 
-    ・フォルダを作成、編集、削除、一覧表示できる。
-
     ・過去のメモに追記できる
 
-    ・過去メモ表示をやめる
+    ・過去メモ表示を非表示
 
-    ・ユーザーごとにアカウントを持ち、ログインしたユーザーは自分のフォルダおよびメモだけを閲覧または編集することができる。
+    ・ユーザーごとにアカウントを持ち、ログインしたユーザーは自分のメモだけを閲覧または編集することができる。
 
     ・ユーザーはパスワードを忘れた場合には再登録することができる。
 
@@ -69,14 +69,6 @@ npm install -D vue-routerでルーターを入れたが、npm install -D vue-rou
 
     ・過去のメモ：上部にランダム表示。再読み込みボタンを押せばもう一度ランダム表示。メモをタップすればメモ編集画面に遷都。
 
-    ＜フォルダ＞
-    ・タイトル、メモ、更新日、作成日、過去メモとして表示するか否か設定を持つ。
-
-    ・設定ボタン：過去メモとして表示するか否か設定ボタン。削除ボタン。
-
-    ・入力値バリデーション：名前はNotNulll、required。デフォルト名「無題のフォルダ」。VARCHAR(20)、max:20
-
-テーブル定義
 
 画面設計
     ・オン/オフボタン：トグルスイッチ。オンオフを文字で表示

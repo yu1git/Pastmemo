@@ -19,6 +19,9 @@ export default {
     components:{
         Navbar
     },
+    // mounted(){
+    //   this.$store.commit('setRandomMemo');
+    // },
     // setup(){
     //     const data = reactive({
     //         message :'Hello Vue!'
