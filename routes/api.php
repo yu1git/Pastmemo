@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\MemoController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -26,5 +28,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //          ->group(base_path('routes/api.php'));
 // }
 
+// メモ新規作成
+Route::apiResource('/memos',MemoController::class);
+
 // ログイン
-Route::post('/login', 'Auth\LoginController@login')->name('login');
+//Route::post('/login', 'Auth\LoginController@login')->name('login');

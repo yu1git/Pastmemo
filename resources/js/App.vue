@@ -1,5 +1,8 @@
 <template>
     <div>
+        <header>
+            <Navbar />
+        </header>
         <main>
             <div class="container">
                 <RouterView />
@@ -9,21 +12,40 @@
 </template>
 
 <script>
-// import { reactive } from "vue";
-// import HelloWorld from './components/HelloWorld'
+import Navbar from './components/Navbar.vue'
 
-// export default {
-//     name: 'App',
-//     components:{
-//         HelloWorld
-//     },
-//     setup(){
-//         const data = reactive({
-//             message :'Hello Vue!'
-//         })
-//         return {
-//             data
-//         }
-//     }
-// };
+export default {
+    name: 'App',
+    components:{
+        Navbar
+    },
+    // mounted(){
+    //   this.$store.commit('setRandomMemo');
+    // },
+    // setup(){
+    //     const data = reactive({
+    //         message :'Hello Vue!'
+    //     });
+        
+    //     try{
+    //         const getAPI = async () => {
+    //         const result = await axios.get(url);
+    //         self.items = result.data;
+    //         console.log(result);
+    //         };
+    //         getAPI();
+
+    //         return {
+    //             data,
+    //             getAPI,
+    //         }
+    //     }catch(error){
+    //         const{
+    //             status,
+    //             statusText
+    //         } = error.response;
+    //     console.log(`Error! HTTP Status: ${status} ${statusText}`);
+    //     }
+    // }
+};
 </script>

@@ -19,6 +19,24 @@
 npm install -D vue-routerでルーターを入れたが、npm install -D vue-router@nextにしないといけなかった。そのまま上書きしがエラーがでる。npm remove vue-routerで消して、もう一度npm install -D vue-router@nextするも、ERROR in ./node_modules/vue-router/dist/vue-router.esm.jsエラー。npm run watchを止めて、もう一度npm run watchをすると、なおっている
 →vueが2になってたから消して3を入れなおしたらrouterがないエラー
 
+・npm install vuex@nextを一度消してnpm remove vuex、npm install -D vuex@next
+→vuexについてhttps://reffect.co.jp/vue/understaind-vue-basic
+
+・UTCの日付形式（例：2021-07-21T04:37:47.000000Z）になってしまいます。
+→Vueのday.jsでformatを変えるか、laravelで変えるか？
+→vueのday.jsで
+<small class="card-text">{{ makeDate(memo.updated_at) }}</small>
+<script>
+    methods:{
+      makeDate(date){
+        return dayjs(date).format('YYYY/MM/DD HH:mm:ss')
+      }
+    },
+</script>
+
+・ランダムな数字をセットするのをstoreのactionsにするか、mutationsにするか悩んだが、最初の読み込み時のみactionから呼び出せばいいので、mutationsに。
+
+
 セキュリティ：
 (1) 機密性の高いデータを保存しない (必要なければ)。 
 (2) ユーザーに与えるアクセス権 はできるだけ小さくする。 
@@ -32,18 +50,16 @@ npm install -D vue-routerでルーターを入れたが、npm install -D vue-rou
     ＜ユーザーができること＞
     ・メモを作成、編集、削除、一覧表示できる。
 
-    ・フォルダを作成、編集、削除、一覧表示できる。
-
     ・過去のメモに追記できる
 
-    ・過去メモ表示をやめる
+    ・過去メモ表示を非表示
 
-    ・ユーザーごとにアカウントを持ち、ログインしたユーザーは自分のフォルダおよびメモだけを閲覧または編集することができる。
+    ・ユーザーごとにアカウントを持ち、ログインしたユーザーは自分のメモだけを閲覧または編集することができる。
 
     ・ユーザーはパスワードを忘れた場合には再登録することができる。
 
     ＜メモ＞
-    ・タイトル、メモ、更新日、作成日、追記したものは親ID、過去メモとして表示するか否か設定を持つ。
+    ・タイトル、メモ、更新日、作成日、過去メモとして表示するか否か設定を持つ。
 
     ・メモを保存せず終了、戻るボタンを押したら、注意メッセージ
 
@@ -53,14 +69,6 @@ npm install -D vue-routerでルーターを入れたが、npm install -D vue-rou
 
     ・過去のメモ：上部にランダム表示。再読み込みボタンを押せばもう一度ランダム表示。メモをタップすればメモ編集画面に遷都。
 
-    ＜フォルダ＞
-    ・タイトル、メモ、更新日、作成日、過去メモとして表示するか否か設定を持つ。
-
-    ・設定ボタン：過去メモとして表示するか否か設定ボタン。削除ボタン。
-
-    ・入力値バリデーション：名前はNotNulll、required。デフォルト名「無題のフォルダ」。VARCHAR(20)、max:20
-
-テーブル定義
 
 画面設計
     ・オン/オフボタン：トグルスイッチ。オンオフを文字で表示
@@ -88,9 +96,12 @@ npm install -D vue-routerでルーターを入れたが、npm install -D vue-rou
     php artisan migrate:fresh --seed
 
     コントローラーを作る
-    php artisan make:controller コントローラー名(UserController)
+    php artisan make:controller コントローラー名(UserController) --api
 
     routes/web.phpにルート情報を追加
+
+    バリデーションのためにフォームリクエストクラスを作成
+    $ php artisan make:request リクエスト名(CreateMemoRequest)
 
 テスト
     テストライブラリを使う
