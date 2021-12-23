@@ -4030,7 +4030,7 @@ $ composer create-project laravel/laravel プロジェクト名 --prefer-dist
 ※Laravel8の変更点
 ・web.phpのルーティング
   ・useで使うコントローラを指定
-  ・Route::get('/user',[UserController::class,'index'])
+  ・Route::get('/user',[UserController::class,'index']);
 ・モデルの場所
   App/Models/ に置くようになる
 

@@ -30,7 +30,8 @@ class MemoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $memo = new Memo();
+        $memo->fill($request->all())->save();
     }
 
     /**
@@ -83,4 +84,5 @@ class MemoController extends Controller
         //$this->validate($request, Memo::$rules);
 
     }
+
 }

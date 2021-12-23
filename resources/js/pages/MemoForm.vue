@@ -4,10 +4,10 @@
         <nav type="dark" variant="info">
             <button class="btn btn-info p-2 m-2 text-white">Add Memo</button>
         </nav>
-        <br>
+        <!--<br>
         <form 
             class="relative mb-3 flex flex-col justify-between bg-white rounded-md shadow overflow-hidden"
-            @submit.prevent="handleAddNewTask"
+            @submit.prevent="addNewMemo"
         >
         <div class="p-3 flex-1">
             <input
@@ -20,7 +20,7 @@
                 class="block w-full px-2 py-1 text-sm border border-blue-800 rounded"
                 rows="2"
                 placeholder="Add a description (optional)"
-                v-model.trim="newTask.description"
+                v-model.trim="newMemo.description"
             ></texterea>
             <div v-show="errorMessage">
                 <span class="text-xs text-red-500">
@@ -31,7 +31,7 @@
 
         <div class="p-3 flex justify-between items-end text-sm bg-gray-100">
             <button
-                @click="$emit('task-canceled')"
+                @click="$emit('memo-canceled')"
                 type="reset"
                 class="py-1 leading-5 text-gray-600 hover:text-gray-700"
             >
@@ -45,60 +45,75 @@
             </button>
         </div>
 
-        </form>
+        </form>-->
     </div>
 </template>
 
 <script>
 import axios from 'axios'
+import {baseurl} from '../const'
 
 export default {
   props: {
-    statusId: Number
+    id: Number
   },
   data() {
     return {
-      newTask: {
+      newMemo: {
+        id: null,
         title: "",
-        description: "",
-        status_id: null
+        content: "",
       },
       errorMessage: ""
     };
   },
   mounted() {
-    this.newTask.status_id = this.statusId;
+    const url = baseurl + 'api/memos'
+    axios.post(url,{
+      title:'テスト',
+      content:'内容',
+    }).then((response) => {
+      // axiosが成功したときのHTTPレスポンスを表示
+      console.log(response)
+    }).catch((error) => {
+      // axiosが失敗したときのエラーを表示
+      console.log(error)
+    })
+    this.newMemo.id = this.id;
   },
   methods: {
-    handleAddNewTask() {
-      if (!this.newTask.title) {
-        this.errorMessage = "The title field is required";
-        return;
-      }
+  //   addNewMemo() {
+  //     if (!this.newMemo.title) {
+  //       this.errorMessage = "The title field is required";
+  //       return;
+  //     }
 
-      axios
-        .post("/tasks", this.newTask)
-        .then(res => {
-          this.$emit("task-added", res.data);
-        })
-        .catch(err => {
-          this.handleErrors(err);
-        });
-    },
-    handleErrors(err) {
-      if (err.response && err.response.status === 422) {
-        const errorBag = err.response.data.errors;
-        if (errorBag.title) {
-          this.errorMessage = errorBag.title[0];
-        } else if (errorBag.description) {
-          this.errorMessage = errorBag.description[0];
-        } else {
-          this.errorMessage = err.response.message;
-        }
-      } else {
-        console.log(err.response);
-      }
-    }
+  //     axios
+  //       .post("/memos", this.newMemo)
+  //       .then(res => {
+  //         this.$emit("Memo-added", res.data);
+  //       })
+  //       .catch(err => {
+  //         this.handleErrors(err);
+  //       });
+  //   },
+  //   handleErrors(err) {
+  //     if (err.response && err.response.status === 422) {
+  //       const errorBag = err.response.data.errors;
+  //       if (errorBag.title) {
+  //         this.errorMessage = errorBag.title[0];
+  //       } else if (errorBag.description) {
+  //         this.errorMessage = errorBag.description[0];
+  //       } else {
+  //         this.errorMessage = err.response.message;
+  //       }
+  //     } else {
+  //       console.log(err.response);
+  //     }
+  //   }
+  // },
+  // created() {
+  //   this.addNewMemo()
   }
 };
 </script>
