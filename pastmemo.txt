@@ -36,6 +36,41 @@ npm install -D vue-routerでルーターを入れたが、npm install -D vue-rou
 
 ・ランダムな数字をセットするのをstoreのactionsにするか、mutationsにするか悩んだが、最初の読み込み時のみactionから呼び出せばいいので、mutationsに。
 
+・veuからLaravelへデータを追加
+    ・MemoForm.vue
+    import axios from 'axios'
+    import {baseurl} from '../const'
+    export default {
+        mounted() {
+        const url = baseurl + 'api/memos'
+        axios.post(url,{
+        title:'テスト',
+        content:'内容',
+        }).then((response) => {
+        // axiosが成功したときのHTTPレスポンスを表示
+        console.log(response)
+        }).catch((error) => {
+        // axiosが失敗したときのエラーを表示
+        console.log(error)
+        })
+    },
+
+    ・const.js
+    export const baseurl = 'http://127.0.0.1:8000/'
+    export default baseurl
+
+    ・$ php artisan route:listで調べると、
+    | POST      | api/memos           | memos.store
+    なので、
+    ・MemoController.phpのstoreを編集。※バリデーションを追加
+    public function store(Request $request)
+    {
+        $memo = new Memo();
+        $memo->fill($request->all())->save();
+    }
+
+
+
 ＜参考＞
 ・jsonからとってきてデータ一覧を表示
 https://blog.capilano-fw.com/?p=432#Vue
@@ -113,7 +148,7 @@ https://dev83.com/vue-vuex04/
     バリデーションのためにフォームリクエストクラスを作成
     $ php artisan make:request リクエスト名(CreateMemoRequest)
 
-    pages/にページ追加→router.jsを編集
+    pages/にページ追加→router.jsを編集。※import忘れずに
 
 テスト
     テストライブラリを使う
