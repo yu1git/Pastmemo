@@ -5,7 +5,7 @@
             <button class="btn btn-info p-2 m-2 text-white">Add Memo</button>
         </nav>
         <br>
-        <!--
+        
         <form 
             class="relative mb-3 flex flex-col justify-between bg-white rounded-md shadow overflow-hidden"
             @submit.prevent="addNewMemo"
@@ -14,22 +14,19 @@
             <input
                 class="block w-full px-2 py-1 text-lg border-b border-blue-800 rounded"
                 type="text"
-                placeholder="Enter a title"
-                v-model.trim="newMemo.title"
+                placeholder="タイトル"
             />
-            <texterea 
+            <textarea
                 class="block w-full px-2 py-1 text-sm border border-blue-800 rounded"
                 rows="2"
-                placeholder="Add a description (optional)"
-                v-model.trim="newMemo.description"
-            ></texterea>
+                placeholder="ここからメモを書きましょう。"
+            ></textarea>
             <div v-show="errorMessage">
                 <span class="text-xs text-red-500">
                 {{ errorMessage }}
                 </span>
             </div>
         </div>
-
         <div class="p-3 flex justify-between items-end text-sm bg-gray-100">
             <button
                 @click="$emit('memo-canceled')"
@@ -45,9 +42,8 @@
                 追加
             </button>
         </div>
-
         </form>
-        -->
+        
     </div>
 </template>
 
@@ -56,19 +52,19 @@ import axios from 'axios'
 import {baseurl} from '../const'
 
 export default {
-  props: {
-    id: Number
-  },
+  // props: {
+  //   id: Number
+  // },
   data() {
     return {
       newMemo: {
-        title: "test",
-        content: "test",
+        title: "",
+        content: "",
       },
       errorMessage: ""
     };
   },
-  mounted() {
+  //mounted() {
     // const url = baseurl + 'api/memos'
     // axios.post(url,{
     //   title:'テスト',
@@ -80,8 +76,8 @@ export default {
     //   // axiosが失敗したときのエラーを表示
     //   console.log(error)
     // })
-    this.newMemo.id = this.id;
-  },
+    // this.newMemo.id = this.id;
+  // },
   methods: {
     addNewMemo() {
       if (!this.newMemo.title) {
