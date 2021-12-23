@@ -41,19 +41,21 @@ npm install -D vue-routerでルーターを入れたが、npm install -D vue-rou
     import axios from 'axios'
     import {baseurl} from '../const'
     export default {
+        //今回は例なのでmounted
         mounted() {
-        const url = baseurl + 'api/memos'
-        axios.post(url,{
-        title:'テスト',
-        content:'内容',
-        }).then((response) => {
-        // axiosが成功したときのHTTPレスポンスを表示
-        console.log(response)
-        }).catch((error) => {
-        // axiosが失敗したときのエラーを表示
-        console.log(error)
-        })
-    },
+            const url = baseurl + 'api/memos'
+            axios.post(url,{
+                title:'テスト',
+                content:'内容',
+            }).then((response) => {
+                // axiosが成功したときのHTTPレスポンスを表示
+                console.log(response)
+            }).catch((error) => {
+                // axiosが失敗したときのエラーを表示
+                console.log(error)
+            })
+        },
+    }
 
     ・const.js
     export const baseurl = 'http://127.0.0.1:8000/'
