@@ -19632,58 +19632,58 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       newMemo: {
-        id: null,
-        title: "",
-        content: ""
+        title: "test",
+        content: "test"
       },
       errorMessage: ""
     };
   },
   mounted: function mounted() {
-    var url = _const__WEBPACK_IMPORTED_MODULE_1__.baseurl + 'api/memos';
-    axios__WEBPACK_IMPORTED_MODULE_0___default().post(url, {
-      title: 'テスト',
-      content: '内容'
-    }).then(function (response) {
-      // axiosが成功したときのHTTPレスポンスを表示
-      console.log(response);
-    })["catch"](function (error) {
-      // axiosが失敗したときのエラーを表示
-      console.log(error);
-    });
+    // const url = baseurl + 'api/memos'
+    // axios.post(url,{
+    //   title:'テスト',
+    //   content:'内容',
+    // }).then((response) => {
+    //   // axiosが成功したときのHTTPレスポンスを表示
+    //   console.log(response)
+    // }).catch((error) => {
+    //   // axiosが失敗したときのエラーを表示
+    //   console.log(error)
+    // })
     this.newMemo.id = this.id;
   },
-  methods: {//   addNewMemo() {
-    //     if (!this.newMemo.title) {
-    //       this.errorMessage = "The title field is required";
-    //       return;
-    //     }
-    //     axios
-    //       .post("/memos", this.newMemo)
-    //       .then(res => {
-    //         this.$emit("Memo-added", res.data);
-    //       })
-    //       .catch(err => {
-    //         this.handleErrors(err);
-    //       });
-    //   },
-    //   handleErrors(err) {
-    //     if (err.response && err.response.status === 422) {
-    //       const errorBag = err.response.data.errors;
-    //       if (errorBag.title) {
-    //         this.errorMessage = errorBag.title[0];
-    //       } else if (errorBag.description) {
-    //         this.errorMessage = errorBag.description[0];
-    //       } else {
-    //         this.errorMessage = err.response.message;
-    //       }
-    //     } else {
-    //       console.log(err.response);
-    //     }
-    //   }
-    // },
-    // created() {
-    //   this.addNewMemo()
+  methods: {
+    addNewMemo: function addNewMemo() {
+      var _this = this;
+
+      if (!this.newMemo.title) {
+        this.errorMessage = "The title field is required";
+        return;
+      }
+
+      var url = _const__WEBPACK_IMPORTED_MODULE_1__.baseurl + 'api/memos';
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post(url, this.newMemo).then(function (res) {
+        //this.$emit("Memo-added", res.data);
+        console.log(res);
+      })["catch"](function (err) {
+        _this.handleErrors(err);
+      });
+    },
+    handleErrors: function handleErrors(err) {
+      if (err.response && err.response.status === 422) {
+        var errorBag = err.response.data.errors;
+
+        if (errorBag.title) {
+          this.errorMessage = errorBag.title[0];
+        } else if (errorBag.description) {
+          this.errorMessage = errorBag.description[0];
+        } else {
+          this.errorMessage = err.response.message;
+        }
+      } else {
+        console.log(err.response);
+      }
+    }
   }
 });
 
@@ -19960,8 +19960,12 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("<br>\n        <form \n            class=\"relative mb-3 flex flex-col justify-between bg-white rounded-md shadow overflow-hidden\"\n            @submit.prevent=\"addNewMemo\"\n        >\n        <div class=\"p-3 flex-1\">\n            <input\n                class=\"block w-full px-2 py-1 text-lg border-b border-blue-800 rounded\"\n                type=\"text\"\n                placeholder=\"Enter a title\"\n                v-model.trim=\"newMemo.title\"\n            />\n            <texterea \n                class=\"block w-full px-2 py-1 text-sm border border-blue-800 rounded\"\n                rows=\"2\"\n                placeholder=\"Add a description (optional)\"\n                v-model.trim=\"newMemo.description\"\n            ></texterea>\n            <div v-show=\"errorMessage\">\n                <span class=\"text-xs text-red-500\">\n                {{ errorMessage }}\n                </span>\n            </div>\n        </div>\n\n        <div class=\"p-3 flex justify-between items-end text-sm bg-gray-100\">\n            <button\n                @click=\"$emit('memo-canceled')\"\n                type=\"reset\"\n                class=\"py-1 leading-5 text-gray-600 hover:text-gray-700\"\n            >\n                キャンセル\n            </button>\n            <button\n                type=\"submit\"\n                class=\"px-3 py-1 leading-5 text-white bg-orange-600 hover:bg-orange-500 rounded\"\n            >\n                追加\n            </button>\n        </div>\n\n        </form>")]);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, _hoisted_3, _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("\n        <form \n            class=\"relative mb-3 flex flex-col justify-between bg-white rounded-md shadow overflow-hidden\"\n            @submit.prevent=\"addNewMemo\"\n        >\n        <div class=\"p-3 flex-1\">\n            <input\n                class=\"block w-full px-2 py-1 text-lg border-b border-blue-800 rounded\"\n                type=\"text\"\n                placeholder=\"Enter a title\"\n                v-model.trim=\"newMemo.title\"\n            />\n            <texterea \n                class=\"block w-full px-2 py-1 text-sm border border-blue-800 rounded\"\n                rows=\"2\"\n                placeholder=\"Add a description (optional)\"\n                v-model.trim=\"newMemo.description\"\n            ></texterea>\n            <div v-show=\"errorMessage\">\n                <span class=\"text-xs text-red-500\">\n                {{ errorMessage }}\n                </span>\n            </div>\n        </div>\n\n        <div class=\"p-3 flex justify-between items-end text-sm bg-gray-100\">\n            <button\n                @click=\"$emit('memo-canceled')\"\n                type=\"reset\"\n                class=\"py-1 leading-5 text-gray-600 hover:text-gray-700\"\n            >\n                キャンセル\n            </button>\n            <button\n                type=\"submit\"\n                class=\"px-3 py-1 leading-5 text-white bg-orange-600 hover:bg-orange-500 rounded\"\n            >\n                追加\n            </button>\n        </div>\n\n        </form>\n        ")]);
 }
 
 /***/ }),
