@@ -14,11 +14,13 @@
             <input
                 class="block w-full px-2 py-1 text-lg border-b border-blue-800 rounded"
                 type="text"
+                v-model="title" 
                 placeholder="タイトル"
             />
             <textarea
                 class="block w-full px-2 py-1 text-sm border border-blue-800 rounded"
-                rows="2"
+                rows="10"
+                v-model="content" 
                 placeholder="ここからメモを書きましょう。"
             ></textarea>
             <div v-show="errorMessage">
@@ -88,8 +90,8 @@ export default {
       axios
         .post(url, this.newMemo)
         .then(res => {
-          this.newMemo.title = "";
-          this.newMemo.content = "";
+          // this.newMemo.title = "";
+          // this.newMemo.content = "";
           //this.$emit("Memo-added", res.data);
           console.log(res)
         })
