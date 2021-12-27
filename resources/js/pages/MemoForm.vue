@@ -88,6 +88,8 @@ export default {
       axios
         .post(url, this.newMemo)
         .then(res => {
+          this.newMemo.title = "";
+          this.newMemo.content = "";
           //this.$emit("Memo-added", res.data);
           console.log(res)
         })
