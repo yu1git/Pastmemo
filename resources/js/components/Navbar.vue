@@ -4,7 +4,12 @@
             <RouterLink class="navbar-brand" to="/">
                 ホーム
             </RouterLink>
-            <form class="d-flex"><input class="form-control" type="search" placeholder="検索..." aria-label="検索..."></form>
+            <form class="d-flex">
+                <input　v-model="filterQuery" @change="search" class="form-control" type="search" placeholder="検索..." aria-label="検索...">
+                <!--<input　v-model="filterQuery.title" @change="search" class="form-control" type="search" placeholder="タイトル検索..." aria-label="検索...">
+                <input　v-model="filterQuery.content" @change="search" class="form-control" type="search" placeholder="本文検索..." aria-label="検索...">
+                -->
+            </form>
             <RouterLink class="nav-link" to="/memoForm">New</RouterLink>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="ナビゲーションの切替">
             <span class="navbar-toggler-icon"></span>
@@ -29,3 +34,32 @@
         </div>
     </nav>
 </template>
+
+<script>
+import { mapGetters } from 'vuex'
+export default {
+    data(){
+        return{
+            filterQuery:""
+            // filterQuery: {
+            //     title: "",
+            //     content: "",
+            // }
+        }
+    },
+    computed: {
+    ...mapGetters('memo', [
+        'filteredMemos'
+    ])},
+    mounted(){
+        this.setFilterQuery(this.filterQuery);
+    },
+    methouds:{
+        search(){
+            this.setFilterQuery(this.filterQuery);
+        },
+
+    }
+
+}
+</script>

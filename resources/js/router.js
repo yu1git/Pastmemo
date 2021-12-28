@@ -9,6 +9,11 @@ export const router = createRouter({
     history: createWebHistory(),
     routes : [
     {
+        // pathの場合はredorectへリダイレクトする
+        // path: '/',
+        // redorect: '/'
+    },
+    {
         path: '/',
         //nameはかかない
         component: MemoList
