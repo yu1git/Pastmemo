@@ -7,7 +7,7 @@
         <nav class="d-flex bd-highlight mb-3">
             <h2 class="title p-2 flex-grow-1 bd-highlight">New Memo</h2>
             <button
-                @click="$emit('memo-canceled')"
+                @click="ret"
                 type="reset"
                 class="btn btn-outline-info p-2 m-2 bd-highlight"
             >
@@ -30,8 +30,10 @@
                 type="text"
                 v-model="newMemo.title" 
                 placeholder="タイトル"
+                @keyup.enter="$event.target.nextElementSibling.focus()"
             />
             <textarea
+                id="2"
                 class="memo-content"
                 style="border:none; resize: none;"
                 rows="10"
@@ -83,7 +85,7 @@ export default {
   methods: {
     addNewMemo() {
       if (!this.newMemo.title) {
-        this.errorMessage = "The title field is required";
+        this.errorMessage = "タイトルを記入してください";
         return;
       }
       const url = baseurl + 'api/memos';
@@ -98,6 +100,10 @@ export default {
         .catch(err => {
           this.handleErrors(err);
         });
+      //新規追加したら、MemoListに戻る
+      this.$router.push({
+        name: 'MemoList'
+      })
     },
     handleErrors(err) {
       if (err.response && err.response.status === 422) {
@@ -112,6 +118,12 @@ export default {
       } else {
         console.log(err.response);
       }
+    },
+    //キャンセルの時は文章リセットして戻る
+    ret() {
+      this.$router.push({
+        name: 'MemoList'
+      })
     }
   },
 };

@@ -71,6 +71,13 @@ npm install -D vue-routerでルーターを入れたが、npm install -D vue-rou
         $memo->fill($request->all())->save();
     }
 
+・一部だけ右寄せ：ml-autoだと効かないのでflex-grow-1
+・navbarはjustify-content-endだとトグルの上にnewがくるのでflex-grow-1
+https://getbootstrap.jp/docs/4.2/utilities/flex/
+
+・タイトルを入力してエンターを押したらメモが書けるようにしたい
+@keyup.enter="$event.target.nextElementSibling.focus()"
+
 
 
 ＜参考＞
@@ -78,6 +85,8 @@ npm install -D vue-routerでルーターを入れたが、npm install -D vue-rou
 https://blog.capilano-fw.com/?p=432#Vue
 ・vuexのstoreでconsole.logを書く場所
 https://dev83.com/vue-vuex04/
+・メモフォーム
+https://www.yuu-progra.com/2020/09/20/laravel-vue-3/
 
 セキュリティ：
 (1) 機密性の高いデータを保存しない (必要なければ)。 

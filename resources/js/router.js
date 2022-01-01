@@ -10,7 +10,7 @@ export const router = createRouter({
     routes : [
     {
         path: '/',
-        //nameはかかない
+        name: 'MemoList',
         component: MemoList
     },
     {
@@ -20,7 +20,7 @@ export const router = createRouter({
     {
         path: '/memoForm',
         component: MemoForm
-    }
+    },
     ]
 
 })

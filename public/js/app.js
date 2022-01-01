@@ -19657,7 +19657,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       if (!this.newMemo.title) {
-        this.errorMessage = "The title field is required";
+        this.errorMessage = "タイトルを記入してください";
         return;
       }
 
@@ -19669,6 +19669,10 @@ __webpack_require__.r(__webpack_exports__);
         console.log(res);
       })["catch"](function (err) {
         _this.handleErrors(err);
+      }); //新規追加したら、MemoListに戻る
+
+      this.$router.push({
+        name: 'MemoList'
       });
     },
     handleErrors: function handleErrors(err) {
@@ -19685,6 +19689,12 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         console.log(err.response);
       }
+    },
+    //キャンセルの時は文章リセットして戻る
+    ret: function ret() {
+      this.$router.push({
+        name: 'MemoList'
+      });
     }
   }
 });
@@ -19993,12 +20003,12 @@ var _hoisted_7 = {
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     "class": "",
-    onSubmit: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onSubmit: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.addNewMemo && $options.addNewMemo.apply($options, arguments);
     }, ["prevent"]))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[0] || (_cache[0] = function ($event) {
-      return _ctx.$emit('memo-canceled');
+    onClick: _cache[0] || (_cache[0] = function () {
+      return $options.ret && $options.ret.apply($options, arguments);
     }),
     type: "reset",
     "class": "btn btn-outline-info p-2 m-2 bd-highlight"
@@ -20011,17 +20021,21 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $data.newMemo.title = $event;
     }),
-    placeholder: "タイトル"
-  }, null, 512
-  /* NEED_PATCH */
+    placeholder: "タイトル",
+    onKeyup: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
+      return $event.target.nextElementSibling.focus();
+    }, ["enter"]))
+  }, null, 544
+  /* HYDRATE_EVENTS, NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.newMemo.title]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
+    id: "2",
     "class": "memo-content",
     style: {
       "border": "none",
       "resize": "none"
     },
     rows: "10",
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
       return $data.newMemo.content = $event;
     }),
     placeholder: "ここからメモを書きましょう。"
@@ -20207,7 +20221,7 @@ var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_3__.createRouter)({
   history: (0,vue_router__WEBPACK_IMPORTED_MODULE_3__.createWebHistory)(),
   routes: [{
     path: '/',
-    //nameはかかない
+    name: 'MemoList',
     component: _pages_MemoList_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }, {
     path: '/login',
