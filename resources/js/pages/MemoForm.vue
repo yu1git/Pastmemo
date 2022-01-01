@@ -1,48 +1,48 @@
 <template>
     <div class="memo-form">
-        <h2 class="title">New Memo</h2>
-        <nav type="dark" variant="info">
-            <button class="btn btn-info p-2 m-2 text-white">Add Memo</button>
+        <form 
+            class=""
+            @submit.prevent="addNewMemo"
+        >
+        <nav class="d-flex bd-highlight mb-3">
+            <h2 class="title p-2 flex-grow-1 bd-highlight">New Memo</h2>
+            <button
+                @click="$emit('memo-canceled')"
+                type="reset"
+                class="btn btn-outline-info p-2 m-2 bd-highlight"
+            >
+                キャンセル
+            </button>
+            <button 
+                type="submit"
+                class="btn btn-outline-info p-2 m-2 bd-highlight"
+            >
+                新規メモ作成
+            </button>
+            
         </nav>
         <br>
         
-        <form 
-            class="relative mb-3 flex flex-col justify-between bg-white rounded-md shadow overflow-hidden"
-            @submit.prevent="addNewMemo"
-        >
-        <div class="p-3 flex-1">
+        <div class="p-3 d-flex flex-column memo-box">
             <input
-                class="block w-full px-2 py-1 text-lg border-b border-blue-800 rounded"
+                class="memo-title h5"
+                style="border:none;"
                 type="text"
-                v-model="title" 
+                v-model="newMemo.title" 
                 placeholder="タイトル"
             />
             <textarea
-                class="block w-full px-2 py-1 text-sm border border-blue-800 rounded"
+                class="memo-content"
+                style="border:none; resize: none;"
                 rows="10"
-                v-model="content" 
+                v-model="newMemo.content" 
                 placeholder="ここからメモを書きましょう。"
-            ></textarea>
+            ></textarea> 
             <div v-show="errorMessage">
                 <span class="text-xs text-red-500">
                 {{ errorMessage }}
                 </span>
             </div>
-        </div>
-        <div class="p-3 flex justify-between items-end text-sm bg-gray-100">
-            <button
-                @click="$emit('memo-canceled')"
-                type="reset"
-                class="py-1 leading-5 text-gray-600 hover:text-gray-700"
-            >
-                キャンセル
-            </button>
-            <button
-                type="submit"
-                class="px-3 py-1 leading-5 text-white bg-orange-600 hover:bg-orange-500 rounded"
-            >
-                追加
-            </button>
         </div>
         </form>
         
@@ -116,3 +116,19 @@ export default {
   },
 };
 </script>
+<style scoped>
+.memo-box{
+  color: #696969;
+  font-weight: bold;
+  border: solid 1px #e6e6e6;
+  box-shadow:2px 2px 0 rgba(0,0,0,.1);
+}
+.memo-content{
+  background-color: #fff;
+  background-image:
+  linear-gradient(90deg, rgba(237, 119, 128, 0) 0%, rgba(237, 119, 128, 0) 50%, #fff 0%, #fff 100%), linear-gradient(180deg, rgba(100, 100, 100, 0) 0%, rgba(100, 100, 100, 0) 97.5%, #646464 100%);
+  background-size: 8px 100%,100% 2rem;
+  line-height: 2rem;
+  padding: 2rem 1rem 0.2rem 1rem;
+}
+</style>
