@@ -1,17 +1,146 @@
 <template>
     <div class="memo-form">
-        <h2 class="title">メモ新規作成</h2>
-        <nav type="dark" variant="info">
-        
-            <button class="btn btn-info p-2 m-2 text-white">新規作成</button>
+        <form 
+            class=""
+            @submit.prevent="addNewMemo"
+        >
+        <nav class="d-flex bd-highlight mb-3">
+            <h2 class="title p-2 flex-grow-1 bd-highlight">New Memo</h2>
+            <button
+                @click="ret"
+                type="reset"
+                class="btn btn-outline-info p-2 m-2 bd-highlight"
+            >
+                キャンセル
+            </button>
+            <button 
+                type="submit"
+                class="btn btn-outline-info p-2 m-2 bd-highlight"
+            >
+                新規メモ作成
+            </button>
+            
         </nav>
         <br>
-        <form class="form form-group">
-            <texterea
-                name="memo-content"
-                id=""
-                class="form-control"
-            ></texterea>
+        
+        <div class="p-3 d-flex flex-column memo-box">
+            <input
+                class="memo-title h5"
+                style="border:none;"
+                type="text"
+                v-model="newMemo.title" 
+                placeholder="タイトル"
+                @keyup.enter="$event.target.nextElementSibling.focus()"
+            />
+            <textarea
+                id="2"
+                class="memo-content"
+                style="border:none; resize: none;"
+                rows="10"
+                v-model="newMemo.content" 
+                placeholder="ここからメモを書きましょう。"
+            ></textarea> 
+            <div v-show="errorMessage">
+                <span class="text-xs text-red-500">
+                {{ errorMessage }}
+                </span>
+            </div>
+        </div>
         </form>
+        
     </div>
 </template>
+
+<script>
+import axios from 'axios'
+import {baseurl} from '../const'
+
+export default {
+  // props: {
+  //   id: Number
+  // },
+  data() {
+    return {
+      newMemo: {
+        title: "",
+        content: "",
+      },
+      errorMessage: ""
+    };
+  },
+  //mounted() {
+    // const url = baseurl + 'api/memos'
+    // axios.post(url,{
+    //   title:'テスト',
+    //   content:'内容',
+    // }).then((response) => {
+    //   // axiosが成功したときのHTTPレスポンスを表示
+    //   console.log(response)
+    // }).catch((error) => {
+    //   // axiosが失敗したときのエラーを表示
+    //   console.log(error)
+    // })
+    // this.newMemo.id = this.id;
+  // },
+  methods: {
+    addNewMemo() {
+      if (!this.newMemo.title) {
+        this.errorMessage = "タイトルを記入してください";
+        return;
+      }
+      const url = baseurl + 'api/memos';
+      axios
+        .post(url, this.newMemo)
+        .then(res => {
+          // this.newMemo.title = "";
+          // this.newMemo.content = "";
+          //this.$emit("Memo-added", res.data);
+          console.log(res)
+        })
+        .catch(err => {
+          this.handleErrors(err);
+        });
+      //新規追加したら、MemoListに戻る
+      this.$router.push({
+        name: 'MemoList'
+      })
+    },
+    handleErrors(err) {
+      if (err.response && err.response.status === 422) {
+        const errorBag = err.response.data.errors;
+        if (errorBag.title) {
+          this.errorMessage = errorBag.title[0];
+        } else if (errorBag.description) {
+          this.errorMessage = errorBag.description[0];
+        } else {
+          this.errorMessage = err.response.message;
+        }
+      } else {
+        console.log(err.response);
+      }
+    },
+    //キャンセルの時は文章リセットして戻る
+    ret() {
+      this.$router.push({
+        name: 'MemoList'
+      })
+    }
+  },
+};
+</script>
+<style scoped>
+.memo-box{
+  color: #696969;
+  font-weight: bold;
+  border: solid 1px #e6e6e6;
+  box-shadow:2px 2px 0 rgba(0,0,0,.1);
+}
+.memo-content{
+  background-color: #fff;
+  background-image:
+  linear-gradient(90deg, rgba(237, 119, 128, 0) 0%, rgba(237, 119, 128, 0) 50%, #fff 0%, #fff 100%), linear-gradient(180deg, rgba(100, 100, 100, 0) 0%, rgba(100, 100, 100, 0) 97.5%, #646464 100%);
+  background-size: 8px 100%,100% 2rem;
+  line-height: 2rem;
+  padding: 2rem 1rem 0.2rem 1rem;
+}
+</style>

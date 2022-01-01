@@ -1,4 +1,4 @@
-<template>
+<!--<template>
   <div class="memo card">
     <div class="card-body">
       <div class="card-text">{{item.owner.name}}</div>
