@@ -4,7 +4,7 @@
             <RouterLink class="navbar-brand" to="/">
                 ホーム
             </RouterLink>
-            <ul class="navbar-nav flex-grow-1">
+            <ul class="navbar-nav flex-grow-1 p-2">
             <form class="d-flex form-inline mr-auto"><input class="form-control" type="search" placeholder="検索..." aria-label="検索..."></form>
             </ul>
             <ul class="navbar-nav">
