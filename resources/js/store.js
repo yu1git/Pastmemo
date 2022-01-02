@@ -41,13 +41,19 @@ export const store = createStore({
     },
     // 非同期の処理を入れる
     actions: {
-        getMemos: ({commit})=>{
-            return axios.get("http://127.0.0.1:8000/api/memos").then(response => {
-                commit('setMemos',response.data);
-                commit('setMaxMemo', response.data.length);
-                commit('setRandomMemo');
-            })
+        async getMemos( {commit} ) {
+            const response = await axios.get("http://127.0.0.1:8000/api/memos")
+            commit('setMemos', response.data)
+            commit('setMaxMemo', response.data.length)
+            commit('setRandomMemo')
         },
+        // getMemos: ({commit})=>{
+        //     return axios.get("http://127.0.0.1:8000/api/memos").then(response => {
+        //         commit('setMemos',response.data);
+        //         commit('setMaxMemo', response.data.length);
+        //         commit('setRandomMemo');
+        //     })
+        // },
             // const url = "http://127.0.0.1:8000/api/memos";
             // const getAPI = async () => {
             //     const result = await axios.get(url);
