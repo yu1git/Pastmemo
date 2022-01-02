@@ -56,7 +56,7 @@ export const store = createStore({
             state.randomMemo = r
         },
         setFilterQuery: (state, filterQuery)=> {
-            state.filterQuery = {...filterQuery};
+            state.filterQuery = filterQuery;
         },
         // count: (state, n)=> {
         //     state.counter += n
@@ -71,12 +71,11 @@ export const store = createStore({
     },
     // 非同期の処理を入れる
     actions: {
-        getMemos: ({commit})=>{
-            return axios.get("http://127.0.0.1:8000/api/memos").then(response => {
-                commit('setMemos',response.data);
-                commit('setMaxMemo', response.data.length);
-                commit('setRandomMemo');
-            })
+        async getMemos( {commit} ) {
+            const response = await axios.get("http://127.0.0.1:8000/api/memos")
+            commit('setMemos', response.data)
+            commit('setMaxMemo', response.data.length)
+            commit('setRandomMemo')
         },
             // const url = "http://127.0.0.1:8000/api/memos";
             // const getAPI = async () => {
