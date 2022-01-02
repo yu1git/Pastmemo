@@ -20252,10 +20252,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_3__.createRouter)({
   history: (0,vue_router__WEBPACK_IMPORTED_MODULE_3__.createWebHistory)(),
-  routes: [{// pathの場合はredorectへリダイレクトする
-    // path: '/',
-    // redorect: '/'
-  }, {
+  routes: [{
     path: '/',
     //nameはかかない
     component: _pages_MemoList_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
