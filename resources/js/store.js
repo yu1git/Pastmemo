@@ -57,6 +57,7 @@ export const store = createStore({
         },
         setFilterQuery: (state, filterQuery)=> {
             state.filterQuery = filterQuery;
+            console.log("store実行した");
         },
         // count: (state, n)=> {
         //     state.counter += n

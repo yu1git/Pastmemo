@@ -19618,13 +19618,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     };
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['filteredMemos'])),
   // mounted(){
   //     this.setFilterQuery(this.filterQuery);
   // },
   methouds: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)(['setFilterQuery'])), {}, {
     search: function search() {
       this.setFilterQuery(this.filterQuery);
+      console.log("実行した");
     }
   })
 });
@@ -19758,6 +19758,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_PastMemo_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/PastMemo.vue */ "./resources/js/components/PastMemo.vue");
 /* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! dayjs */ "./node_modules/dayjs/dayjs.min.js");
 /* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(dayjs__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -19765,6 +19773,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     PastMemo: _components_PastMemo_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)(['filteredMemos'])),
   methods: {
     makeDate: function makeDate(date) {
       return dayjs__WEBPACK_IMPORTED_MODULE_1___default()(date).format('YYYY/MM/DD HH:mm');
@@ -19834,9 +19843,16 @@ var _hoisted_4 = {
   "class": "d-flex"
 };
 
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("New");
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "submit",
+  value: "検索"
+}, null, -1
+/* HOISTED */
+);
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("New");
+
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   "class": "navbar-toggler",
   type: "button",
   "data-bs-toggle": "collapse",
@@ -19850,20 +19866,20 @@ var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_7 = {
+var _hoisted_8 = {
   "class": "collapse navbar-collapse",
   id: "navbar"
 };
-var _hoisted_8 = {
+var _hoisted_9 = {
   "class": "navbar-nav me-auto"
 };
-var _hoisted_9 = {
+var _hoisted_10 = {
   "class": "nav-item"
 };
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Login / Register");
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Login / Register");
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<li class=\"nav-item dropdown\"><a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"dropdown\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">ドロップダウン</a><div class=\"dropdown-menu\" aria-labelledby=\"dropdown\"><a class=\"dropdown-item\" href=\"#\">リンク1</a><a class=\"dropdown-item\" href=\"#\">リンク2</a><a class=\"dropdown-item\" href=\"#\">リンク3</a></div></li>", 1);
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<li class=\"nav-item dropdown\"><a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"dropdown\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">ドロップダウン</a><div class=\"dropdown-menu\" aria-labelledby=\"dropdown\"><a class=\"dropdown-item\" href=\"#\">リンク1</a><a class=\"dropdown-item\" href=\"#\">リンク2</a><a class=\"dropdown-item\" href=\"#\">リンク3</a></div></li>", 1);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_RouterLink = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("RouterLink");
@@ -19891,27 +19907,27 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "aria-label": "検索..."
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.filterQuery]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("<input　v-model=\"filterQuery.title\" @change=\"search\" class=\"form-control\" type=\"search\" placeholder=\"タイトル検索...\" aria-label=\"検索...\">\n                <input　v-model=\"filterQuery.content\" @change=\"search\" class=\"form-control\" type=\"search\" placeholder=\"本文検索...\" aria-label=\"検索...\">\n                ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_RouterLink, {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.filterQuery]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("<input　v-model=\"filterQuery.title\" @change=\"search\" class=\"form-control\" type=\"search\" placeholder=\"タイトル検索...\" aria-label=\"検索...\">\n                <input　v-model=\"filterQuery.content\" @change=\"search\" class=\"form-control\" type=\"search\" placeholder=\"本文検索...\" aria-label=\"検索...\">\n                "), _hoisted_5]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_RouterLink, {
     "class": "nav-link",
     to: "/memoForm"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_5];
+      return [_hoisted_6];
     }),
     _: 1
     /* STABLE */
 
-  }), _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_RouterLink, {
+  }), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_RouterLink, {
     "class": "nav-link",
     to: "/login"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_10];
+      return [_hoisted_11];
     }),
     _: 1
     /* STABLE */
 
-  })]), _hoisted_11])])])]);
+  })]), _hoisted_12])])])]);
 }
 
 /***/ }),
@@ -20160,7 +20176,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* KEYED_FRAGMENT */
   ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_PastMemo), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "検索ができているのか:" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$store.state.filterQuery), 1
   /* TEXT */
-  )])])]);
+  ), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.filteredMemos, function (filteredmemo) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("table", {
+      key: filteredmemo
+    });
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))])])]);
 }
 
 /***/ }),
@@ -20346,6 +20368,7 @@ var store = (0,vuex__WEBPACK_IMPORTED_MODULE_2__.createStore)({
     },
     setFilterQuery: function setFilterQuery(state, filterQuery) {
       state.filterQuery = filterQuery;
+      console.log("store実行した");
     } // count: (state, n)=> {
     //     state.counter += n
     // },

@@ -9,6 +9,7 @@
                 <!--<input　v-model="filterQuery.title" @change="search" class="form-control" type="search" placeholder="タイトル検索..." aria-label="検索...">
                 <input　v-model="filterQuery.content" @change="search" class="form-control" type="search" placeholder="本文検索..." aria-label="検索...">
                 -->
+                <input type="submit" value="検索">
             </form>
             <RouterLink class="nav-link" to="/memoForm">New</RouterLink>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="ナビゲーションの切替">
@@ -47,11 +48,7 @@ export default {
             // }
         }
     },
-    computed: {
-        ...mapGetters([
-            'filteredMemos'
-        ]),
-    },
+    
     // mounted(){
     //     this.setFilterQuery(this.filterQuery);
     // },
@@ -61,6 +58,7 @@ export default {
         ]),
         search(){
             this.setFilterQuery(this.filterQuery);
+            console.log("実行した");
         },
 
     }
