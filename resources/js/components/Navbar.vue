@@ -5,7 +5,7 @@
                 ホーム
             </RouterLink>
             <form class="d-flex">
-                <input　v-model="filterQuery" @change="search" class="form-control" type="search" placeholder="検索..." aria-label="検索...">
+                <input v-model="filterQuery" @change="search" class="form-control" type="search" placeholder="検索..." aria-label="検索...">
                 <!--<input　v-model="filterQuery.title" @change="search" class="form-control" type="search" placeholder="タイトル検索..." aria-label="検索...">
                 <input　v-model="filterQuery.content" @change="search" class="form-control" type="search" placeholder="本文検索..." aria-label="検索...">
                 -->
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 export default {
     data(){
         return{
@@ -48,13 +48,17 @@ export default {
         }
     },
     computed: {
-    ...mapGetters('memo', [
-        'filteredMemos'
-    ])},
-    mounted(){
-        this.setFilterQuery(this.filterQuery);
+        ...mapGetters([
+            'filteredMemos'
+        ]),
     },
+    // mounted(){
+    //     this.setFilterQuery(this.filterQuery);
+    // },
     methouds:{
+        ...mapMutations([
+                'setFilterQuery'
+        ]),
         search(){
             this.setFilterQuery(this.filterQuery);
         },

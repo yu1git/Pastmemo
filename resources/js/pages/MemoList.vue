@@ -19,7 +19,7 @@
       </div>
       <div class="col-md-3">
         <PastMemo />
-        <p>検索ができているのか：{{$store.state.filterQuery}}</p>
+        <p>検索ができているのか:{{$store.state.filterQuery}}</p>
       </div>
     </div>
   </div>

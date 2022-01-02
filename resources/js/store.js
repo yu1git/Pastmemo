@@ -14,7 +14,7 @@ export const store = createStore({
             //filterQuery:{},
         }
     },
-    getters: ()=>{
+    getters: {
         filteredMemos: (state)=> {
             let data = state.memos;
             if (state.filterQuery != ""){
@@ -25,6 +25,7 @@ export const store = createStore({
                             );
                     });
                 }
+            return data;
             // // タイトル検索
             // if (state.filterQuery.title != ""){
             //     data = data.filter(function (row){
