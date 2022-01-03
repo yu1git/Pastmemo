@@ -19642,6 +19642,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       memo: {
+        id: Number,
         title: "",
         content: ","
       },
@@ -20196,9 +20197,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     type: "submit",
     "class": "btn btn-outline-info p-2 m-2 bd-highlight"
-  }, " 保存 ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "id" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$route.params.id), 1
-  /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, " 保存 ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "memo-title h5",
     style: {
       "border": "none"

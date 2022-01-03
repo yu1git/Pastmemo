@@ -23,7 +23,6 @@
         保存
       </button>
     </nav>
-    <p>id{{ $route.params.id }}</p>
 
     <div class="p-3 d-flex flex-column memo-box">
       <input
@@ -55,6 +54,7 @@ export default {
   data() {
     return {
       memo: {
+        id: Number,
         title: "",
         content: ",",
       },
