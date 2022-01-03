@@ -9,6 +9,7 @@ export const store = createStore({
             memos:[],
             maxMemo:0,
             randomMemo:0,
+            show:true,
         }
     },
     // getters: ()=>{
@@ -28,6 +29,10 @@ export const store = createStore({
             let r =  Math.floor(Math.random() *state.maxMemo);
             state.randomMemo = r
         },
+        changeShow: (state)=>{
+            state.show = !state.show;
+            console.log(state.show)
+        }
         // count: (state, n)=> {
         //     state.counter += n
         // },

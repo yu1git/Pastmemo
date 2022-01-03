@@ -1,11 +1,11 @@
 <template>
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-9">
+    <div class="row justify-content-center">
+      <div v-bind:class="[$store.state.show === true ? 'col-md-9' : 'col-md-12']">
         <h1 class="text-center m-3">Memo List</h1>
-        <div class="row">
+        <div class="row justify-content-center">
           <div
-            class="col-sm-2 col-xs-6 mb-3"
+            class="col-sm-2 col-xs-6 mb-2"
             style="width: 12rem"
             v-for="memo in $store.state.memos"
             v-bind:key="memo.id"
@@ -30,7 +30,8 @@
           </div>
         </div>
       </div>
-      <div class="col-md-3">
+      <!--<div class="col-md-3 collapse" id="collapsePastMemo">-->
+      <div class="col-md-3" v-show="$store.state.show">
         <PastMemo />
       </div>
     </div>
@@ -46,10 +47,12 @@ export default {
   components: {
     PastMemo,
   },
+  
   methods: {
     makeDate(date) {
       return dayjs(date).format("YYYY/MM/DD HH:mm");
     },
+      
   },
   // computed: {
   //     memos: ()=>{
