@@ -42,7 +42,8 @@ class MemoController extends Controller
      */
     public function show($id)
     {
-        //
+        $memo = Memo::find($id);
+        return $memo;
     }
 
     /**
@@ -54,7 +55,17 @@ class MemoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // $update = Memo::find($id);
+        // $update->title = $request->title;
+        // $update->content = $request->content;
+        // $update->save();
+        // return redirect("api/memos/".$id);
+        $updateMemo = [
+            //'memo_id'=>$request->memo_id,
+            'title'=>$request->title,
+            'content'=>$request->content
+        ];
+        Memo::where('id', $id)->update($updateMemo);
     }
 
     /**
@@ -65,7 +76,10 @@ class MemoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // $memo = Memo::find($id);
+        // $memo->delete();
+        // return redirect('api/memos');
+        Memo::where('id', $id)->delete();
     }
 
     // public function __construct()
