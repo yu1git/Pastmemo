@@ -78,6 +78,22 @@ https://getbootstrap.jp/docs/4.2/utilities/flex/
 ・タイトルを入力してエンターを押したらメモが書けるようにしたい
 @keyup.enter="$event.target.nextElementSibling.focus()"
 
+・メモを保存せずブラウザバックしたら、注意メッセージ
+    @input="flagChange"
+    で入力を始めていたらメソッドの
+    flagChange() {
+      this.flag = true;
+    },
+    でdata()の
+    flag: false
+    をTrueに変える。
+    あとは　https://qiita.com/mimoe/items/ccd57821c3ae6b4f8495
+    を参考に
+    →新規作成ボタンを押しても、注意メッセージが表示されてしまう
+        addNewMemo() {
+            this.flag = false;
+        を追加することで、注意メッセージが表示されないようにした。
+    
 
 
 ＜参考＞
@@ -87,6 +103,8 @@ https://blog.capilano-fw.com/?p=432#Vue
 https://dev83.com/vue-vuex04/
 ・メモフォーム
 https://www.yuu-progra.com/2020/09/20/laravel-vue-3/
+・CRUD処理
+https://qiita.com/kennsukea/items/2f103a6055ebb37b377d
 
 セキュリティ：
 (1) 機密性の高いデータを保存しない (必要なければ)。 
@@ -108,15 +126,17 @@ https://www.yuu-progra.com/2020/09/20/laravel-vue-3/
     ・ユーザーはパスワードを忘れた場合には再登録することができる。
 
     ＜メモ＞
-    ・タイトル、メモの中身、更新日、作成日、過去メモとして表示するか否か設定を持つ。
+    ・タイトル、メモの中身、更新日、作成日、？過去メモとして表示するか否か設定を持つ。
+
+    ・メモをタップすると編集画面に遷移
 
     ・メモを保存せず終了、戻るボタンを押したら、注意メッセージ
 
     ・設定ボタン：過去メモとして表示するか否か設定ボタン。削除ボタン。
 
-    ・入力値バリデーション：タイトルはNotNull、required。デフォルト名「無題のメモ」。VARCHAR(20)、max:20
+    ・入力値バリデーション：タイトルはnull許容。VARCHAR(20)、max:20
 
-    ・過去のメモ：上部にランダム表示。再読み込みボタンを押せばもう一度ランダム表示。メモをタップすればメモ編集画面に遷都。
+    ・過去のメモ：右部にランダム表示。再読み込みボタンを押せばもう一度ランダム表示。メモをタップすればメモ編集画面に遷都。
 
 
 画面設計
