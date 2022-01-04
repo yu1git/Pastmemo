@@ -19703,6 +19703,17 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.flag = false;
+
+      if (this.newMemo.title.length > 20) {
+        this.errorMessage = "タイトルは20文字以内で入力してください";
+        return;
+      }
+
+      if (!this.newMemo.content) {
+        this.errorMessage = "本文を記入してください";
+        return;
+      }
+
       var url = _const__WEBPACK_IMPORTED_MODULE_1__.baseurl + "api/memos/" + this.memo.id;
       axios__WEBPACK_IMPORTED_MODULE_0___default().put(url, {
         //id: this.userId,
@@ -19743,8 +19754,8 @@ __webpack_require__.r(__webpack_exports__);
 
         if (errorBag.title) {
           this.errorMessage = errorBag.title[0];
-        } else if (errorBag.description) {
-          this.errorMessage = errorBag.description[0];
+        } else if (errorBag.content) {
+          this.errorMessage = errorBag.content[0];
         } else {
           this.errorMessage = err.response.message;
         }
@@ -19856,6 +19867,11 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.flag = false;
+
+      if (this.newMemo.title.length > 20) {
+        this.errorMessage = "タイトルは20文字以内で入力してください";
+        return;
+      }
 
       if (!this.newMemo.content) {
         this.errorMessage = "本文を記入してください";
@@ -20260,6 +20276,9 @@ var _hoisted_1 = {
 var _hoisted_2 = {
   "class": "p-3 d-flex flex-column memo-box"
 };
+var _hoisted_3 = {
+  "class": "text-xs text-red-500"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[0] || (_cache[0] = function () {
@@ -20290,10 +20309,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     onInput: _cache[4] || (_cache[4] = function () {
       return $options.flagChange && $options.flagChange.apply($options, arguments);
-    }),
-    onKeyup: _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
-      return $event.target.nextElementSibling.focus();
-    }, ["enter"]))
+    })
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.memo.title]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
@@ -20303,15 +20319,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "resize": "none"
     },
     rows: "10",
-    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
       return $data.memo.content = $event;
     }),
-    onInput: _cache[7] || (_cache[7] = function () {
+    onInput: _cache[6] || (_cache[6] = function () {
       return $options.flagChange && $options.flagChange.apply($options, arguments);
     })
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.memo.content]])])]);
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.memo.content]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.errorMessage), 1
+  /* TEXT */
+  )], 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.errorMessage]])])]);
 }
 
 /***/ }),
@@ -20373,7 +20393,7 @@ var _hoisted_7 = {
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     "class": "",
-    onSubmit: _cache[6] || (_cache[6] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onSubmit: _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.addNewMemo && $options.addNewMemo.apply($options, arguments);
     }, ["prevent"]))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
@@ -20394,10 +20414,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     placeholder: "タイトル",
     onInput: _cache[2] || (_cache[2] = function () {
       return $options.flagChange && $options.flagChange.apply($options, arguments);
-    }),
-    onKeyup: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
-      return $event.target.nextElementSibling.focus();
-    }, ["enter"]))
+    })
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.newMemo.title]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
@@ -20407,11 +20424,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "resize": "none"
     },
     rows: "10",
-    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
       return $data.newMemo.content = $event;
     }),
     placeholder: "ここからメモを書きましょう。",
-    onInput: _cache[5] || (_cache[5] = function () {
+    onInput: _cache[4] || (_cache[4] = function () {
       return $options.flagChange && $options.flagChange.apply($options, arguments);
     })
   }, null, 544
@@ -20509,7 +20526,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
         return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(memo.title), 1
         /* TEXT */
-        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(memo.content), 1
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(memo.content.slice(0, 24)), 1
         /* TEXT */
         ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.makeDate(memo.updated_at)), 1
         /* TEXT */

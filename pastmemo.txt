@@ -75,8 +75,9 @@ npm install -D vue-routerでルーターを入れたが、npm install -D vue-rou
 ・navbarはjustify-content-endだとトグルの上にnewがくるのでflex-grow-1
 https://getbootstrap.jp/docs/4.2/utilities/flex/
 
-・タイトルを入力してエンターを押したらメモが書けるようにしたい
+・タイトルを入力してエンターを押したらメモ本文が書けるようにしたい
 @keyup.enter="$event.target.nextElementSibling.focus()"
+    →使ってみると邪魔に感じるのでよりいい方法を思いつくまでは消しておく
 
 ・メモを保存せずブラウザバックしたら、注意メッセージ
     @input="flagChange"
@@ -106,6 +107,8 @@ https://dev83.com/vue-vuex04/
 https://www.yuu-progra.com/2020/09/20/laravel-vue-3/
 ・CRUD処理
 https://qiita.com/kennsukea/items/2f103a6055ebb37b377d
+・CSRFトークンの挿入
+https://migisanblog.com/laravel-vue-install/#サンプルVueコンポーネントの確認
 
 セキュリティ：
 (1) 機密性の高いデータを保存しない (必要なければ)。 

@@ -93,10 +93,18 @@ class MemoController extends Controller
      * @param CreateMemoRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function create(CreateMemoRequest $request)
-    {
-        //$this->validate($request, Memo::$rules);
+    // public function create(CreateMemoRequest $request)
+    // {
+    //     //$this->validate($request, Memo::$rules);
 
+    // }
+
+    /**
+     * バリデーション
+     */
+    public function register(Request $request)
+    {
+        //
     }
 
 }

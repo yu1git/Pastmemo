@@ -18,7 +18,7 @@
               >
                 <div class="card-body">
                   <h6 class="card-title">{{ memo.title }}</h6>
-                  <p class="card-text">{{ memo.content }}</p>
+                  <p class="card-text">{{ memo.content.slice(0,24) }}</p>
                   <div class="text-end">
                     <small class="card-text">{{
                       makeDate(memo.updated_at)
