@@ -94,7 +94,8 @@ https://getbootstrap.jp/docs/4.2/utilities/flex/
             this.flag = false;
         を追加することで、注意メッセージが表示されないようにした。
     
-
+・過去メモを非表示：非表示にはできるが、横幅を積めなかったので、showがfalseの時は過去メモでない側は全部の幅を使って表示させる。
+    v-bind:class="[$store.state.show === true ? 'col-md-9' : 'col-md-12']"
 
 ＜参考＞
 ・jsonからとってきてデータ一覧を表示

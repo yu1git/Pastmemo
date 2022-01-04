@@ -45,7 +45,15 @@
                 >ドロップダウン</a
               >
               <div class="dropdown-menu" aria-labelledby="dropdown">
-                <a class="dropdown-item" href="#">リンク1</a>
+               <button class="dropdown-item" @click="changeShow()">過去メモ非表示</button>
+                <!-- <button 
+                  class="dropdown-item" 
+                  type="button" 
+                  data-toggle="collapse" 
+                  data-target="#collapsePastMemo" 
+                  aria-expanded="true" 
+                  aria-controls="collapsePastMemo"
+                >過去メモ非表示</button>--> 
                 <a class="dropdown-item" href="#">リンク2</a>
                 <a class="dropdown-item" href="#">リンク3</a>
               </div>
@@ -56,3 +64,14 @@
     </div>
   </nav>
 </template>
+
+<script>
+export default {
+  name:'Navbar',
+  methods:{
+    changeShow(){
+      this.$store.commit('changeShow')
+    }
+  }
+}
+</script>
