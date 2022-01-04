@@ -24,7 +24,6 @@
           v-model="newMemo.title"
           placeholder="タイトル"
           @input="flagChange"
-          @keyup.enter="$event.target.nextElementSibling.focus()"
         />
         <textarea
           class="memo-content"
@@ -103,6 +102,10 @@ export default {
   methods: {
     addNewMemo() {
       this.flag = false;
+      if (this.newMemo.title.length > 20){
+        this.errorMessage = "タイトルは20文字以内で入力してください";
+        return;
+      }
       if (!this.newMemo.content) {
         this.errorMessage = "本文を記入してください";
         return;

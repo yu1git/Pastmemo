@@ -31,7 +31,6 @@
         type="text"
         v-model="memo.title"
         @input="flagChange"
-        @keyup.enter="$event.target.nextElementSibling.focus()"
       />
       <textarea
         class="memo-content"
@@ -40,6 +39,11 @@
         v-model="memo.content"
         @input="flagChange"
       ></textarea>
+      <div v-show="errorMessage">
+        <span class="text-xs text-red-500">
+          {{ errorMessage }}
+        </span>
+      </div>
     </div>
   </div>
 </template>
@@ -89,6 +93,14 @@ export default {
   methods: {
     updateMemo() {
       this.flag = false;
+      if (this.newMemo.title.length > 20) {
+        this.errorMessage = "タイトルは20文字以内で入力してください";
+        return;
+      }
+      if (!this.newMemo.content) {
+        this.errorMessage = "本文を記入してください";
+        return;
+      }
       const url = baseurl + "api/memos/" + this.memo.id;
       axios
         .put(url, {
@@ -126,8 +138,8 @@ export default {
         const errorBag = err.response.data.errors;
         if (errorBag.title) {
           this.errorMessage = errorBag.title[0];
-        } else if (errorBag.description) {
-          this.errorMessage = errorBag.description[0];
+        } else if (errorBag.content) {
+          this.errorMessage = errorBag.content[0];
         } else {
           this.errorMessage = err.response.message;
         }
