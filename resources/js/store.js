@@ -12,19 +12,21 @@ export const store = createStore({
             // 検索パラメータ
             filterQuery:"",
             //filterQuery:{},
+            //検索結果を表示するフラグ
+            serchFlag: false,
         }
     },
     getters: {
         filteredMemos: (state)=> {
             let data = state.memos;
-            // if (state.filterQuery != ""){
-            //         data = data.filter(function (memo){
-            //             return (
-            //                 memo.title.indexOf(state.filterQuery)!== -1 ||
-            //                 memo.content.indexOf(state.filterQuery) !== -1
-            //                 );
-            //         });
-            //     }
+            if (state.filterQuery != ""){
+                    data = data.filter(function (memo){
+                        return (
+                            memo.title.indexOf(state.filterQuery)!== -1 ||
+                            memo.content.indexOf(state.filterQuery) !== -1
+                            );
+                    });
+                }
             // return data;
             // タイトル検索
             // if (state.filterQuery.title != ""){

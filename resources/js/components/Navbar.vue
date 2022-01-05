@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <RouterLink class="navbar-brand" to="/"> ホーム </RouterLink>
-      <!-- <form class="d-flex"> -->
+      <div class="d-flex"> 
       <input
         v-model="filterQuery"
         class="form-control"
@@ -16,7 +16,7 @@
                 -->
       <!-- <button v-on:click.prevent="search" >検索</button> -->
       <button v-on:click="searchMemo">検索</button>
-      <!-- </form> -->
+      </div>
       <RouterLink class="nav-link" to="/memoForm">New</RouterLink>
       <button
         class="navbar-toggler"
@@ -80,7 +80,6 @@ export default {
     ...mapMutations(["setFilterQuery"]),
 
     searchMemo() {
-      console.log("確認");
       // mapMutationsで呼び出したsetFilterQueryの呼び出し。引数はそのまま入れる
       this.setFilterQuery(this.filterQuery);
       console.log("実行した");
