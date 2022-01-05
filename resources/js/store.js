@@ -17,22 +17,23 @@ export const store = createStore({
     getters: {
         filteredMemos: (state)=> {
             let data = state.memos;
-            if (state.filterQuery != ""){
-                    data = data.filter(function (memo){
-                        return (
-                            memo.title.indexOf(state.filterQuery)!== -1 ||
-                            memo.content.indexOf(state.filterQuery) !== -1
-                            );
-                    });
-                }
-            return data;
-            // // タイトル検索
+            // if (state.filterQuery != ""){
+            //         data = data.filter(function (memo){
+            //             return (
+            //                 memo.title.indexOf(state.filterQuery)!== -1 ||
+            //                 memo.content.indexOf(state.filterQuery) !== -1
+            //                 );
+            //         });
+            //     }
+            // return data;
+            // タイトル検索
             // if (state.filterQuery.title != ""){
             //     data = data.filter(function (row){
             //         return row['title'].indexOf(state.filterQuery.title) !== -1;
             //     });
             // }
-            // // 本文検索
+            return data;
+            // 本文検索
             // if (state.filterQuery.content != ""){
             //     data = data.filter(function (row){
             //         return row['content'].indexOf(state.filterQuery.content) !== -1;
@@ -58,6 +59,7 @@ export const store = createStore({
         setFilterQuery: (state, filterQuery)=> {
             state.filterQuery = filterQuery;
             console.log("store実行した");
+            console.log(state.filterQuery);
         },
         // count: (state, n)=> {
         //     state.counter += n

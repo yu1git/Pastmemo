@@ -5,11 +5,12 @@
                 ホーム
             </RouterLink>
             <form class="d-flex">
-                <input v-model="filterQuery" @change="search" class="form-control" type="search" placeholder="検索..." aria-label="検索...">
-                <!--<input　v-model="filterQuery.title" @change="search" class="form-control" type="search" placeholder="タイトル検索..." aria-label="検索...">
-                <input　v-model="filterQuery.content" @change="search" class="form-control" type="search" placeholder="本文検索..." aria-label="検索...">
+                <input v-model="filterQuery" @change="setFilterQuery" class="form-control" type="search" placeholder="検索..." aria-label="検索...">
+                <!--<input v-model="filterQuery" @change="search" class="form-control" type="search" placeholder="検索..." aria-label="検索...">-->
+                <!--<input v-model="filterQuery.title" @change="search" class="form-control" type="search" placeholder="タイトル検索..." aria-label="検索...">-->
+                <!--<input v-model="filterQuery.content" @change="search" class="form-control" type="search" placeholder="本文検索..." aria-label="検索...">
                 -->
-                <input type="submit" value="検索">
+                <button v-on:click.prevent="search" >検索</button>
             </form>
             <RouterLink class="nav-link" to="/memoForm">New</RouterLink>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="ナビゲーションの切替">
@@ -37,7 +38,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapMutations } from 'vuex'
 export default {
     data(){
         return{
@@ -56,7 +57,7 @@ export default {
         ...mapMutations([
                 'setFilterQuery'
         ]),
-        search(){
+        setFilterQuery(){
             this.setFilterQuery(this.filterQuery);
             console.log("実行した");
         },

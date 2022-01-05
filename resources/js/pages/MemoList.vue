@@ -20,7 +20,7 @@
       <div class="col-md-3">
         <PastMemo />
         <p>検索ができているのか:{{$store.state.filterQuery}}</p>
-        <table v-for="filteredmemo in filteredMemos" v-bind:key="filteredmemo" ></table>
+        <!--<table v-for="filteredmemo in filteredMemos" v-bind:key="filteredmemo" ></table>-->
       </div>
     </div>
   </div>
@@ -29,7 +29,7 @@
 <script>
 import PastMemo from '../components/PastMemo.vue'
 import dayjs from 'dayjs'
-import { mapGetters } from 'vuex'
+//import { mapGetters } from 'vuex'
 
 export default {
     name: 'memoList',
@@ -37,9 +37,12 @@ export default {
         PastMemo,
     },
     computed: {
-        ...mapGetters([
-            'filteredMemos'
-        ]),
+        // ...mapGetters([
+        //     'filteredMemos'
+        // ]),
+        filteredMemos(){
+          return this.$store.getters.filteredMemos
+        }
     },
     methods:{
       makeDate(date){
