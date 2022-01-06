@@ -1,21 +1,22 @@
 <template>
   <div class="memo-form">
     <form class="" @submit.prevent="addNewMemo">
-      <nav class="d-flex bd-highlight mb-3">
-        <h2 class="title p-2 flex-grow-1 bd-highlight">New Memo</h2>
+      <!-- ナビゲーションバー -->
+      <nav class="d-flex  mb-3">
+        <h2 class="title p-2 flex-grow-1 ">New Memo</h2>
         <button
-          @click="ret"
-          type="reset"
-          class="btn btn-outline-info p-2 m-2 bd-highlight"
+          @click="$router.go(-1)"
+          type="button"
+          class="btn btn-outline-info p-2 m-2 "
         >
           戻る
         </button>
-        <button type="submit" class="btn btn-outline-info p-2 m-2 bd-highlight">
+        <button type="submit" class="btn btn-outline-info p-2 m-2 ">
           新規メモ作成
         </button>
       </nav>
-      <br />
-
+      <!-- /ナビゲーションバー -->
+      <!-- メモ新規作成画面 -->
       <div class="p-3 d-flex flex-column memo-box">
         <input
           class="memo-title h5"
@@ -39,6 +40,7 @@
           </span>
         </div>
       </div>
+      <!-- /メモ新規作成画面 -->
     </form>
   </div>
 </template>
@@ -48,9 +50,6 @@ import axios from "axios";
 import { baseurl } from "../const";
 
 export default {
-  // props: {
-  //   id: Number
-  // },
   data() {
     return {
       newMemo: {
@@ -58,18 +57,20 @@ export default {
         content: "",
       },
       errorMessage: "",
+      //メモの入力が始まっているか確認するフラグ
       flag: false,
     };
   },
-  // created() {
-  //   window.addEventListener('popstate', this.backAlert);
-  // },
+
   created() {
+    // 意図しない移動に対して注意喚起
     window.addEventListener("beforeunload", this.confirmSave);
   },
   destroyed() {
+    // 意図しない移動に対して注意喚起
     window.removeEventListener("beforeunload", this.confirmSave);
   },
+  // 意図しない移動に対して注意喚起
   beforeRouteLeave(to, from, next) {
     if (this.flag) {
       const answer = window.confirm(
@@ -84,25 +85,11 @@ export default {
       next();
     }
   },
-  
-  // mounted() {
-  // const url = baseurl + 'api/memos'
-  // axios.post(url,{
-  //   title:'テスト',
-  //   content:'内容',
-  // }).then((response) => {
-  //   // axiosが成功したときのHTTPレスポンスを表示
-  //   console.log(response)
-  // }).catch((error) => {
-  //   // axiosが失敗したときのエラーを表示
-  //   console.log(error)
-  // })
-  // this.newMemo.id = this.id;
-  // },
   methods: {
+    // 新規メモ作成
     addNewMemo() {
       this.flag = false;
-      if (this.newMemo.title.length > 20){
+      if (this.newMemo.title.length > 20) {
         this.errorMessage = "タイトルは20文字以内で入力してください";
         return;
       }
@@ -114,16 +101,15 @@ export default {
       axios
         .post(url, this.newMemo)
         .then((res) => {
-          // this.newMemo.title = "";
-          // this.newMemo.content = "";
-          //this.$emit("Memo-added", res.data);
           console.log(res);
+          // 終了後MemoListに移動
           this.$router.push({ name: "MemoList" });
         })
         .catch((err) => {
           this.handleErrors(err);
         });
     },
+    // エラー処理
     handleErrors(err) {
       if (err.response && err.response.status === 422) {
         const errorBag = err.response.data.errors;
@@ -138,43 +124,16 @@ export default {
         console.log(err.response);
       }
     },
-    //キャンセルの時は文章リセットして戻る
-    ret() {
-      this.$router.push({
-        name: "MemoList",
-      });
-    },
+    // メモの入力が始まっているか確認するフラグの変更
     flagChange() {
       this.flag = true;
     },
+    // 意図しない移動に対して注意喚起
     confirmSave(event) {
       if (this.flag) {
         event.returnValue = "編集中のものは保存されませんが、よろしいですか？";
       }
     },
-    // backAlert() {
-    //   // if (!this.newMemo.content) {
-    //   //       this.errorMessage = "本文を記入してください";
-
-    //   //     }
-    //   if(this.flag){
-    //     //this.errorMessage = "変更された内容があります。保存しますか？"
-    //     if(window.confirm('変更された内容があります。保存しますか？')){
-    //     //if(){
-    //       this.flag = false;
-    //       if (!this.newMemo.content) {
-    //         const ans = window.confirm('本文を記入してください');
-    //         if(ans){
-    //           this.$router.push({ name: "MemoForm" });
-    //         }
-    //       }
-    //       this.addNewMemo();
-    //     }else{
-    //       this.flag = false;
-    //       this.ret();
-    //     };
-    //   }
-    // }
   },
 };
 </script>

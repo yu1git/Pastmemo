@@ -36,7 +36,7 @@ npm install -D vue-routerでルーターを入れたが、npm install -D vue-rou
 
 ・ランダムな数字をセットするのをstoreのactionsにするか、mutationsにするか悩んだが、最初の読み込み時のみactionから呼び出せばいいので、mutationsに。
 
-・veuからLaravelへデータを追加
+・veuからLaravelへデータを追加（メモ新規作成）
     ・MemoForm.vue
     import axios from 'axios'
     import {baseurl} from '../const'
@@ -79,14 +79,42 @@ https://getbootstrap.jp/docs/4.2/utilities/flex/
 @keyup.enter="$event.target.nextElementSibling.focus()"
     →使ってみると邪魔に感じるのでよりいい方法を思いつくまでは消しておく
 
+・「メモを保存せずブラウザバックしたら、注意メッセージ」の試行錯誤
+        created() {
+            window.addEventListener('popstate', this.backAlert);
+        },
+        backAlert() {
+      // if (!this.newMemo.content) {
+      //       this.errorMessage = "本文を記入してください";
+
+      //     }
+        if(this.flag){
+            //this.errorMessage = "変更された内容があります。保存しますか？"
+            if(window.confirm('変更された内容があります。保存しますか？')){
+            //if(){
+            this.flag = false;
+            if (!this.newMemo.content) {
+                const ans = window.confirm('本文を記入してください');
+                if(ans){
+                this.$router.push({ name: "MemoForm" });
+                }
+            }
+            this.addNewMemo();
+            }else{
+            this.flag = false;
+            this.ret();
+            };
+        }
+        }
+
 ・メモを保存せずブラウザバックしたら、注意メッセージ
-    @input="flagChange"
+        @input="flagChange"
     で入力を始めていたらメソッドの
-    flagChange() {
-      this.flag = true;
-    },
+        flagChange() {
+        this.flag = true;
+        },
     でdata()の
-    flag: false
+        flag: false
     をTrueに変える。
     あとは https://qiita.com/mimoe/items/ccd57821c3ae6b4f8495
     を参考に
@@ -95,7 +123,7 @@ https://getbootstrap.jp/docs/4.2/utilities/flex/
             this.flag = false;
         を追加することで、注意メッセージが表示されないようにした。
     
-・過去メモを非表示
+・過去メモを非表示の試行錯誤
     Navbar
         <button 
             class="dropdown-item" 
@@ -114,7 +142,8 @@ https://getbootstrap.jp/docs/4.2/utilities/flex/
         >過去メモ非表示</button>
     非表示にはできるが、横幅を詰めなかったので、showがfalseの時は過去メモでない側は全部の幅を使って表示させる。
     v-bind:class="[$store.state.show === true ? 'col-md-9' : 'col-md-12']"
-・検索
+
+・検索の試行錯誤
         <input v-model="filterQuery.title" @change="search" class="form-control" type="search" placeholder="タイトル検索..." aria-label="検索...">-->
         <input v-model="filterQuery.content" @change="search" class="form-control" type="search" placeholder="本文検索..." aria-label="検索...">
         data() {
@@ -191,6 +220,17 @@ https://getbootstrap.jp/docs/4.2/utilities/flex/
         // },
     }
 
+・戻るボタン
+        <button @click="ret"
+    メソッド
+        ret() {
+            this.$router.push({
+                name: "MemoList",
+            });
+        },
+    を変える
+        <button @click="$router.go(-1)"
+
 ＜参考＞
 ・jsonからとってきてデータ一覧を表示
 https://blog.capilano-fw.com/?p=432#Vue
@@ -202,6 +242,10 @@ https://www.yuu-progra.com/2020/09/20/laravel-vue-3/
 https://qiita.com/kennsukea/items/2f103a6055ebb37b377d
 ・CSRFトークンの挿入
 https://migisanblog.com/laravel-vue-install/#サンプルVueコンポーネントの確認
+・画面の表示・非表示
+https://noumenon-th.net/programming/2019/05/07/v-if-v-show/
+・検索
+https://www.webopixel.net/javascript/1461.html
 ・ルーターリンクをボタンタグに
 https://www.webdevqa.jp.net/ja/button/vuejs%E3%81%AE%E3%83%9C%E3%82%BF%E3%83%B3%E3%81%A7%E3%83%AB%E3%83%BC%E3%82%BF%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%AF%E3%82%BF%E3%82%B0%E3%82%92%E5%9B%B2%E3%82%80/832905295/
 ・戻るボタンなど「router.」
@@ -245,17 +289,7 @@ https://next.router.vuejs.org/guide/essentials/navigation.html#replace-current-l
 開発
     php artisan serve
     npm run watch
-
-        ・ユーザー認証
-
-        ・検索機能：本文とタイトル検索を分けないor簡単に切り替えられる方法を考える。ハイライトする
-        ・バリデーション
-        ・セキュリティ
-        ・上部メニューにアイコン追加、いい感じに見えるように整理
-            ボタンデザイン
-            https://liginc.co.jp/280820
-            埋め込みで使う
-            https://hibidesign.com/memo/web/331
+        
 
 
 

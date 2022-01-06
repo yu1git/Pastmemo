@@ -41,7 +41,7 @@ export const store = createStore({
         setMaxMemo: (state, maxMemo)=> {
             state.maxMemo = maxMemo
         },
-        //過去メモをランダムに表示するため
+        //過去メモをランダムに表示する
         setRandomMemo: (state)=> {
             let r =  Math.floor(Math.random() *state.maxMemo);
             state.randomMemo = r
@@ -57,7 +57,6 @@ export const store = createStore({
         //過去メモの表示・非表示を切り替える
         changeShow: (state)=>{
             state.show = !state.show;
-            console.log(state.show)
         }
     },
     // 非同期の処理を入れる
