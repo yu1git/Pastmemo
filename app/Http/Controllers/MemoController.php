@@ -24,7 +24,7 @@ class MemoController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
+     * メモ新規作成
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -48,20 +48,14 @@ class MemoController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
+     * メモ更新
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        // $update = Memo::find($id);
-        // $update->title = $request->title;
-        // $update->content = $request->content;
-        // $update->save();
-        // return redirect("api/memos/".$id);
         $updateMemo = [
-            //'memo_id'=>$request->memo_id,
             'title'=>$request->title,
             'content'=>$request->content
         ];
@@ -70,15 +64,12 @@ class MemoController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
+     * メモ削除
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        // $memo = Memo::find($id);
-        // $memo->delete();
-        // return redirect('api/memos');
         Memo::where('id', $id)->delete();
     }
 
@@ -87,24 +78,5 @@ class MemoController extends Controller
     //     // 認証が必要
     //     $this->middleware('auth');
     // }
-
-    /**
-     * メモ新規作成
-     * @param CreateMemoRequest $request
-     * @return \Illuminate\Http\Response
-     */
-    // public function create(CreateMemoRequest $request)
-    // {
-    //     //$this->validate($request, Memo::$rules);
-
-    // }
-
-    /**
-     * バリデーション
-     */
-    public function register(Request $request)
-    {
-        //
-    }
 
 }

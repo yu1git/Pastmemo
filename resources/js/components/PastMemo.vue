@@ -8,6 +8,7 @@
         v-for="(memo, index) in $store.state.memos"
         v-bind:key="(memo, index)"
       >
+        <!-- クリックすると編集画面に移動 -->
         <router-link
           :to="{ name: 'MemoEdit', params: { id: memo.id } }"
           v-if="index === $store.state.randomMemo"
@@ -24,6 +25,7 @@
             <small>{{ makeDate(memo.updated_at) }}</small>
           </div>
         </router-link>
+        <!-- /クリックすると編集画面に移動 -->
       </div>
     </div>
   </div>
@@ -34,13 +36,12 @@ import dayjs from "dayjs";
 
 export default {
   name: "PastMemo",
-  //setup(){
-  //    const data
-  //}
   methods: {
+    //日付フォーマット
     makeDate(date) {
       return dayjs(date).format("YYYY/MM/DD HH:mm");
     },
+    //ランダムなメモを表示
     changeMemo() {
       this.$store.commit("setRandomMemo");
     },

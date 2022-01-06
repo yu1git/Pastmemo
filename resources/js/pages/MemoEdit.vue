@@ -1,29 +1,31 @@
 <template>
   <div>
-    <nav class="d-flex bd-highlight mb-3 justify-content-end">
+    <!-- ナビゲーションバー -->
+    <nav class="d-flex mb-3 justify-content-end">
       <button
-        @click="ret"
+        @click="$router.go(-1)"
         type="reset"
-        class="btn btn-outline-info p-2 m-2 bd-highlight"
+        class="btn btn-outline-info p-2 m-2"
       >
-        キャンセル
+        戻る
       </button>
       <button
         @click="destroyMemo"
         type="reset"
-        class="btn btn-outline-info p-2 m-2 bd-highlight"
+        class="btn btn-outline-info p-2 m-2"
       >
         削除
       </button>
       <button
         @click="updateMemo"
         type="submit"
-        class="btn btn-outline-info p-2 m-2 bd-highlight"
+        class="btn btn-outline-info p-2 m-2"
       >
         保存
       </button>
     </nav>
-
+    <!-- /ナビゲーションバー -->
+    <!-- メモ編集画面 -->
     <div class="p-3 d-flex flex-column memo-box">
       <input
         class="memo-title h5"
@@ -45,6 +47,7 @@
         </span>
       </div>
     </div>
+    <!-- /メモ編集画面 -->
   </div>
 </template>
 
@@ -63,19 +66,24 @@ export default {
         content: ",",
       },
       errorMessage: "",
+      //メモの入力が始まっているか確認するフラグ
       flag: false,
     };
   },
   created() {
+    // クリックしたメモの情報を持ってくる
     axios
       .get(baseurl + "api/memos/" + this.$route.params.id)
       .then((response) => (this.memo = response.data))
-      .catch((erorr) => console.log(error));
+      .catch((err) => console.log(err));
+    // 意図しない移動に対して注意喚起
     window.addEventListener("beforeunload", this.confirmSave);
   },
   destroyed() {
+    // 意図しない移動に対して注意喚起
     window.removeEventListener("beforeunload", this.confirmSave);
   },
+  // 意図しない移動に対して注意喚起
   beforeRouteLeave(to, from, next) {
     if (this.flag) {
       const answer = window.confirm(
@@ -91,13 +99,14 @@ export default {
     }
   },
   methods: {
+    // メモ更新
     updateMemo() {
       this.flag = false;
-      if (this.newMemo.title.length > 20) {
+      if (this.memo.title.length > 20) {
         this.errorMessage = "タイトルは20文字以内で入力してください";
         return;
       }
-      if (!this.newMemo.content) {
+      if (!this.memo.content) {
         this.errorMessage = "本文を記入してください";
         return;
       }
@@ -116,6 +125,7 @@ export default {
           this.handleErrors(err);
         });
     },
+    // メモ削除
     destroyMemo() {
       this.flag = false;
       const url = baseurl + "api/memos/" + this.memo.id;
@@ -133,6 +143,7 @@ export default {
           this.handleErrors(err);
         });
     },
+    // エラー処理
     handleErrors(err) {
       if (err.response && err.response.status === 422) {
         const errorBag = err.response.data.errors;
@@ -147,35 +158,17 @@ export default {
         console.log(err.response);
       }
     },
-    //キャンセルの時は文章リセットして戻る
-    ret() {
-      this.$router.push({
-        name: "MemoList",
-      });
-    },
+    // メモの入力が始まっているか確認するフラグの変更
     flagChange() {
       this.flag = true;
     },
+    // 意図しない移動に対して注意喚起
     confirmSave(event) {
       if (this.flag) {
         event.returnValue = "編集中のものは保存されませんが、よろしいですか？";
       }
     },
   },
-  //mounted() {
-  // const url = baseurl + 'api/memos'
-  // axios.post(url,{
-  //   title:'テスト',
-  //   content:'内容',
-  // }).then((response) => {
-  //   // axiosが成功したときのHTTPレスポンスを表示
-  //   console.log(response)
-  // }).catch((error) => {
-  //   // axiosが失敗したときのエラーを表示
-  //   console.log(error)
-  // })
-  // this.newMemo.id = this.id;
-  // },
 };
 </script>
 <style scoped>

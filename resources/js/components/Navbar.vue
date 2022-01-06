@@ -1,10 +1,10 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-info">
     <div class="container-fluid d-flex">
       <RouterLink class="navbar-brand" to="/"> ホーム </RouterLink>
-      <ul class="navbar-nav flex-grow-1 p-2">
       <!-- 検索フォーム -->
-        <div class="d-flex form-inline mr-auto"> 
+      <ul class="navbar-nav flex-grow-1 p-2">
+        <div class="d-flex mr-auto"> 
           <input
             v-model="filterQuery"
             class="form-control"
@@ -16,12 +16,17 @@
             tag="button" 
             v-on:click="searchMemo" 
             to="/Searched" 
-          >検索</RouterLink>
+            class="nav-link p-2"
+          >検索アイコンのみ</RouterLink>
         </div>
       </ul>
+      <!-- /検索フォーム -->
+      <!-- メモ新規作成ボタン -->
       <ul class="navbar-nav">
         <RouterLink class="nav-link" to="/memoForm">New</RouterLink>
       </ul>
+      <!-- /メモ新規作成ボタン -->
+      <!-- その他のボタン -->
       <ul>
       <button
         class="navbar-toggler"
@@ -37,9 +42,11 @@
       <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
+            <!-- ログインボタン -->
             <RouterLink class="nav-link" to="/login"
               >Login / Register</RouterLink
             >
+            <!-- /ログインボタン -->
           </li>
           <li class="nav-item dropdown">
             <a
@@ -63,6 +70,7 @@
         </ul>
       </div>
       </ul>
+      <!-- /その他のボタン -->
     </div>
   </nav>
 </template>
