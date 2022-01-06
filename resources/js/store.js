@@ -11,9 +11,11 @@ export const store = createStore({
             randomMemo:0,
             // 検索パラメータ
             filterQuery:"",
-            //filterQuery:{},
             //検索結果を表示するフラグ
             serchFlag: false,
+
+            //過去メモ表示・非表示を管理するフラグ
+            show:true,
         }
     },
     getters: {
@@ -29,24 +31,7 @@ export const store = createStore({
                 }
                 console.log(data);
             return data;
-            
-            // タイトル検索
-            // if (state.filterQuery.title != ""){
-            //     data = data.filter(function (row){
-            //         return row['title'].indexOf(state.filterQuery.title) !== -1;
-            //     });
-            // }
-            // 本文検索
-            // if (state.filterQuery.content != ""){
-            //     data = data.filter(function (row){
-            //         return row['content'].indexOf(state.filterQuery.content) !== -1;
-            //     });
-            // }
-            // return data;
         }
-    //     getPastMemo: (state) => (id) =>{
-    //         return state.memos.id( Math.floor(Math.random() * 10));
-    //    }
     },
     // stateの更新
     mutations: {
@@ -56,25 +41,24 @@ export const store = createStore({
         setMaxMemo: (state, maxMemo)=> {
             state.maxMemo = maxMemo
         },
+        //過去メモをランダムに表示するため
         setRandomMemo: (state)=> {
             let r =  Math.floor(Math.random() *state.maxMemo);
             state.randomMemo = r
         },
+
+        //検索キーワードをstateにセットする
         setFilterQuery: (state, filterQuery)=> {
             state.filterQuery = filterQuery;
             console.log("store実行した");
             console.log(state.filterQuery);
         },
-        // count: (state, n)=> {
-        //     state.counter += n
-        // },
-        // say: (state, msg)=> {
-        //     state.message = msg
-        // },
-        // reset: (state)=> {
-        //     state.message = "reset!"
-        //     state.counter = 0        
-        // },
+        
+        //過去メモの表示・非表示を切り替える
+        changeShow: (state)=>{
+            state.show = !state.show;
+            console.log(state.show)
+        }
     },
     // 非同期の処理を入れる
     actions: {
@@ -84,17 +68,6 @@ export const store = createStore({
             commit('setMaxMemo', response.data.length)
             commit('setRandomMemo')
         },
-            // const url = "http://127.0.0.1:8000/api/memos";
-            // const getAPI = async () => {
-            //     const result = await axios.get(url);
-                
-            //     console.log(result);
-            //     };
-            //     getAPI();
-    
-            //     return {
-            //         getAPI,
-            //     }
     }
 })
 
