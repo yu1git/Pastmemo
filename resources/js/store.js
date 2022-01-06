@@ -27,20 +27,22 @@ export const store = createStore({
                             );
                     });
                 }
-            // return data;
+                console.log(data);
+            return data;
+            
             // タイトル検索
             // if (state.filterQuery.title != ""){
             //     data = data.filter(function (row){
             //         return row['title'].indexOf(state.filterQuery.title) !== -1;
             //     });
             // }
-            return data;
             // 本文検索
             // if (state.filterQuery.content != ""){
             //     data = data.filter(function (row){
             //         return row['content'].indexOf(state.filterQuery.content) !== -1;
             //     });
             // }
+            // return data;
         }
     //     getPastMemo: (state) => (id) =>{
     //         return state.memos.id( Math.floor(Math.random() * 10));

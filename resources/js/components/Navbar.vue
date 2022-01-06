@@ -15,7 +15,12 @@
       <!--<input v-model="filterQuery.content" @change="search" class="form-control" type="search" placeholder="本文検索..." aria-label="検索...">
                 -->
       <!-- <button v-on:click.prevent="search" >検索</button> -->
-      <button v-on:click="searchMemo">検索</button>
+      <RouterLink 
+        tag="button" 
+        v-on:click="searchMemo" 
+        to="/Searched" 
+        
+      >検索</RouterLink>
       </div>
       <RouterLink class="nav-link" to="/memoForm">New</RouterLink>
       <button

@@ -24,11 +24,6 @@
       </div>
       <div class="col-md-3">
         <PastMemo />
-        <table v-for="SearchedMemo in SearchedMemos" v-bind:key="SearchedMemo" >
-          <td>{{SearchedMemo.id}}</td>
-          <td>{{SearchedMemo.title}}</td>
-          <td>{{SearchedMemo.content}}</td>
-        </table>
       </div>
     </div>
   </div>
@@ -37,20 +32,11 @@
 <script>
 import PastMemo from '../components/PastMemo.vue'
 import dayjs from 'dayjs'
-import { mapGetters } from 'vuex'
 
 export default {
     name: 'memoList',
     components:{
         PastMemo,
-    },
-    computed: {
-        ...mapGetters([
-            'filteredMemos'
-        ]),
-        SearchedMemos(){
-          return this.$store.getters.filteredMemos
-        }
     },
     methods:{
       makeDate(date){
