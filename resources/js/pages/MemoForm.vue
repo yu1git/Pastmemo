@@ -117,7 +117,7 @@ export default {
           // this.newMemo.title = "";
           // this.newMemo.content = "";
           //this.$emit("Memo-added", res.data);
-          //console.log(res);
+          console.log(res);
           this.$router.push({ name: "MemoList" });
         })
         .catch((err) => {

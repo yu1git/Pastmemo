@@ -88,15 +88,108 @@ https://getbootstrap.jp/docs/4.2/utilities/flex/
     でdata()の
     flag: false
     をTrueに変える。
-    あとは　https://qiita.com/mimoe/items/ccd57821c3ae6b4f8495
+    あとは https://qiita.com/mimoe/items/ccd57821c3ae6b4f8495
     を参考に
     →新規作成ボタンを押しても、注意メッセージが表示されてしまう
         addNewMemo() {
             this.flag = false;
         を追加することで、注意メッセージが表示されないようにした。
     
-・過去メモを非表示：非表示にはできるが、横幅を積めなかったので、showがfalseの時は過去メモでない側は全部の幅を使って表示させる。
+・過去メモを非表示
+    Navbar
+        <button 
+            class="dropdown-item" 
+            type="button" 
+            data-toggle="collapse" 
+            data-target="#collapsePastMemo" 
+            aria-expanded="true" 
+            aria-controls="collapsePastMemo"
+        >過去メモ非表示</button>
+    MemoList
+        <div class="col-md-3 collapse" id="collapsePastMemo">
+    collapseではなく、クリックイベントで表示を変える
+        <button 
+            class="dropdown-item" 
+            @click="changeShow()"
+        >過去メモ非表示</button>
+    非表示にはできるが、横幅を詰めなかったので、showがfalseの時は過去メモでない側は全部の幅を使って表示させる。
     v-bind:class="[$store.state.show === true ? 'col-md-9' : 'col-md-12']"
+・検索
+        <input v-model="filterQuery.title" @change="search" class="form-control" type="search" placeholder="タイトル検索..." aria-label="検索...">-->
+        <input v-model="filterQuery.content" @change="search" class="form-control" type="search" placeholder="本文検索..." aria-label="検索...">
+        data() {
+            return {
+                filterQuery: {
+                    title: "",
+                    content: "",
+                }
+    と二種類に分けて検索するのが嫌で、タイトルも本文も同時に検索できるようにしたい
+        <input v-model="filterQuery" @change="search" class="form-control" type="search" placeholder="検索..." aria-label="検索...">
+    から@change="search"けして、ボタンで検索開始する
+        <button v-on:click.prevent="search" >検索</button>
+    preventいらない
+        <RouterLink 
+            tag="button" 
+            v-on:click="searchMemo" 
+            to="/Searched" 
+        >検索</RouterLink>
+    Navbarのメソッド
+        methods: {
+        // mapMutationsをスプレット演算子を使って呼び出すことで、setFilterQueryをそのまま出せる
+        // .スプレット演算子(...)はオブジェクトを展開できる
+        ...mapMutations(["setFilterQuery"]),
+        searchMemo() {
+        // mapMutationsで呼び出したsetFilterQueryの呼び出し。引数はそのまま入れる
+        this.setFilterQuery(this.filterQuery);
+        console.log("実行した");
+            },
+        },
+    store.js
+        getters: {
+        filteredMemos: (state)=> {
+            let data = state.memos;
+            if (state.filterQuery != ""){
+                    data = data.filter(function (memo){
+                        return (
+                            memo.title.indexOf(state.filterQuery)!== -1 ||
+                            memo.content.indexOf(state.filterQuery) !== -1
+                            );
+                    });
+                }
+                console.log(data);
+            return data;
+            
+            // タイトル検索
+            // if (state.filterQuery.title != ""){
+            //     data = data.filter(function (row){
+            //         return row['title'].indexOf(state.filterQuery.title) !== -1;
+            //     });
+            // }
+            // 本文検索
+            // if (state.filterQuery.content != ""){
+            //     data = data.filter(function (row){
+            //         return row['content'].indexOf(state.filterQuery.content) !== -1;
+            //     });
+            // }
+            // return data;
+        }
+
+・store.jsのactionの書き方はどっちがいいのか？
+    actions: {
+        async getMemos( {commit} ) {
+            const response = await axios.get("http://127.0.0.1:8000/api/memos")
+            commit('setMemos', response.data)
+            commit('setMaxMemo', response.data.length)
+            commit('setRandomMemo')
+        },
+        // getMemos: ({commit})=>{
+        //     return axios.get("http://127.0.0.1:8000/api/memos").then(response => {
+        //         commit('setMemos',response.data);
+        //         commit('setMaxMemo', response.data.length);
+        //         commit('setRandomMemo');
+        //     })
+        // },
+    }
 
 ＜参考＞
 ・jsonからとってきてデータ一覧を表示
@@ -109,6 +202,10 @@ https://www.yuu-progra.com/2020/09/20/laravel-vue-3/
 https://qiita.com/kennsukea/items/2f103a6055ebb37b377d
 ・CSRFトークンの挿入
 https://migisanblog.com/laravel-vue-install/#サンプルVueコンポーネントの確認
+・ルーターリンクをボタンタグに
+https://www.webdevqa.jp.net/ja/button/vuejs%E3%81%AE%E3%83%9C%E3%82%BF%E3%83%B3%E3%81%A7%E3%83%AB%E3%83%BC%E3%82%BF%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%AF%E3%82%BF%E3%82%B0%E3%82%92%E5%9B%B2%E3%82%80/832905295/
+・戻るボタンなど「router.」
+https://next.router.vuejs.org/guide/essentials/navigation.html#replace-current-location
 
 セキュリティ：
 (1) 機密性の高いデータを保存しない (必要なければ)。 
@@ -150,11 +247,16 @@ https://migisanblog.com/laravel-vue-install/#サンプルVueコンポーネン�
     npm run watch
 
         ・ユーザー認証
-        ・検索機能
+
+        ・検索機能：本文とタイトル検索を分けないor簡単に切り替えられる方法を考える。ハイライトする
         ・バリデーション
         ・セキュリティ
         ・上部メニューにアイコン追加、いい感じに見えるように整理
-        
+            ボタンデザイン
+            https://liginc.co.jp/280820
+            埋め込みで使う
+            https://hibidesign.com/memo/web/331
+
 
 
     モデルとマイグレーションを同時に作成
