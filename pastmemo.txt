@@ -231,6 +231,8 @@ https://getbootstrap.jp/docs/4.2/utilities/flex/
     を変える
         <button @click="$router.go(-1)"
 
+・戻るボタン、検索結果画面だけ左側に配置していたが、違和感があったので右側にそろえる
+
 ＜参考＞
 ・jsonからとってきてデータ一覧を表示
 https://blog.capilano-fw.com/?p=432#Vue
