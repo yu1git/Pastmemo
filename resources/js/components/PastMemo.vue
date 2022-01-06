@@ -1,8 +1,11 @@
 <template>
   <div>
-    <button @click="changeMemo()" class="btn btn-outline-info">
-      再読み込み
-    </button>
+    <div class="d-flex mb-3 justify-content-center">
+      <button @click="changeMemo()" class="btn btn-outline-info mt-2">
+        再読み込み
+      </button>
+      <h4 class="text-center m-3 flex-grow-1">過去メモ</h4>
+    </div>
     <div class="alert alert-info" style="margin-top: 20px">
       <div
         v-for="(memo, index) in $store.state.memos"

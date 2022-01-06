@@ -2,16 +2,16 @@
   <div class="memo-form">
     <form class="" @submit.prevent="addNewMemo">
       <!-- ナビゲーションバー -->
-      <nav class="d-flex bd-highlight mb-3">
-        <h2 class="title p-2 flex-grow-1 bd-highlight">New Memo</h2>
+      <nav class="d-flex  mb-3">
+        <h2 class="title p-2 flex-grow-1 ">New Memo</h2>
         <button
           @click="$router.go(-1)"
-          type="reset"
-          class="btn btn-outline-info p-2 m-2 bd-highlight"
+          type="button"
+          class="btn btn-outline-info p-2 m-2 "
         >
           戻る
         </button>
-        <button type="submit" class="btn btn-outline-info p-2 m-2 bd-highlight">
+        <button type="submit" class="btn btn-outline-info p-2 m-2 ">
           新規メモ作成
         </button>
       </nav>

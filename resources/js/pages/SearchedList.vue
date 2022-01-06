@@ -1,12 +1,12 @@
 <template>
   <div class="container-fluid">
     <div class="d-flex mb-3 justify-content-center">
-      <button @click="$router.go(-1)" class="btn btn-outline-info p-2">
-        戻る
-      </button>
       <h4 class="text-center m-3 flex-grow-1">
         検索：{{ $store.state.filterQuery }}
       </h4>
+      <button @click="$router.go(-1)" class="btn btn-outline-info mt-2">
+        戻る
+      </button>
     </div>
     <div class="row justify-content-center">
       <div
