@@ -24,5 +24,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/login',[LoginController::class, 'login']);
 Route::post('/logout',[LoginController::class, 'logout']);
 
-// メモ新規作成
-Route::apiResource('/memos',MemoController::class);
+// 認証済みでないと許可しない
+Route::group(["middleware" => ["auth:sanctum"]], function () {
+    // メモ新規作成
+    Route::apiResource('/memos',MemoController::class);
+});

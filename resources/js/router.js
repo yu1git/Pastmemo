@@ -11,8 +11,8 @@ import MemoEdit from './pages/MemoEdit.vue'
 // 本番環境にデプロイするときこっちに変える？
 // const router = createRouter({
 //     history: createWebHistory(process.env.BASE_URL),
-//     routes
-//   })
+//     routes: [
+
 export const router = createRouter({
     history: createWebHistory(),
     routes: [

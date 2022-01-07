@@ -121,9 +121,9 @@ export const store = createStore({
                     commit('SET_USER', response.data);
                 })
                 .catch(() => {
-                    commit('SET_IS_AUTH', false);
-                    commit('SET_USER', null);
-                });
+                        commit('SET_IS_AUTH', false);
+                        commit('SET_USER', null);
+                    });
         },
     }
 })

@@ -20845,8 +20845,7 @@ __webpack_require__.r(__webpack_exports__);
  // 本番環境にデプロイするときこっちに変える？
 // const router = createRouter({
 //     history: createWebHistory(process.env.BASE_URL),
-//     routes
-//   })
+//     routes: [
 
 var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_6__.createRouter)({
   history: (0,vue_router__WEBPACK_IMPORTED_MODULE_6__.createWebHistory)(),
