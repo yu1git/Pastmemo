@@ -47,12 +47,12 @@ export const store = createStore({
         /**
          * auth
          */
-         isAuth(state) {
+        isAuth(state) {
             return state.isAuth;
-          },
-          user(state) {
+        },
+        user(state) {
             return state.user;
-          },
+        },
     },
     // stateの更新
     mutations: {
@@ -86,12 +86,12 @@ export const store = createStore({
         /**
          * auth
          */
-         SET_IS_AUTH(state, value) {
+        SET_IS_AUTH(state, value) {
             state.isAuth = value;
-          },
-          SET_USER(state, value) {
+        },
+        SET_USER(state, value) {
             state.user = value;
-          },
+        },
     },
     // 非同期の処理を入れる
     actions: {
@@ -108,23 +108,23 @@ export const store = createStore({
         /**
          * auth
          */
-         async login({ dispatch }, credentials) {
+        async login({ dispatch }, credentials) {
             await axios.get('/sanctum/csrf-cookie');
             await axios.post('/api/login', credentials);
             return await dispatch('me');
-          },
-          async me({ commit }) {
+        },
+        async me({ commit }) {
             return await axios
-              .get('/api/user')
-              .then(response => {
-                commit('SET_IS_AUTH', true);
-                commit('SET_USER', response.data);
-              })
-              .catch(() => {
-                commit('SET_IS_AUTH', false);
-                commit('SET_USER', null);
-              });
-          },
+                .get('/api/user')
+                .then(response => {
+                    commit('SET_IS_AUTH', true);
+                    commit('SET_USER', response.data);
+                })
+                .catch(() => {
+                    commit('SET_IS_AUTH', false);
+                    commit('SET_USER', null);
+                });
+        },
     }
 })
 
