@@ -252,6 +252,11 @@ https://www.webopixel.net/javascript/1461.html
 https://www.webdevqa.jp.net/ja/button/vuejs%E3%81%AE%E3%83%9C%E3%82%BF%E3%83%B3%E3%81%A7%E3%83%AB%E3%83%BC%E3%82%BF%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%AF%E3%82%BF%E3%82%B0%E3%82%92%E5%9B%B2%E3%82%80/832905295/
 ・戻るボタンなど「router.」
 https://next.router.vuejs.org/guide/essentials/navigation.html#replace-current-location
+・Sanctum
+https://readouble.com/laravel/8.x/ja/sanctum.html
+https://qiita.com/hikkappi/items/b95626bb51bbf2ebcd2d
+https://wonwon-eater.com/laravel-sanctum-vue/#outline__7
+https://maasaablog.com/development/laravel/1011/#toc14
 
 セキュリティ：
 (1) 機密性の高いデータを保存しない (必要なければ)。 

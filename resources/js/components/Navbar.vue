@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-info">
     <div class="container-fluid d-flex">
-      <RouterLink class="navbar-brand" to="/"> ホーム </RouterLink>
+      <RouterLink class="navbar-brand" :to="{ name: 'MemoList' }"> ホーム </RouterLink>
       <!-- 検索フォーム -->
       <ul class="navbar-nav flex-grow-1 p-2">
         <div class="d-flex mr-auto"> 
