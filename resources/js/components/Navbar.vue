@@ -42,6 +42,11 @@
       <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
+            <!-- ログアウトボタン -->
+              <button class="nav-link">Logout</button>
+            <!-- /ログアウトボタン -->
+            </li>
+            <li class="nav-item">
             <!-- ログインボタン -->
             <RouterLink class="nav-link" to="/login"
               >Login / Register</RouterLink

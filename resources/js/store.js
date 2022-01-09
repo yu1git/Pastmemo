@@ -86,10 +86,10 @@ export const store = createStore({
         /**
          * auth
          */
-        SET_IS_AUTH(state, value) {
+        setIsAuth(state, value) {
             state.isAuth = value;
         },
-        SET_USER(state, value) {
+        setUser(state, value) {
             state.user = value;
         },
     },
@@ -108,6 +108,7 @@ export const store = createStore({
         /**
          * auth
          */
+        //ログイン
         async login({ dispatch }, credentials) {
             await axios.get('/sanctum/csrf-cookie');
             await axios.post('/api/login', credentials);
@@ -117,12 +118,12 @@ export const store = createStore({
             return await axios
                 .get('/api/user')
                 .then(response => {
-                    commit('SET_IS_AUTH', true);
-                    commit('SET_USER', response.data);
+                    commit('setIsAuth', true);
+                    commit('setUser', response.data);
                 })
                 .catch(() => {
-                        commit('SET_IS_AUTH', false);
-                        commit('SET_USER', null);
+                        commit('setIsAuth', false);
+                        commit('setUser', null);
                     });
         },
     }

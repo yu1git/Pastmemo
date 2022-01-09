@@ -258,6 +258,9 @@ https://qiita.com/hikkappi/items/b95626bb51bbf2ebcd2d
 https://wonwon-eater.com/laravel-sanctum-vue/#outline__7
 https://maasaablog.com/development/laravel/1011/#toc14
 
+php artisan tinker
+\App\Models\User::factory()->create(['name' => 'genba neko', 'email' => 'neko@neko.jp', 'password' => bcrypt('nekoneko')]);
+
 セキュリティ：
 (1) 機密性の高いデータを保存しない (必要なければ)。 
 (2) ユーザーに与えるアクセス権 はできるだけ小さくする。 
