@@ -2,7 +2,7 @@
   <div class="memo-form">
     <form class="" @submit.prevent="addNewMemo">
       <!-- ナビゲーションバー -->
-      <nav class="d-flex  mb-3">
+      <nav class="d-flex mb-3">
         <h2 class="title p-2 flex-grow-1 ">New Memo</h2>
         <button
           @click="$router.go(-1)"

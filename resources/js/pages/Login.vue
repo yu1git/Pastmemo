@@ -1,67 +1,152 @@
 <template>
   <div>
     <!-- tabの数字を切り替え -->
-    <ul>
-      <li @click="tab = 1">Login</li>
-      <li @click="tab = 2">Register</li>
-    </ul>
+    <nav class="d-flex justify-content-end mb-3">
+      <button @click="tab = 1" class="btn btn-outline-info p-2 m-2">
+        ログイン
+      </button>
+      <button @click="tab = 2" class="btn btn-outline-info p-2 m-2">
+        会員登録
+      </button>
+    </nav>
     <!-- /tabの数字を切り替え -->
-    <!-- tabによってログインとRegisterの画面を切り替える -->
-    <!-- Login Form -->
-    <div v-show="tab === 1">
-      <form @submit.prevent="loginSubmit">
-        <div>
-          <label for="login-email">メールアドレス</label>
-          <input type="text" v-model="loginForm.email" id="login-email" />
-          <span v-show="errors.email">{{ errors.email }}</span>
+    <div class="container">
+      <!-- tabの数字によってログインとRegisterの画面を切り替える -->
+      <!-- Login Form -->
+      <div v-show="tab === 1">
+        <div class="card" style="width: 80%">
+          <div class="card-body">
+            <h5 class="card-title">ログイン</h5>
+            <form @submit.prevent="loginSubmit">
+              <div class="row mb-3">
+                <label for="login-email" class="col-sm-3 col-form-label">
+                  メールアドレス
+                </label>
+                <div class="col-sm-9">
+                  <input
+                    type="text"
+                    v-model="loginForm.email"
+                    id="login-email"
+                    class="form-control"
+                  />
+                  <span v-show="errors.email" class="text-danger">
+                    {{ errors.email }}
+                  </span>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="login-password" class="col-sm-3 col-form-label">
+                  パスワード
+                </label>
+                <div class="col-sm-9">
+                  <input
+                    type="password"
+                    v-model="loginForm.password"
+                    id="login-password"
+                    class="form-control"
+                  />
+                  <span v-show="errors.password" class="text-danger">
+                    {{ errors.password }}
+                  </span>
+                </div>
+              </div>
+              <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-info p-2 m-2">
+                  ログイン
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-        <div>
-          <label for="login-password">パスワード</label>
-          <input
-            type="password"
-            v-model="loginForm.password"
-            id="login-password"
-          />
-          <span v-show="errors.password">{{ errors.password }}</span>
+      </div>
+      <!-- /Login Form -->
+      <!-- Register Form -->
+      <div v-show="tab === 2">
+        <div class="card" style="width: 80%">
+          <div class="card-body">
+            <h5 class="card-title">新規会員登録</h5>
+            <form @submit.prevent="registerSubmit">
+              <div class="row mb-3">
+                <label for="username" class="col-sm-3 col-form-label">
+                  名前
+                </label>
+                <div class="col-sm-9">
+                  <input
+                    type="text"
+                    id="username"
+                    v-model="registerForm.name"
+                    class="form-control"
+                  />
+                  <span v-show="errors.name" class="text-danger">
+                    {{ errors.name }}
+                  </span>
+                </div>
+              </div>
+              <div class="row mb-3">
+              <label for="email" class="col-sm-3 col-form-label">
+                メールアドレス
+              </label>
+              <div class="col-sm-9">
+              <input
+                type="text"
+                id="email"
+                v-model="registerForm.email"
+                class="form-control"
+              />
+              <span v-show="errors.email" class="text-danger">
+                {{ errors.email }}
+              </span>
+              </div>
+              </div>
+<div class="row mb-3">
+              <label for="password" class="col-sm-3 col-form-label"
+                >パスワード</label
+              >
+              <div class="col-sm-9">
+              <input
+                type="password"
+                id="password"
+                v-model="registerForm.password"
+                class="form-control"
+              />
+              <span v-show="errors.password" class="text-danger">
+                {{ errors.password }}
+              </span>
+              </div>
+</div>
+<div class="row mb-3">
+              <label for="password-confirmation" class="col-sm-3 col-form-label"
+                >パスワード (確認)</label
+              >
+              <div class="col-sm-9">
+              <input
+                type="password"
+                id="password-confirmation"
+                v-model="registerForm.password_confirmation"
+                class="form-control"
+              />
+              <span v-show="errors.password_confirmation">{{
+                errors.password_confirmation
+              }}</span>
+              </div>
+</div>
+              <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-info p-2 m-2">
+                  新規会員登録
+                </button>
+              </div>
+              <div v-show="errorMessage">
+                <span class="text-xs text-red-500">
+                  {{ errorMessage }}
+                </span>
+              </div>
+            </form>
+          </div>
         </div>
-        <button type="submit">ログイン</button>
-      </form>
+      </div>
+      <!-- /Register Form -->
+      <!-- /tabの数字によってログインとRegisterの画面を切り替える -->
     </div>
-    <!-- /Login Form -->
-    <!-- Register Form -->
-    <div v-show="tab === 2">
-      <form @submit.prevent="registerSubmit">
-        <label for="username">名前</label>
-        <input type="text" id="username" v-model="registerForm.name" />
-        <span v-show="errors.name">{{ errors.name }}</span>
-
-        <label for="email">メールアドレス</label>
-        <input type="text" id="email" v-model="registerForm.email" />
-        <span v-show="errors.email">{{ errors.email }}</span>
-
-        <label for="password">パスワード</label>
-        <input type="password" id="password" v-model="registerForm.password" />
-        <span v-show="errors.password">{{ errors.password }}</span>
-
-        <label for="password-confirmation">パスワード (確認)</label>
-        <input
-          type="password"
-          id="password-confirmation"
-          v-model="registerForm.password_confirmation"
-        />
-        <span v-show="errors.password_confirmation">{{ errors.password_confirmation }}</span>
-        <div>
-          <button type="submit">register</button>
-        </div>
-        <div v-show="errorMessage">
-          <span class="text-xs text-red-500">
-            {{ errorMessage }}
-          </span>
-        </div>
-      </form>
-    </div>
-    <!-- /Register Form -->
-    <!-- /tabによってログインとRegisterの画面を切り替える -->
   </div>
 </template>
 <script>
@@ -136,42 +221,44 @@ export default {
     },
     // バリデーション
     validMsg(form) {
-      let validEmail = /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9]{1,}$/;
-      if(!form.name) {
-        this.errors.name = "名前を記入してください"
-      } else if(form.name.length > 255) {
-        this.errors.name = "名前は255文字以内で記入してください"
+      let validEmail =
+        /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9]{1,}$/;
+      if (!form.name) {
+        this.errors.name = "名前を記入してください";
+      } else if (form.name.length > 255) {
+        this.errors.name = "名前は255文字以内で記入してください";
       } else {
         //2度目以降に正しい入力をしたとき、表示したエラーメッセージを空白に戻す
-        this.errors.name = ""
+        this.errors.name = "";
       }
-      if(!form.email) {
-        this.errors.email = "メールアドレスを記入してください"
-      } else if(form.email.length > 255) {
-        this.errors.email = "メールアドレスは255文字以内で記入してください"
-      } else if(!validEmail.test(form.email)) {
-        this.errors.email = "メールアドレスの形式で入力してください"
+      if (!form.email) {
+        this.errors.email = "メールアドレスを記入してください";
+      } else if (form.email.length > 255) {
+        this.errors.email = "メールアドレスは255文字以内で記入してください";
+      } else if (!validEmail.test(form.email)) {
+        this.errors.email = "メールアドレスの形式で入力してください";
       } else {
         //2度目以降に正しい入力をしたとき、表示したエラーメッセージを空白に戻す
-        this.errors.email = ""
+        this.errors.email = "";
       }
-      if(!form.password) {
-        this.errors.password = "パスワードを記入してください"
-      } else if(form.password < 8) {
-        this.errors.password = "パスワードは8文字以上で記入してください"
+      if (!form.password) {
+        this.errors.password = "パスワードを記入してください";
+      } else if (form.password < 8) {
+        this.errors.password = "パスワードは8文字以上で記入してください";
       } else {
         //2度目以降に正しい入力をしたとき、表示したエラーメッセージを空白に戻す
-        this.errors.password= ""
+        this.errors.password = "";
       }
-      if(!form.password_confirmation) {
-        this.errors.password_confirmation = "パスワード（確認）の入力は必須です"
-      } else if(form.password !== form.password_confirmation) {
-        this.errors.password_confirmation = "パスワードが異なります"
+      if (!form.password_confirmation) {
+        this.errors.password_confirmation =
+          "パスワード（確認）の入力は必須です";
+      } else if (form.password !== form.password_confirmation) {
+        this.errors.password_confirmation = "パスワードが異なります";
       } else {
         //2度目以降に正しい入力をしたとき、表示したエラーメッセージを空白に戻す
-        this.errors.password_confirmation = ""
+        this.errors.password_confirmation = "";
       }
-    }
+    },
   },
 };
 </script>
