@@ -57,11 +57,11 @@ import { baseurl } from "../const";
 
 export default {
   name: "MemoEdit",
-  //props:['userId'],
+  props:['userId'],
   data() {
     return {
       memo: {
-        id: Number,
+        user_id: this.userId,
         title: "",
         content: ",",
       },

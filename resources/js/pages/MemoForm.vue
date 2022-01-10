@@ -50,6 +50,7 @@ import axios from "axios";
 import { baseurl } from "../const";
 
 export default {
+  name: "MemoForm",
   data() {
     return {
       newMemo: {

@@ -18,8 +18,14 @@ class MemoController extends Controller
      */
     public function index()
     {
-        $memos = Memo::all();
-        return $memos;
+        // $memos = Memo::all();
+        // return $memos;
+        if ($request->ajax()) {
+            $memos =  Memo::all();
+            return response()->json(['memos' => $memos]);
+        } else {
+            return view('memos.memoList');
+        }
     }
 
     /**
@@ -30,8 +36,12 @@ class MemoController extends Controller
      */
     public function store(Request $request)
     {
-        $memo = new Memo();
-        $memo->fill($request->all())->save();
+        // $memo = new Memo();
+        // $memo->fill($request->all())->save();
+        Memo::create([
+            'content'=>$request->content,
+            'user_id'=>$request->user_id,
+        ]);
     }
 
     /**

@@ -19869,11 +19869,11 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "MemoEdit",
-  //props:['userId'],
+  props: ['userId'],
   data: function data() {
     return {
       memo: {
-        id: Number,
+        user_id: this.userId,
         title: "",
         content: ","
       },
@@ -20012,6 +20012,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "MemoForm",
   data: function data() {
     return {
       newMemo: {
@@ -21393,6 +21394,7 @@ var store = (0,vuex__WEBPACK_IMPORTED_MODULE_2__.createStore)({
     },
     setUser: function setUser(state, value) {
       state.user = value;
+      console.log(value);
     }
   },
   // 非同期の処理を入れる
