@@ -18,6 +18,7 @@
 
 </head>
 <body>
+<input type="hidden" id="user_id" name="user_id" value="{{ Auth::id() }}" />
     <div id="app"></div>
     <script src="js/app.js"></script>
 </body>

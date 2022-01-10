@@ -17,9 +17,10 @@ use App\Http\Controllers\Auth\RegisterController;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+// api/userのルート
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
 // ログイン・ログアウト
 Route::post('/login',[LoginController::class, 'login']);

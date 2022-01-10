@@ -261,6 +261,9 @@ https://readouble.com/laravel/8.x/ja/sanctum.html
 https://qiita.com/hikkappi/items/b95626bb51bbf2ebcd2d
 https://wonwon-eater.com/laravel-sanctum-vue/#outline__7
 https://maasaablog.com/development/laravel/1011/#toc14
+・user_idを紐づける
+https://qiita.com/kennsukea/items/2f103a6055ebb37b377d
+https://qiita.com/yyy752/items/d75f329d04e724e9d714
 
 php artisan tinker
 \App\Models\User::factory()->create(['name' => 'genba neko', 'email' => 'neko@neko.jp', 'password' => bcrypt('nekoneko')]);

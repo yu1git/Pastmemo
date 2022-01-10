@@ -91,7 +91,6 @@ export const store = createStore({
         },
         setUser(state, value) {
             state.user = value;
-            console.log(value);
         },
     },
     // 非同期の処理を入れる

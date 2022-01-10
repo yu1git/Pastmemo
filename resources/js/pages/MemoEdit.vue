@@ -54,10 +54,9 @@
 <script>
 import axios from "axios";
 import { baseurl } from "../const";
-
+console.log(this.memo.user_id)
 export default {
   name: "MemoEdit",
-  props:['userId'],
   data() {
     return {
       memo: {
