@@ -35,18 +35,27 @@ export const router = createRouter({
             //メモ新規作成画面
             path: '/memoForm',
             name: 'MemoForm',
-            component: MemoForm
+            component: MemoForm,
+            meta: {
+                isAuthenticated: true,
+            },
         },
         {
             //メモ検索結果画面
             path: '/Searched',
-            component: SearchedList
+            component: SearchedList,
+            meta: {
+                isAuthenticated: true,
+            },
         },
         {
             //メモ編集画面
             path: '/memoEdit/:id',
             name: 'MemoEdit',
-            component: MemoEdit
+            component: MemoEdit,
+            meta: {
+                isAuthenticated: true,
+            },
         },
     ]
 
@@ -55,13 +64,13 @@ export const router = createRouter({
 //認証されていなければLoginページへリダイレクト
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.isAuthenticated)) {
-      if (!store.state.isAuth) {
-        next({ name: 'Login' });
-      } else {
-        next();
-      }
+        if (!store.state.isAuth) {
+            next({ name: 'Login' });
+        } else {
+            next();
+        }
     }
     next();
-  });
+});
 
 export default router

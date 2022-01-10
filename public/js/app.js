@@ -19738,6 +19738,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 return _this.login(_this.loginForm);
 
               case 3:
+                // 現在のhistoryを置換(上書き)して移動する
                 _this.$router.replace({
                   name: "MemoList"
                 });
@@ -19763,8 +19764,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                 _context2.next = 3;
                 return _this2.register(_this2.registerForm).then(function (res) {
-                  console.log(res);
+                  console.log(res); // 現在のhistoryを置換(上書き)して移動する
 
+                  // 現在のhistoryを置換(上書き)して移動する
                   _this2.$router.replace({
                     name: "MemoList"
                   });
@@ -19829,7 +19831,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (!form.password) {
         this.errors.password = "パスワードを記入してください";
       } else if (form.password < 8) {
-        this.errors.password = "パスワードは8文字以上を記入してください";
+        this.errors.password = "パスワードは8文字以上で記入してください";
       } else {
         //2度目以降に正しい入力をしたとき、表示したエラーメッセージを空白に戻す
         this.errors.password = "";
@@ -21128,16 +21130,25 @@ var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_6__.createRouter)({
     //メモ新規作成画面
     path: '/memoForm',
     name: 'MemoForm',
-    component: _pages_MemoForm_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+    component: _pages_MemoForm_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    meta: {
+      isAuthenticated: true
+    }
   }, {
     //メモ検索結果画面
     path: '/Searched',
-    component: _pages_SearchedList_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+    component: _pages_SearchedList_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    meta: {
+      isAuthenticated: true
+    }
   }, {
     //メモ編集画面
     path: '/memoEdit/:id',
     name: 'MemoEdit',
-    component: _pages_MemoEdit_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+    component: _pages_MemoEdit_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+    meta: {
+      isAuthenticated: true
+    }
   }]
 }); //認証されていなければLoginページへリダイレクト
 

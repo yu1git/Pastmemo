@@ -98,6 +98,7 @@ export default {
       this.validMsg(this.loginForm);
       // storeのloginアクションを呼び出す
       await this.login(this.loginForm);
+      // 現在のhistoryを置換(上書き)して移動する
       this.$router.replace({ name: "MemoList" });
     },
     async registerSubmit() {
@@ -106,12 +107,12 @@ export default {
       await this.register(this.registerForm)
         .then((res) => {
           console.log(res);
+          // 現在のhistoryを置換(上書き)して移動する
           this.$router.replace({ name: "MemoList" });
         })
         .catch((err) => {
           this.handleErrors(err);
         });
-      //this.$router.replace({ name: 'MemoList' });
     },
     // エラー処理
     handleErrors(err) {
@@ -157,7 +158,7 @@ export default {
       if(!form.password) {
         this.errors.password = "パスワードを記入してください"
       } else if(form.password < 8) {
-        this.errors.password = "パスワードは8文字以上を記入してください"
+        this.errors.password = "パスワードは8文字以上で記入してください"
       } else {
         //2度目以降に正しい入力をしたとき、表示したエラーメッセージを空白に戻す
         this.errors.password= ""
