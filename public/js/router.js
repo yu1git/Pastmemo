@@ -19602,21 +19602,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       tab: 1,
+      errorMessage: "",
+      errors: {
+        name: "",
+        email: "",
+        password: "",
+        password_confirmation: ""
+      },
       loginForm: {
-        email: '',
-        password: ''
+        email: "",
+        password: ""
       },
       registerForm: {
-        name: '',
-        email: '',
-        password: '',
-        password_confirmation: ''
+        name: "",
+        email: "",
+        password: "",
+        password_confirmation: ""
       }
     };
   },
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)({
-    login: 'login',
-    register: 'register'
+    login: "login",
+    register: "register"
   })), {}, {
     loginSubmit: function loginSubmit() {
       var _this = this;
@@ -19626,15 +19633,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
+                _this.validMsg(_this.loginForm); // storeのloginアクションを呼び出す
+
+
+                _context.next = 3;
                 return _this.login(_this.loginForm);
 
-              case 2:
+              case 3:
                 _this.$router.replace({
-                  name: 'MemoList'
+                  name: "MemoList"
                 });
 
-              case 3:
+              case 4:
               case "end":
                 return _context.stop();
             }
@@ -19642,7 +19652,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee);
       }))();
     },
-    register: function register() {
+    registerSubmit: function registerSubmit() {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
@@ -19650,12 +19660,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.next = 2;
-                return _this2.register(_this2.registerForm);
+                _this2.validMsg(_this2.registerForm); // authストアのresigterアクションを呼び出す
 
-              case 2:
-                _this2.$router.replace({
-                  name: 'MemoList'
+
+                _context2.next = 3;
+                return _this2.register(_this2.registerForm).then(function (res) {
+                  console.log(res);
+
+                  _this2.$router.replace({
+                    name: "MemoList"
+                  });
+                })["catch"](function (err) {
+                  _this2.handleErrors(err);
                 });
 
               case 3:
@@ -19665,6 +19681,70 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }
         }, _callee2);
       }))();
+    },
+    // エラー処理
+    handleErrors: function handleErrors(err) {
+      console.log(err);
+
+      if (err.response && err.response.status === 422) {
+        var errorBag = err.response.data.errors;
+
+        if (errorBag.name) {
+          this.errorMessage = errorBag.name[0];
+        } else if (errorBag.email) {
+          this.errorMessage = errorBag.email[0];
+        } else if (errorBag.password) {
+          this.errorMessage = errorBag.password[0];
+        } else if (errorBag.password_confirmation) {
+          this.errorMessage = errorBag.password_confirmation[0];
+        } else {
+          this.errorMessage = err.response.message;
+        }
+      } else {
+        console.log(err.response);
+      }
+    },
+    // バリデーション
+    validMsg: function validMsg(form) {
+      var validEmail = /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9]{1,}$/;
+
+      if (!form.name) {
+        this.errors.name = "名前を記入してください";
+      } else if (form.name.length > 255) {
+        this.errors.name = "名前は255文字以内で記入してください";
+      } else {
+        //2度目以降に正しい入力をしたとき、表示したエラーメッセージを空白に戻す
+        this.errors.name = "";
+      }
+
+      if (!form.email) {
+        this.errors.email = "メールアドレスを記入してください";
+      } else if (form.email.length > 255) {
+        this.errors.email = "メールアドレスは255文字以内で記入してください";
+      } else if (!validEmail.test(form.email)) {
+        this.errors.email = "メールアドレスの形式で入力してください";
+      } else {
+        //2度目以降に正しい入力をしたとき、表示したエラーメッセージを空白に戻す
+        this.errors.email = "";
+      }
+
+      if (!form.password) {
+        this.errors.password = "パスワードを記入してください";
+      } else if (form.password < 8) {
+        this.errors.password = "パスワードは8文字以上を記入してください";
+      } else {
+        //2度目以降に正しい入力をしたとき、表示したエラーメッセージを空白に戻す
+        this.errors.password = "";
+      }
+
+      if (!form.password_confirmation) {
+        this.errors.password_confirmation = "パスワード（確認）の入力は必須です";
+      } else if (form.password !== form.password_confirmation) {
+        this.errors.password_confirmation = "パスワードが異なります";
+      } else {
+        //2度目以降に正しい入力をしたとき、表示したエラーメッセージを空白に戻す
+        this.errors.password_confirmation = "";
+      }
     }
   })
 });
@@ -19895,6 +19975,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     // エラー処理
     handleErrors: function handleErrors(err) {
+      console.log(err);
+
       if (err.response && err.response.status === 422) {
         var errorBag = err.response.data.errors;
 
@@ -20102,7 +20184,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "login-email"
-}, "Email", -1
+}, "メールアドレス", -1
 /* HOISTED */
 );
 
@@ -20126,7 +20208,7 @@ var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 
 var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "email"
-}, "Email", -1
+}, "メールアドレス", -1
 /* HOISTED */
 );
 
@@ -20144,20 +20226,23 @@ var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 
 var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   type: "submit"
-}, " register ")], -1
+}, "register")], -1
 /* HOISTED */
 );
 
+var _hoisted_9 = {
+  "class": "text-xs text-red-500"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" tabの数字を切り替え "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $data.tab = 1;
     })
-  }, " Login "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
+  }, "Login"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $data.tab = 2;
     })
-  }, " Register ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" /tabの数字を切り替え "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" tabによってログインとRegisterの画面を切り替える "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Login Form "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+  }, "Register")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" /tabの数字を切り替え "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" tabによってログインとRegisterの画面を切り替える "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Login Form "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     onSubmit: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.loginSubmit && $options.loginSubmit.apply($options, arguments);
     }, ["prevent"]))
@@ -20169,7 +20254,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     id: "login-email"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.loginForm.email]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.loginForm.email]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.errors.email), 513
+  /* TEXT, NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.errors.email]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "password",
     "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
       return $data.loginForm.password = $event;
@@ -20177,13 +20264,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     id: "login-password"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.loginForm.password]])]), _hoisted_3], 32
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.loginForm.password]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.errors.password), 513
+  /* TEXT, NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.errors.password]])]), _hoisted_3], 32
   /* HYDRATE_EVENTS */
   )], 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.tab === 1]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" /Login Form "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Register Form "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     onSubmit: _cache[9] || (_cache[9] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
-      return _ctx.registerSubmit && _ctx.registerSubmit.apply(_ctx, arguments);
+      return $options.registerSubmit && $options.registerSubmit.apply($options, arguments);
     }, ["prevent"]))
   }, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
@@ -20193,7 +20282,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.registerForm.name]]), _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.registerForm.name]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.errors.name), 513
+  /* TEXT, NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.errors.name]]), _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     id: "email",
     "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
@@ -20201,7 +20292,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.registerForm.email]]), _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.registerForm.email]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.errors.email), 513
+  /* TEXT, NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.errors.email]]), _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "password",
     id: "password",
     "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
@@ -20209,7 +20302,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.registerForm.password]]), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.registerForm.password]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.errors.password), 513
+  /* TEXT, NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.errors.password]]), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "password",
     id: "password-confirmation",
     "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
@@ -20217,7 +20312,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.registerForm.password_confirmation]]), _hoisted_8], 32
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.registerForm.password_confirmation]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.errors.password_confirmation), 513
+  /* TEXT, NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.errors.password_confirmation]]), _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.errorMessage), 1
+  /* TEXT */
+  )], 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.errorMessage]])], 32
   /* HYDRATE_EVENTS */
   )], 512
   /* NEED_PATCH */
@@ -20778,8 +20879,8 @@ var store = (0,vuex__WEBPACK_IMPORTED_MODULE_2__.createStore)({
     /**
      * auth
      */
-    //ログイン
-    login: function login(_ref2, credentials) {
+    //会員登録
+    register: function register(_ref2, credentials) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
         var dispatch;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
@@ -20792,7 +20893,7 @@ var store = (0,vuex__WEBPACK_IMPORTED_MODULE_2__.createStore)({
 
               case 3:
                 _context2.next = 5;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().post('/api/login', credentials);
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().post('/api/register', credentials);
 
               case 5:
                 _context2.next = 7;
@@ -20809,15 +20910,46 @@ var store = (0,vuex__WEBPACK_IMPORTED_MODULE_2__.createStore)({
         }, _callee2);
       }))();
     },
-    me: function me(_ref3) {
+    //ログイン
+    login: function login(_ref3, credentials) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var commit;
+        var dispatch;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                commit = _ref3.commit;
+                dispatch = _ref3.dispatch;
                 _context3.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/sanctum/csrf-cookie');
+
+              case 3:
+                _context3.next = 5;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().post('/api/login', credentials);
+
+              case 5:
+                _context3.next = 7;
+                return dispatch('me');
+
+              case 7:
+                return _context3.abrupt("return", _context3.sent);
+
+              case 8:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    me: function me(_ref4) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var commit;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                commit = _ref4.commit;
+                _context4.next = 3;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/api/user').then(function (response) {
                   commit('setIsAuth', true);
                   commit('setUser', response.data);
@@ -20827,14 +20959,73 @@ var store = (0,vuex__WEBPACK_IMPORTED_MODULE_2__.createStore)({
                 });
 
               case 3:
-                return _context3.abrupt("return", _context3.sent);
+                return _context4.abrupt("return", _context4.sent);
 
               case 4:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3);
+        }, _callee4);
+      }))();
+    },
+    //ログアウト
+    logout: function logout(_ref5) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+        var dispatch;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                dispatch = _ref5.dispatch;
+                _context5.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/sanctum/csrf-cookie');
+
+              case 3:
+                _context5.next = 5;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().post('/api/logout');
+
+              case 5:
+                _context5.next = 7;
+                return dispatch('out');
+
+              case 7:
+                return _context5.abrupt("return", _context5.sent);
+
+              case 8:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5);
+      }))();
+    },
+    out: function out(_ref6) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+        var commit;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                commit = _ref6.commit;
+                _context6.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/api/user').then(function (response) {
+                  commit('setIsAuth', false);
+                  commit('setUser', response.data);
+                })["catch"](function () {
+                  commit('setIsAuth', false);
+                  commit('setUser', null);
+                });
+
+              case 3:
+                return _context6.abrupt("return", _context6.sent);
+
+              case 4:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6);
       }))();
     }
   }

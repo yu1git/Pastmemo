@@ -233,6 +233,10 @@ https://getbootstrap.jp/docs/4.2/utilities/flex/
 
 ・戻るボタン、検索結果画面だけ左側に配置していたが、違和感があったので右側にそろえる
 
+・エラーメッセージの連想配列：2度目以降に正しい入力をしたとき、表示したエラーメッセージを消す
+        //delete(this.errors['name']);
+        this.errors.name = ""
+
 ＜参考＞
 ・jsonからとってきてデータ一覧を表示
 https://blog.capilano-fw.com/?p=432#Vue

@@ -111,6 +111,7 @@ export default {
     },
     // エラー処理
     handleErrors(err) {
+      console.log(err);
       if (err.response && err.response.status === 422) {
         const errorBag = err.response.data.errors;
         if (errorBag.title) {

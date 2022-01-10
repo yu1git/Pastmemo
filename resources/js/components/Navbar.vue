@@ -43,7 +43,7 @@
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
             <!-- ログアウトボタン -->
-              <button class="nav-link">Logout</button>
+              <button class="nav-link" @click="logoutButton">Logout</button>
             <!-- /ログアウトボタン -->
             </li>
             <li class="nav-item">
@@ -81,7 +81,7 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapActions } from "vuex";
 export default {
   name:'Navbar',
   data() {
@@ -91,14 +91,21 @@ export default {
   },
   methods: {
     ...mapMutations(["setFilterQuery"]),
-    //検索キーワードをstoreにセットする
+    ...mapActions({logout: 'logout'}),
+    // 検索キーワードをstoreにセットする
     searchMemo() {
       this.setFilterQuery(this.filterQuery);
       console.log("実行した");
     },
-    //過去メモの表示・非表示を切り替える
-    changeShow(){
+    // 過去メモの表示・非表示を切り替える
+    changeShow() {
       this.$store.commit('changeShow')
+    },
+    // ログアウト
+    async logoutButton() {
+      // storeのlogoutアクションを呼び出す
+      await this.logout();
+      this.$router.replace({ name: 'Login' });
     }
   },
 };
