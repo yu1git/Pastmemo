@@ -54,6 +54,8 @@ export default {
   data() {
     return {
       newMemo: {
+        //？storeからuser_idをもってきて保存したら反映されるか？
+
         title: "",
         content: "",
       },
