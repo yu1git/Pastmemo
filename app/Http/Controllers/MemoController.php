@@ -31,17 +31,12 @@ class MemoController extends Controller
      */
     public function store(Request $request)
     {
-        //✕
-        // $memo = new Memo();
-        // $memo->fill($request->all())->save();
- 
-        //✕
-        // Memo::create([
-        //     'user_id'=>$request->user_id,
-        //     'tilte'=>$request->title,
-        //     'content'=>$request->content,
-            
-        // ]);
+        $memo = new Memo();
+        // ログインユーザーのidと紐付ける
+        $memo->user_id = auth()->id();
+        $memo->title = $request->title;
+        $memo->content = $request->content;
+        $memo->save();
     }
 
     /**

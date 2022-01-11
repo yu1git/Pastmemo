@@ -111,8 +111,6 @@ export default {
       const url = baseurl + "api/memos";
       axios
         .post(url, {
-          // 認証済みのuserIdをメモのuser_idとする
-          user_id: this.userId,
           title: this.newMemo.title,
           content:this.newMemo.content
         })

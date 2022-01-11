@@ -252,6 +252,23 @@ https://getbootstrap.jp/docs/4.2/utilities/flex/
         $memos = Auth::user()->memos;
  
         return $memos;
+・メモを新規作成するときログインユーザーのidを紐づける
+    ユーザーidを気にせずに保存
+        // $memo = new Memo();
+        // $memo->fill($request->all())->save();
+    ログインユーザーのidを付与
+        // Memo::create([
+        //     'user_id'=>$request->user_id,
+        //     'tilte'=>$request->title,
+        //     'content'=>$request->content,
+        // ]);
+    はダメだったので変える
+        $memo = new Memo();
+        $memo->user_id = auth()->id();
+        $memo->title = $request->title;
+        $memo->content = $request->content;
+        $memo->save();
+        
 
 ＜参考＞
 ・jsonからとってきてデータ一覧を表示
@@ -282,6 +299,8 @@ https://qiita.com/kennsukea/items/2f103a6055ebb37b377d
 https://qiita.com/yyy752/items/d75f329d04e724e9d714
 ・ログインユーザーのデータのみを取り出す
 http://taustation.com/laravel-acquiring-data-of-logged-in-user/
+・メモを新規作成するときログインユーザーのidを紐づける
+https://nebikatsu.com/8570.html/
 
 php artisan tinker
 \App\Models\User::factory()->create(['name' => 'genba neko', 'email' => 'neko@neko.jp', 'password' => bcrypt('nekoneko')]);
