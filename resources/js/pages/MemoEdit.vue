@@ -54,13 +54,13 @@
 <script>
 import axios from "axios";
 import { baseurl } from "../const";
-console.log(this.memo.user_id)
+
 export default {
   name: "MemoEdit",
   data() {
     return {
       memo: {
-        user_id: this.userId,
+        //user_id: this.userId,
         title: "",
         content: ",",
       },
