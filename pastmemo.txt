@@ -237,6 +237,22 @@ https://getbootstrap.jp/docs/4.2/utilities/flex/
         //delete(this.errors['name']);
         this.errors.name = ""
 
+・ログインユーザーのデータのみを取り出す
+    すべてのメモを表示するとき
+        // $memos = Memo::all();
+        // return $memos;
+    ログインユーザーのmemoのみを取り出す
+        // if ($request->ajax()) {
+        //     $memos =  Memo::all();
+        //     return response()->json(['memos' => $memos]);
+        // } else {
+        //     return view('memos.memoList');
+        // }
+    はだめだったので変える
+        $memos = Auth::user()->memos;
+ 
+        return $memos;
+
 ＜参考＞
 ・jsonからとってきてデータ一覧を表示
 https://blog.capilano-fw.com/?p=432#Vue
@@ -264,6 +280,8 @@ https://maasaablog.com/development/laravel/1011/#toc14
 ・user_idを紐づける
 https://qiita.com/kennsukea/items/2f103a6055ebb37b377d
 https://qiita.com/yyy752/items/d75f329d04e724e9d714
+・ログインユーザーのデータのみを取り出す
+http://taustation.com/laravel-acquiring-data-of-logged-in-user/
 
 php artisan tinker
 \App\Models\User::factory()->create(['name' => 'genba neko', 'email' => 'neko@neko.jp', 'password' => bcrypt('nekoneko')]);

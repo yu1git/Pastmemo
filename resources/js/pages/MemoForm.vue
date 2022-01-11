@@ -48,6 +48,7 @@
 <script>
 import axios from "axios";
 import { baseurl } from "../const";
+import { mapGetters } from "vuex";
 
 export default {
   name: "MemoForm",
@@ -88,6 +89,13 @@ export default {
       next();
     }
   },
+  computed: {
+    ...mapGetters(["getUserId"]),
+    // storeからもってくる
+    userId() {
+      return this.$store.getters.getUserId;
+    },
+  },
   methods: {
     // 新規メモ作成
     addNewMemo() {
@@ -102,7 +110,13 @@ export default {
       }
       const url = baseurl + "api/memos";
       axios
-        .post(url, this.newMemo)
+        .post(url, {
+          // 認証済みのuserIdをメモのuser_idとする
+          user_id: this.userId,
+          title: this.newMemo.title,
+          content:this.newMemo.content
+        })
+        //.post(url, this.newMemo)
         .then((res) => {
           console.log(res);
           // 終了後MemoListに移動

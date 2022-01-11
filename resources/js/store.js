@@ -53,6 +53,10 @@ export const store = createStore({
         user(state) {
             return state.user;
         },
+        getUserId(state) {
+            console.log(state.user.id)
+            return state.user.id;
+        }
     },
     // stateの更新
     mutations: {
