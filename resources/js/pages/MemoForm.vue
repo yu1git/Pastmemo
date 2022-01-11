@@ -55,8 +55,6 @@ export default {
   data() {
     return {
       newMemo: {
-        //？storeからuser_idをもってきて保存したら反映されるか？
-
         title: "",
         content: "",
       },
@@ -89,13 +87,6 @@ export default {
       next();
     }
   },
-  computed: {
-    ...mapGetters(["getUserId"]),
-    // storeからもってくる
-    userId() {
-      return this.$store.getters.getUserId;
-    },
-  },
   methods: {
     // 新規メモ作成
     addNewMemo() {
@@ -110,11 +101,7 @@ export default {
       }
       const url = baseurl + "api/memos";
       axios
-        .post(url, {
-          title: this.newMemo.title,
-          content:this.newMemo.content
-        })
-        //.post(url, this.newMemo)
+        .post(url, this.newMemo)
         .then((res) => {
           console.log(res);
           // 終了後MemoListに移動

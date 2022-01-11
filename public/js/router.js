@@ -19910,13 +19910,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _const__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../const */ "./resources/js/const.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -19925,7 +19918,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       newMemo: {
-        //？storeからuser_idをもってきて保存したら反映されるか？
         title: "",
         content: ""
       },
@@ -19956,12 +19948,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       next();
     }
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)(["getUserId"])), {}, {
-    // storeからもってくる
-    userId: function userId() {
-      return this.$store.getters.getUserId;
-    }
-  }),
   methods: {
     // 新規メモ作成
     addNewMemo: function addNewMemo() {
@@ -19980,11 +19966,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       var url = _const__WEBPACK_IMPORTED_MODULE_1__.baseurl + "api/memos";
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post(url, {
-        title: this.newMemo.title,
-        content: this.newMemo.content
-      }) //.post(url, this.newMemo)
-      .then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post(url, this.newMemo).then(function (res) {
         console.log(res); // 終了後MemoListに移動
 
         _this.$router.push({
