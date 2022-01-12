@@ -20029,13 +20029,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     // すべてのメモをstoreからもってくる
-    this.$store.dispatch("getMemos"); // メモが0の時、初回の説明画面を表示するためのフラグを設定する
-
-    if (this.$store.state.maxMemo === 0) {
-      this.$store.commit('setFirstFlag', true);
-    } else {
-      this.$store.commit('setFirstFlag', false);
-    }
+    this.$store.dispatch("getMemos");
   },
   methods: {
     // 日付フォーマット
@@ -20966,7 +20960,7 @@ var store = (0,vuex__WEBPACK_IMPORTED_MODULE_3__.createStore)({
     // 初めてのメモ作成時の表示をするためのフラグをセットする
     setFirstFlag: function setFirstFlag(state, bool) {
       state.firstFlag = bool;
-      console.log("memoない" + state.firstFlag + state.maxMemo);
+      console.log("memoの数：" + state.maxMemo + state.firstFlag);
     },
 
     /**
@@ -20986,23 +20980,30 @@ var store = (0,vuex__WEBPACK_IMPORTED_MODULE_3__.createStore)({
      */
     getMemos: function getMemos(_ref) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var commit;
+        var commit, response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 commit = _ref.commit;
                 _context.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().get("http://127.0.0.1:8000/api/memos").then(function (response) {
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get("http://127.0.0.1:8000/api/memos").then(function () {
                   commit('setMemos', response.data);
                   commit('setMaxMemo', response.data.length);
-                  commit('setRandomMemo');
+                  commit('setRandomMemo'); // メモが0の時、初回の説明画面を表示するためのフラグを設定する
+
+                  // メモが0の時、初回の説明画面を表示するためのフラグを設定する
+                  if (response.data.length === 0) {
+                    commit('setFirstFlag', true);
+                  } else {
+                    commit('setFirstFlag', false);
+                  }
                 })["catch"](function (error) {
                   console.log(error.state);
                 });
 
               case 3:
-                return _context.abrupt("return", _context.sent);
+                response = _context.sent;
 
               case 4:
               case "end":

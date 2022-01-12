@@ -88,7 +88,7 @@ export const store = createStore({
         // 初めてのメモ作成時の表示をするためのフラグをセットする
         setFirstFlag: (state,bool) => {
             state.firstFlag = bool;
-            console.log("memoない"+state.firstFlag+state.maxMemo)
+            console.log("memoの数："+state.maxMemo+state.firstFlag)
         },
 
         /**
@@ -107,13 +107,18 @@ export const store = createStore({
          * memo
          */
         async getMemos({ commit }) {
-            
-            return await axios
+            const response = await axios
             .get("http://127.0.0.1:8000/api/memos")
-            .then(response => {
+            .then(() => {
                 commit('setMemos', response.data)
                 commit('setMaxMemo', response.data.length)
                 commit('setRandomMemo')
+                // メモが0の時、初回の説明画面を表示するためのフラグを設定する
+                if(response.data.length === 0){
+                    commit('setFirstFlag',true);
+                }else{
+                    commit('setFirstFlag',false);
+                }
             })
             .catch((error) => {
                 console.log(error.state)

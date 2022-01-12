@@ -269,6 +269,38 @@ https://getbootstrap.jp/docs/4.2/utilities/flex/
         $memo->content = $request->content;
         $memo->save();
         
+・①ログインだと問題ないが、新規会員登録すると他のユーザーのメモが表示されたMemoListに移動してしまうor②メモがないので画面が表示される
+    →とりあえず②の解決のため初回のメモが0のときの画面を表示する
+    MemoList
+        <!-- ▼メモが0の時、初回の説明画面を表示する -->
+        <div v-if="$store.state.firstFlag">
+            「New」ボタンを押してメモを新規作成してください。
+        </div>
+        <!-- ▲メモが0の時、初回の説明画面を表示する -->
+        <div v-else>
+    MemoListのmounted()
+        // if(this.$store.state.maxMemo === 0){
+            // this.$store.commit('setFirstFlag',true);
+        // }else{
+            // this.$store.commit('setFirstFlag',false);
+        // }
+    store.jsのgetMemosにまとめる
+        return await axios
+            .get("http://127.0.0.1:8000/api/memos")
+            .then(response => {
+                commit('setMemos', response.data)
+                commit('setMaxMemo', response.data.length)
+                commit('setRandomMemo')
+                // メモが0の時、初回の説明画面を表示するためのフラグを設定する
+                if(response.data.length === 0){
+                    commit('setFirstFlag',true);
+                }else{
+                    commit('setFirstFlag',false);
+                }
+            })
+
+        
+        
 
 ＜参考＞
 ・jsonからとってきてデータ一覧を表示

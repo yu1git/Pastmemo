@@ -63,12 +63,6 @@ export default {
   mounted() {
     // すべてのメモをstoreからもってくる
     this.$store.dispatch("getMemos");
-    // メモが0の時、初回の説明画面を表示するためのフラグを設定する
-    if(this.$store.state.maxMemo === 0){
-      this.$store.commit('setFirstFlag',true);
-    }else{
-      this.$store.commit('setFirstFlag',false);
-    }
   },
   methods: {
     // 日付フォーマット
