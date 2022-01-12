@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- tabの数字を切り替え -->
+    <!-- ▼tabの数字を切り替え -->
     <nav class="d-flex justify-content-end mb-3">
       <button @click="tab = 1" class="btn btn-outline-info p-2 m-2">
         ログイン
@@ -9,10 +9,10 @@
         会員登録
       </button>
     </nav>
-    <!-- /tabの数字を切り替え -->
+    <!-- ▲tabの数字を切り替え -->
     <div class="container">
-      <!-- tabの数字によってログインとRegisterの画面を切り替える -->
-      <!-- Login Form -->
+      <!-- ▼tabの数字によってログインとRegisterの画面を切り替える -->
+      <!-- ▼Login Form -->
       <div v-show="tab === 1">
         <div class="card" style="width: 80%">
           <div class="card-body">
@@ -59,8 +59,8 @@
           </div>
         </div>
       </div>
-      <!-- /Login Form -->
-      <!-- Register Form -->
+      <!-- ▲Login Form -->
+      <!-- ▼Register Form -->
       <div v-show="tab === 2">
         <div class="card" style="width: 80%">
           <div class="card-body">
@@ -144,8 +144,8 @@
           </div>
         </div>
       </div>
-      <!-- /Register Form -->
-      <!-- /tabの数字によってログインとRegisterの画面を切り替える -->
+      <!-- ▲Register Form -->
+      <!-- ▲tabの数字によってログインとRegisterの画面を切り替える -->
     </div>
   </div>
 </template>

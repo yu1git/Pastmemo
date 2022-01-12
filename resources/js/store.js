@@ -1,6 +1,7 @@
 //import { reactive } from "vue";
 import { createStore } from 'vuex'
 import axios from 'axios'
+import { get } from 'lodash';
 
 export const store = createStore({
     // 保管する値を用意
@@ -18,6 +19,8 @@ export const store = createStore({
             serchFlag: false,
             //過去メモ表示・非表示を管理するフラグ
             show: true,
+            // 初めてのメモ作成時の表示をするためのフラグ
+            firstFlag: false,
 
             /**
              * auth
@@ -53,10 +56,6 @@ export const store = createStore({
         user(state) {
             return state.user;
         },
-        getUserId(state) {
-            console.log(state.user.id)
-            return state.user.id;
-        }
     },
     // stateの更新
     mutations: {
@@ -86,6 +85,11 @@ export const store = createStore({
         changeShow: (state) => {
             state.show = !state.show;
         },
+        // 初めてのメモ作成時の表示をするためのフラグをセットする
+        setFirstFlag: (state,bool) => {
+            state.firstFlag = bool;
+            console.log("memoない"+state.firstFlag+state.maxMemo)
+        },
 
         /**
          * auth
@@ -103,12 +107,18 @@ export const store = createStore({
          * memo
          */
         async getMemos({ commit }) {
-            const response = await axios.get("http://127.0.0.1:8000/api/memos")
-            commit('setMemos', response.data)
-            commit('setMaxMemo', response.data.length)
-            commit('setRandomMemo')
+            
+            return await axios
+            .get("http://127.0.0.1:8000/api/memos")
+            .then(response => {
+                commit('setMemos', response.data)
+                commit('setMaxMemo', response.data.length)
+                commit('setRandomMemo')
+            })
+            .catch((error) => {
+                console.log(error.state)
+            });
         },
-
         /**
          * auth
          */
@@ -133,9 +143,9 @@ export const store = createStore({
                     commit('setUser', response.data);
                 })
                 .catch(() => {
-                        commit('setIsAuth', false);
-                        commit('setUser', null);
-                    });
+                    commit('setIsAuth', false);
+                    commit('setUser', null);
+                });
         },
 
         //ログアウト
@@ -152,9 +162,9 @@ export const store = createStore({
                     commit('setUser', response.data);
                 })
                 .catch(() => {
-                        commit('setIsAuth', false);
-                        commit('setUser', null);
-                    });
+                    commit('setIsAuth', false);
+                    commit('setUser', null);
+                });
         },
     }
 })

@@ -1,7 +1,7 @@
 <template>
   <div class="memo-form">
     <form class="" @submit.prevent="addNewMemo">
-      <!-- ナビゲーションバー -->
+      <!-- ▼ナビゲーションバー -->
       <nav class="d-flex mb-3">
         <h2 class="title p-2 flex-grow-1 ">New Memo</h2>
         <button
@@ -15,8 +15,8 @@
           新規メモ作成
         </button>
       </nav>
-      <!-- /ナビゲーションバー -->
-      <!-- メモ新規作成画面 -->
+      <!-- ▲ナビゲーションバー -->
+      <!-- ▼メモ新規作成画面 -->
       <div class="p-3 d-flex flex-column memo-box">
         <input
           class="memo-title h5"
@@ -40,7 +40,7 @@
           </span>
         </div>
       </div>
-      <!-- /メモ新規作成画面 -->
+      <!-- ▲メモ新規作成画面 -->
     </form>
   </div>
 </template>

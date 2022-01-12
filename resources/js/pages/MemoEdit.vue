@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- ナビゲーションバー -->
+    <!-- ▼ナビゲーションバー -->
     <nav class="d-flex mb-3 justify-content-end">
       <button
         @click="$router.go(-1)"
@@ -24,8 +24,8 @@
         保存
       </button>
     </nav>
-    <!-- /ナビゲーションバー -->
-    <!-- メモ編集画面 -->
+    <!-- ▲ナビゲーションバー -->
+    <!-- ▼メモ編集画面 -->
     <div class="p-3 d-flex flex-column memo-box">
       <input
         class="memo-title h5"
@@ -47,7 +47,7 @@
         </span>
       </div>
     </div>
-    <!-- /メモ編集画面 -->
+    <!-- ▲メモ編集画面 -->
   </div>
 </template>
 
@@ -60,7 +60,6 @@ export default {
   data() {
     return {
       memo: {
-        //user_id: this.userId,
         title: "",
         content: ",",
       },
@@ -112,7 +111,6 @@ export default {
       const url = baseurl + "api/memos/" + this.memo.id;
       axios
         .put(url, {
-          //id: this.userId,
           title: this.memo.title,
           content: this.memo.content,
         })
@@ -130,7 +128,6 @@ export default {
       const url = baseurl + "api/memos/" + this.memo.id;
       axios
         .delete(url, {
-          //id: this.userId,
           title: this.memo.title,
           content: this.memo.content,
         })

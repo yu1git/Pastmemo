@@ -11,7 +11,7 @@
         v-for="(memo, index) in $store.state.memos"
         v-bind:key="(memo, index)"
       >
-        <!-- クリックすると編集画面に移動 -->
+        <!-- ▼クリックすると編集画面に移動 -->
         <router-link
           :to="{ name: 'MemoEdit', params: { id: memo.id } }"
           v-if="index === $store.state.randomMemo"
@@ -28,7 +28,7 @@
             <small>{{ makeDate(memo.updated_at) }}</small>
           </div>
         </router-link>
-        <!-- /クリックすると編集画面に移動 -->
+        <!-- ▲クリックすると編集画面に移動 -->
       </div>
     </div>
   </div>

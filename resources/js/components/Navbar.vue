@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-info">
     <div class="container-fluid d-flex">
       <RouterLink class="navbar-brand" :to="{ name: 'MemoList' }"> ホーム </RouterLink>
-      <!-- 検索フォーム -->
+      <!-- ▼検索フォーム -->
       <ul class="navbar-nav flex-grow-1 p-2">
         <div class="d-flex mr-auto"> 
           <input
@@ -20,13 +20,13 @@
           >検索アイコンのみ</RouterLink>
         </div>
       </ul>
-      <!-- /検索フォーム -->
-      <!-- メモ新規作成ボタン -->
+      <!-- ▲検索フォーム -->
+      <!-- ▼メモ新規作成ボタン -->
       <ul class="navbar-nav">
         <RouterLink class="nav-link" to="/memoForm">New</RouterLink>
       </ul>
-      <!-- /メモ新規作成ボタン -->
-      <!-- その他のボタン -->
+      <!-- ▲メモ新規作成ボタン -->
+      <!-- ▼その他のボタン -->
       <ul>
       <button
         class="navbar-toggler"
@@ -42,16 +42,16 @@
       <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <!-- ログアウトボタン -->
+            <!-- ▼ログアウトボタン -->
               <button class="nav-link" @click="logoutButton">Logout</button>
-            <!-- /ログアウトボタン -->
+            <!-- ▲ログアウトボタン -->
             </li>
             <li class="nav-item">
-            <!-- ログインボタン -->
+            <!-- ▼ログインボタン -->
             <RouterLink class="nav-link" to="/login"
               >Login / Register</RouterLink
             >
-            <!-- /ログインボタン -->
+            <!-- ▲ログインボタン -->
           </li>
           <li class="nav-item dropdown">
             <a
@@ -75,7 +75,7 @@
         </ul>
       </div>
       </ul>
-      <!-- /その他のボタン -->
+      <!-- ▲その他のボタン -->
     </div>
   </nav>
 </template>
