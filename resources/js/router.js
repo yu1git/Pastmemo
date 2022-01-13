@@ -62,15 +62,15 @@ export const router = createRouter({
 });
 
 //認証されていなければLoginページへリダイレクト
-router.beforeEach((to, from, next) => {
-    if (to.matched.some(record => record.meta.isAuthenticated)) {
-        if (!store.state.isAuth) {
-            next({ name: 'Login' });
-        } else {
-            next();
+router.beforeEach((to, from) => {
+    // metaフィールドをチェック
+    if (to.meta.isAuthenticated && !store.state.isAuth) {
+        return {
+            path: '/login',
+            // 後で戻ってくる場所を保存
+            query: { redirect: to.fullPath },
         }
     }
-    next();
-});
+})
 
 export default router

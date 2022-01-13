@@ -299,8 +299,69 @@ https://getbootstrap.jp/docs/4.2/utilities/flex/
                 }
             })
 
-        
-        
+・getMemosを.then.catchで書いたらバグった
+    //  async getMemos({ commit }) {
+        // const response = await axios.get("http://127.0.0.1:8000/api/memos")
+        // .then(() => {
+        //     console.log(repsonse)
+        //     commit('setMemos', response.data)
+        //     commit('setMaxMemo', response.data.length)
+        //     commit('setRandomMemo')
+        //     // メモが0の時、初回の説明画面を表示するためのフラグを設定する
+        //     if(response.data.length === 0){
+        //         commit('setFirstFlag',true);
+        //     }else{
+        //         commit('setFirstFlag',false);
+        //     }
+        // })
+        // .catch((error) => {
+        //     console.log(error.state)
+        // });
+    async getMemos({ commit }) {
+            try {
+                const response = await axios.get("http://127.0.0.1:8000/api/memos")
+                // レスポンスを確認
+                console.log(response.data)
+                // 各メモをセット
+                commit('setMemos',response.data)
+                commit('setMaxMemo', response.data.length)
+                commit('setRandomMemo')
+                // 三項演算子で書き換え
+                response.data.length === 0 
+                    ? commit('setFirstFlag',true) 
+                    : commit('setFirstFlag',false);
+            } catch (error) {
+                console.error(error)
+            }
+        },    
+
+・毎回出てくる注意文を消す
+        vue-router.esm-bundler.js?ec2d:72 [Vue Router warn]: The "next" callback was called more than once in one navigation guard when going from "/login?redirect=/" to "/memoForm". It should be called exactly one time in each navigation guard. This will fail in production.
+    調べると、使っていたのはVue Routerバージョン3の時のやり方
+        router.beforeEach((to, from,next) => {
+            // metaフィールドをチェック
+            if (to.matched.some(record => record.meta.isAuthenticated)) {
+                if (!store.state.isAuth) {
+                    next({ name: 'Login' });
+                } else {
+                    next();
+                }
+            }
+            next();
+        });
+    Vue Routerバージョン4を使ってるので公式に書いてるやり方に変える
+        router.beforeEach((to, from) => {
+            // metaフィールドをチェック
+            if (to.meta.isAuthenticated && !store.state.isAuth) {
+                return {
+                    path: '/login',
+                    // 後で戻ってくる場所を保存
+                    query: { redirect: to.fullPath },
+                }
+            }
+        })
+    →注意文消えた
+
 
 ＜参考＞
 ・jsonからとってきてデータ一覧を表示

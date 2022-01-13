@@ -1,7 +1,7 @@
 //import { reactive } from "vue";
 import { createStore } from 'vuex'
 import axios from 'axios'
-import { get } from 'lodash';
+//import { get } from 'lodash';
 
 export const store = createStore({
     // 保管する値を用意
@@ -11,7 +11,9 @@ export const store = createStore({
              * memo
              */
             memos: [],
+            // 過去メモをランダム表示するためのメモの最大数
             maxMemo: 0,
+            // 過去メモをランダム表示するためのランダムな数値
             randomMemo: 0,
             // 検索パラメータ
             filterQuery: "",
@@ -111,47 +113,17 @@ export const store = createStore({
                 const response = await axios.get("http://127.0.0.1:8000/api/memos")
                 // レスポンスを確認
                 console.log(response.data)
-
-                // 各メモをセット
+                // メモをセット
                 commit('setMemos',response.data)
                 commit('setMaxMemo', response.data.length)
                 commit('setRandomMemo')
-
                 // メモが0の時、初回の説明画面を表示するためのフラグを設定する
-                // if(response.data.length === 0){
-                //     commit('setFirstFlag',true);
-                // }else{
-                //     commit('setFirstFlag',false);
-                // }
-
-                // 三項演算子で書き換え
                 response.data.length === 0 
                     ? commit('setFirstFlag',true) 
                     : commit('setFirstFlag',false);
-
             } catch (error) {
                 console.error(error)
             }
-
-            //  async () => {
-                // const response = await axios.get("http://127.0.0.1:8000/api/memos")
-
-
-            // .then(() => {
-            //     console.log(repsonse)
-            //     commit('setMemos', response.data)
-            //     commit('setMaxMemo', response.data.length)
-            //     commit('setRandomMemo')
-            //     // メモが0の時、初回の説明画面を表示するためのフラグを設定する
-            //     if(response.data.length === 0){
-            //         commit('setFirstFlag',true);
-            //     }else{
-            //         commit('setFirstFlag',false);
-            //     }
-            // })
-            // .catch((error) => {
-            //     console.log(error.state)
-            // });
         },
         /**
          * auth
