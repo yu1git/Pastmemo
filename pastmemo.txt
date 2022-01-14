@@ -1,12 +1,12 @@
 アプリケーションの名前：過去メモ
-コンセプト：過去、自分が考えたアイデアを思い出すきっかけをつくり、そのアイデアをさらに深める
+コンセプト：過去に自分が考えたアイデアを思い出すきっかけをつくり、そのアイデアをさらに深めるメモ帳
 サービス説明、概要：過去のメモを思い出すきっかけを作るため、メモ帳の上部に過去のメモをランダム表示する。また、そのメモに対して現在の考えをメモできる
 制作目的：一度メモしたアイデアは忘れてしまい、振り返る機会がなかなかなかった。しかし、過去のアイデアを時間をおいてからもう一度振り返ることで、良いアイデアが浮かぶことがある。過去のメモを振り返りやすいメモ帳を使えば、その問題が解決され、良いアイデアを生み出す手助けができると考えた。
 
 想定されたユーザー(ターゲット)：アイデアを生み出したい人。過去のメモに書いたアイデアを忘れてしまう人。
 ユーザーが持つ課題：過去のメモに書いたアイデアが使われないまま忘れ去られてしまう。
 ？課題の解決方法：メモ帳の上部に過去のメモをランダム表示する。また、そのメモに対して現在の考えをメモできる
-使用技術：Laravel8、vue3、MYSQL
+使用技術：Laravel8、Vue.js3、MYSQL
 選定理由：使い慣れていたため。
 今後追加したい機能など：
 
@@ -250,8 +250,8 @@ https://getbootstrap.jp/docs/4.2/utilities/flex/
         // }
     はだめだったので変える
         $memos = Auth::user()->memos;
- 
         return $memos;
+
 ・メモを新規作成するときログインユーザーのidを紐づける
     ユーザーidを気にせずに保存
         // $memo = new Memo();
@@ -298,6 +298,15 @@ https://getbootstrap.jp/docs/4.2/utilities/flex/
                     commit('setFirstFlag',false);
                 }
             })
+    ①の解決にはstore.jsの会員登録を
+        async register({ dispatch }, credentials) {
+            await axios.get('/sanctum/csrf-cookie');
+            // 新規ユーザーの作成
+            await axios.post('/api/register', credentials);
+            // 新規ユーザーでログイン
+            await axios.post('/api/login', credentials);
+            await dispatch('me');
+        },
 
 ・getMemosを.then.catchで書いたらバグった
     //  async getMemos({ commit }) {
@@ -362,6 +371,28 @@ https://getbootstrap.jp/docs/4.2/utilities/flex/
         })
     →注意文消えた
 
+・ドロップダウン不要なので消す
+    ドロップダウン
+        <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="dropdown"
+              data-bs-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              >ドロップダウン</a
+            >
+            <div class="dropdown-menu" aria-labelledby="dropdown">
+              <a 
+                  href="#"
+                  class="dropdown-item" 
+                  @click="changeShow()"
+              >過去メモ非表示</a>
+              <a class="dropdown-item" href="#">リンク2</a>
+              <a class="dropdown-item" href="#">リンク3</a>
+            </div>
+        </li>
 
 ＜参考＞
 ・jsonからとってきてデータ一覧を表示

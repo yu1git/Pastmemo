@@ -174,13 +174,14 @@ export const store = createStore({
         },
         async out({ commit }) {
             try {
-                const response = axios.get('/api/user');
-                console.log(response.data);
+                //const response = axios.get('/api/user');
+                //console.log(response.data);
 
                 // 認証情報を初期化
                 commit('setIsAuth', false);
                 // setUserを動かす？？
-                commit('setUser', response.data);
+                //commit('setUser', response.data);
+                commit('setUser', null);
             } catch (error) {
                 console.log(error)
 
