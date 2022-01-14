@@ -132,9 +132,11 @@ export const store = createStore({
         //会員登録
         async register({ dispatch }, credentials) {
             // await axios.get('/sanctum/csrf-cookie');
+            // 新規ユーザーの作成
             await axios.post('/api/register', credentials);
+            // 新規ユーザーでログイン
             await axios.post('/api/login', credentials);
-            return await dispatch('me');
+            await dispatch('me');
         },
 
         //ログイン
