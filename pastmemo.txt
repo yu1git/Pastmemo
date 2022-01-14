@@ -468,9 +468,6 @@ php artisan tinker
     php artisan serve
     npm run watch
         
-
-
-
     モデルとマイグレーションを同時に作成
     php artisan make:model 名(最初大文字。単数形) --migration
 
