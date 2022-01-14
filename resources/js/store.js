@@ -88,9 +88,9 @@ export const store = createStore({
             state.show = !state.show;
         },
         // 初めてのメモ作成時の表示をするためのフラグをセットする
-        setFirstFlag: (state,bool) => {
+        setFirstFlag: (state, bool) => {
             state.firstFlag = bool;
-            console.log("memoの数："+state.maxMemo+state.firstFlag)
+            console.log("memoの数：" + state.maxMemo + state.firstFlag)
         },
 
         /**
@@ -110,19 +110,20 @@ export const store = createStore({
          */
         async getMemos({ commit }) {
             try {
-                const response = await axios.get("http://127.0.0.1:8000/api/memos")
+                // axiosはデフォルトでbaseURLに自サーバーのURLを持つのでlocalhost~~は不要らしい（すみません）
+                const response = await axios.get("/api/memos")
                 // レスポンスを確認
                 console.log(response.data)
                 // メモをセット
-                commit('setMemos',response.data)
+                commit('setMemos', response.data)
                 commit('setMaxMemo', response.data.length)
                 commit('setRandomMemo')
                 // メモが0の時、初回の説明画面を表示するためのフラグを設定する
-                response.data.length === 0 
-                    ? commit('setFirstFlag',true) 
-                    : commit('setFirstFlag',false);
+                response.data.length === 0
+                    ? commit('setFirstFlag', true)
+                    : commit('setFirstFlag', false);
             } catch (error) {
-                console.error(error)
+                console.error(error);
             }
         },
         /**
@@ -130,47 +131,60 @@ export const store = createStore({
          */
         //会員登録
         async register({ dispatch }, credentials) {
-            await axios.get('/sanctum/csrf-cookie');
+            // await axios.get('/sanctum/csrf-cookie');
             await axios.post('/api/register', credentials);
             return await dispatch('me');
         },
 
         //ログイン
         async login({ dispatch }, credentials) {
-            await axios.get('/sanctum/csrf-cookie');
+            // 用途不明のため一度コメントアウト
+            // await axios.get('/sanctum/csrf-cookie');
             await axios.post('/api/login', credentials);
-            return await dispatch('me');
+            await dispatch('me');
         },
         async me({ commit }) {
-            return await axios
-                .get('/api/user')
-                .then(response => {
-                    commit('setIsAuth', true);
-                    commit('setUser', response.data);
-                })
-                .catch(() => {
-                    commit('setIsAuth', false);
-                    commit('setUser', null);
-                });
+            try {
+                const response = await axios.get('/api/user');
+                console.log('認証情報の表示');
+                console.log(response.data);
+
+                // 認証情報を設定
+                commit('setIsAuth', true);
+                commit('setUser', response.data);
+            } catch (error) {
+                console.log('エラー情報の表示');
+                console.log(error);
+
+                // 認証情報を初期化
+                commit('setIsAuth', false);
+                commit('setUser', null);
+            }
         },
 
         //ログアウト
         async logout({ dispatch }) {
-            await axios.get('/sanctum/csrf-cookie');
+            // 用途不明のため一度コメントアウト
+            // await axios.get('/sanctum/csrf-cookie');
             await axios.post('/api/logout');
-            return await dispatch('out');
+            await dispatch('out');
         },
         async out({ commit }) {
-            return await axios
-                .get('/api/user')
-                .then(response => {
-                    commit('setIsAuth', false);
-                    commit('setUser', response.data);
-                })
-                .catch(() => {
-                    commit('setIsAuth', false);
-                    commit('setUser', null);
-                });
+            try {
+                const response = axios.get('/api/user');
+                console.log(response.data);
+
+                // 認証情報を初期化
+                commit('setIsAuth', false);
+                // setUserを動かす？？
+                commit('setUser', response.data);
+            } catch (error) {
+                console.log(error)
+
+                // 認証情報を初期化？
+                commit('setIsAuth', false);
+                commit('setUser', null);
+            }
         },
     }
 })
