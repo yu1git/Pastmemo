@@ -6,7 +6,7 @@
         ログイン
       </button>
       <button @click="tab = 2" class="btn btn-outline-info p-2 m-2">
-        会員登録
+        ユーザー登録
       </button>
     </nav>
     <!-- ▲tabの数字を切り替え -->
@@ -14,53 +14,72 @@
       <!-- ▼tabの数字によってログインとRegisterの画面を切り替える -->
       <!-- ▼Login Form -->
       <div v-show="tab === 1">
-        <div class="card" style="width: 80%">
-          <div class="card-body">
-            <h5 class="card-title">ログイン</h5>
-            <form @submit.prevent="loginSubmit">
-              <div class="row mb-3">
-                <label for="login-email" class="col-sm-3 col-form-label">
-                  メールアドレス
-                  <span class="text-light bg-danger px-1 small">必須</span>
-                </label>
-                <div class="col-sm-9">
-                  <input
-                    type="text"
-                    v-model="loginForm.email"
-                    id="login-email"
-                    class="form-control"
-                    v-bind:class="{ errorOutline: errors.email }"
-                  />
-                  <span v-show="errors.email" class="text-danger">
-                    {{ errors.email }}
-                  </span>
-                </div>
+        <div class="row">
+          <div class="col-sm-8 pb-3">
+            <div class="card" style="width: 80%">
+              <div class="card-body">
+                <h5 class="card-title">ログイン</h5>
+                <form @submit.prevent="loginSubmit">
+                  <div class="row mb-3">
+                    <label for="login-email" class="col-sm-3 col-form-label">
+                      メールアドレス
+                      <span class="text-light bg-danger px-1 small">必須</span>
+                    </label>
+                    <div class="col-sm-9">
+                      <input
+                        type="text"
+                        v-model="loginForm.email"
+                        id="login-email"
+                        class="form-control"
+                        v-bind:class="{ errorOutline: errors.email }"
+                      />
+                      <span v-show="errors.email" class="text-danger">
+                        {{ errors.email }}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="login-password" class="col-sm-3 col-form-label">
+                      パスワード
+                      <span class="text-light bg-danger px-1 small">必須</span>
+                    </label>
+                    <div class="col-sm-9">
+                      <input
+                        type="password"
+                        v-model="loginForm.password"
+                        id="login-password"
+                        class="form-control"
+                        v-bind:class="{ errorOutline: errors.password }"
+                      />
+                      <span v-show="errors.password" class="text-danger">
+                        {{ errors.password }}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-info p-2 m-2">
+                      ログイン
+                    </button>
+                  </div>
+                </form>
               </div>
-              <div class="row mb-3">
-                <label for="login-password" class="col-sm-3 col-form-label">
-                  パスワード
-                  <span class="text-light bg-danger px-1 small">必須</span>
-                </label>
-                <div class="col-sm-9">
-                  <input
-                    type="password"
-                    v-model="loginForm.password"
-                    id="login-password"
-                    class="form-control"
-                    v-bind:class="{ errorOutline: errors.password }"
-                  />
-                  <span v-show="errors.password" class="text-danger">
-                    {{ errors.password }}
-                  </span>
-                </div>
-              </div>
-              <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-info p-2 m-2">
-                  ログイン
-                </button>
-              </div>
-            </form>
+            </div>
           </div>
+          <!-- ▼ユーザー登録への移動 -->
+          <div class="col-sm-4 pb-3">
+            <div class="card " style="width: 80%; height: 100%;">
+              <div class="card-body">
+                <h5 class="card-title">新規ユーザー登録</h5>
+                <p class="d-flex align-items-center" style="height: 40%;">はじめての方はユーザー登録をしてください</p>
+                <div class="d-flex justify-content-center">
+                  <button @click="tab = 2" class="btn btn-info p-2 m-2">
+                    ユーザー登録画面へ
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ▲ユーザー登録への移動 -->
         </div>
       </div>
       <!-- ▲Login Form -->
@@ -68,7 +87,7 @@
       <div v-show="tab === 2">
         <div class="card" style="width: 80%">
           <div class="card-body">
-            <h5 class="card-title">新規会員登録</h5>
+            <h5 class="card-title">新規ユーザー登録</h5>
             <form @submit.prevent="registerSubmit">
               <div class="row mb-3">
                 <label for="username" class="col-sm-3 col-form-label">
@@ -122,9 +141,9 @@
                   <span v-show="errors.password" class="text-danger">
                     {{ errors.password }}<br />
                   </span>
-                  <span style="font-size: 0.7rem"
-                    >8文字以上で入力して下さい</span
-                  >
+                  <span style="font-size: 0.7rem">
+                    8文字以上で入力して下さい
+                  </span>
                 </div>
               </div>
               <div class="row mb-3">
@@ -155,7 +174,7 @@
               </div>
               <div class="d-flex justify-content-center">
                 <button type="submit" class="btn btn-info p-2 m-2">
-                  新規会員登録
+                  新規ユーザー登録
                 </button>
               </div>
             </form>

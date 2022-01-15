@@ -49,13 +49,13 @@
               >過去メモ非表示</a>
             </li>
             <!-- ▼過去メモ非表示ボタン -->
-            <!-- ▼ログイン・会員登録ボタン -->
+            <!-- ▼ログイン・ユーザー登録ボタン -->
             <li class="nav-item">
               <RouterLink class="nav-link" to="/login">
-                ログイン・会員登録
+                ログイン・ユーザー登録
               </RouterLink>
             </li>
-            <!-- ▲ログインボタン -->
+            <!-- ▲ログイン・ユーザー登録ボタン -->
             <!-- ▼ログアウトボタン -->
             <li class="nav-item">
               <a class="nav-link" href="#" @click="logoutButton">ログアウト</a>
