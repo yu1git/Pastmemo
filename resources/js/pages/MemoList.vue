@@ -1,17 +1,25 @@
 <template>
   <div class="container-fluid">
-      <!-- ▼メモが0の時、初回の説明画面を表示する -->
-      <div v-if="$store.state.firstFlag">
-        「New」ボタンを押してメモを新規作成してください。
-      </div>
-      <!-- ▲メモが0の時、初回の説明画面を表示する -->
-      <div v-else>
-        <div class="row justify-content-center">
+    <!-- ▼メモが0の時、初回の説明画面を表示する -->
+    <div v-if="$store.state.firstFlag">
+      「New」ボタンを押してメモを新規作成してください。
+    </div>
+    <!-- ▲メモが0の時、初回の説明画面を表示する -->
+    <div v-else>
+      <div class="row justify-content-center">
         <!-- ▼過去メモ表示・非表示でMemoListを表示する幅を変える -->
         <div
           v-bind:class="[$store.state.show === true ? 'col-md-9' : 'col-md-12']"
         >
-          <h1 class="text-center m-3">Memo List</h1>
+          <div class="d-flex mb-3 justify-content-center">
+          <h1 class="text-center m-3 flex-grow-1">Memo List</h1>
+          <!-- ▼メモ新規作成ボタン -->
+          
+          <RouterLink class="btn btn-outline-info mt-2" style="width:10%" to="/memoForm">New</RouterLink>
+          
+          
+          <!-- ▲メモ新規作成ボタン -->
+          </div>
           <div class="row justify-content-center">
             <div
               class="col-sm-2 col-xs-6 mb-3"

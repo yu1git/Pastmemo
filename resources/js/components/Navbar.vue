@@ -24,11 +24,6 @@
         </div>
       </ul>
       <!-- ▲検索フォーム -->
-      <!-- ▼メモ新規作成ボタン -->
-      <ul class="navbar-nav">
-        <RouterLink class="nav-link" to="/memoForm">New</RouterLink>
-      </ul>
-      <!-- ▲メモ新規作成ボタン -->
       <!-- ▼その他のボタン -->
       <ul>
         <button
@@ -45,6 +40,15 @@
         <!-- ▼トグルメニューの中身 -->
         <div class="collapse navbar-collapse" id="navbar">
           <ul class="navbar-nav me-auto">
+            <!-- ▼過去メモ非表示ボタン -->
+            <li class="nav-item">
+              <a 
+                  href="#"
+                  class="nav-link" 
+                  @click="changeShow()"
+              >過去メモ非表示</a>
+            </li>
+            <!-- ▼過去メモ非表示ボタン -->
             <!-- ▼ログイン・会員登録ボタン -->
             <li class="nav-item">
               <RouterLink class="nav-link" to="/login">
@@ -57,15 +61,6 @@
               <a class="nav-link" href="#" @click="logoutButton">ログアウト</a>
             </li>
             <!-- ▲ログアウトボタン -->
-            <!-- ▼過去メモ非表示ボタン -->
-            <li class="nav-item">
-              <a 
-                  href="#"
-                  class="nav-link" 
-                  @click="changeShow()"
-              >過去メモ非表示</a>
-            </li>
-            <!-- ▼過去メモ非表示ボタン -->
           </ul>
         </div>
         <!-- ▲トグルメニューの中身 -->

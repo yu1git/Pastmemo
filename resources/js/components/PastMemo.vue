@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="d-flex mb-3 justify-content-center">
-      <h5 class="text-center m-3 flex-grow-1">過去メモ</h5>
-      <button @click="changeMemo()" class="btn btn-outline-info mt-2">
+      <h5 class="text-center m-3 flex-grow-1" style="width:15%">過去メモ</h5>
+      <button @click="changeMemo()" class="btn btn-outline-info mt-2" style="width:40%">
         再読み込み
       </button>
     </div>

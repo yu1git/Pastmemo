@@ -29,7 +29,7 @@
                     v-model="loginForm.email"
                     id="login-email"
                     class="form-control"
-                    v-bind:class="{errorOutline: errors.email}"
+                    v-bind:class="{ errorOutline: errors.email }"
                   />
                   <span v-show="errors.email" class="text-danger">
                     {{ errors.email }}
@@ -47,7 +47,7 @@
                     v-model="loginForm.password"
                     id="login-password"
                     class="form-control"
-                    v-bind:class="{errorOutline: errors.password}"
+                    v-bind:class="{ errorOutline: errors.password }"
                   />
                   <span v-show="errors.password" class="text-danger">
                     {{ errors.password }}
@@ -81,7 +81,7 @@
                     id="username"
                     v-model="registerForm.name"
                     class="form-control"
-                    v-bind:class="{errorOutline: errors.name}"
+                    v-bind:class="{ errorOutline: errors.name }"
                   />
                   <span v-show="errors.name" class="text-danger">
                     {{ errors.name }}
@@ -89,60 +89,70 @@
                 </div>
               </div>
               <div class="row mb-3">
-              <label for="email" class="col-sm-3 col-form-label">
-                メールアドレス
-                <span class="text-light bg-danger px-1 small">必須</span>
-              </label>
-              <div class="col-sm-9">
-              <input
-                type="text"
-                id="email"
-                v-model="registerForm.email"
-                class="form-control"
-                v-bind:class="{errorOutline: errors.email}"
-              />
-              <span v-show="errors.email" class="text-danger">
-                {{ errors.email }}
-              </span>
+                <label for="email" class="col-sm-3 col-form-label">
+                  メールアドレス
+                  <span class="text-light bg-danger px-1 small">必須</span>
+                </label>
+                <div class="col-sm-9">
+                  <input
+                    type="text"
+                    id="email"
+                    v-model="registerForm.email"
+                    class="form-control"
+                    v-bind:class="{ errorOutline: errors.email }"
+                  />
+                  <span v-show="errors.email" class="text-danger">
+                    {{ errors.email }}
+                  </span>
+                </div>
               </div>
+              <div class="row mb-3">
+                <label for="password" class="col-sm-3 col-form-label">
+                  パスワード
+                  <span class="text-light bg-danger px-1 small">必須</span>
+                </label>
+                <div class="col-sm-9">
+                  <input
+                    type="password"
+                    id="password"
+                    v-model="registerForm.password"
+                    class="form-control"
+                    v-bind:class="{ errorOutline: errors.password }"
+                  />
+                  <span v-show="errors.password" class="text-danger">
+                    {{ errors.password }}<br />
+                  </span>
+                  <span style="font-size: 0.7rem"
+                    >8文字以上で入力して下さい</span
+                  >
+                </div>
               </div>
-<div class="row mb-3">
-              <label for="password" class="col-sm-3 col-form-label">
-                パスワード
-                <span class="text-light bg-danger px-1 small">必須</span>
-              </label>
-              <div class="col-sm-9">
-              <input
-                type="password"
-                id="password"
-                v-model="registerForm.password"
-                class="form-control"
-                v-bind:class="{errorOutline: errors.password}"
-              />
-              <span v-show="errors.password" class="text-danger">
-                {{ errors.password }}<br/>
-              </span>
-              <span style="font-size: 0.7rem;">8文字以上で入力して下さい</span>
+              <div class="row mb-3">
+                <label
+                  for="password-confirmation"
+                  class="col-sm-3 col-form-label"
+                >
+                  パスワード (確認)
+                  <span class="text-light bg-danger px-1 small">必須</span>
+                </label>
+                <div class="col-sm-9">
+                  <input
+                    type="password"
+                    id="password-confirmation"
+                    v-model="registerForm.password_confirmation"
+                    class="form-control"
+                    v-bind:class="{
+                      errorOutline: errors.password_confirmation,
+                    }"
+                  />
+                  <span
+                    v-show="errors.password_confirmation"
+                    class="text-danger"
+                  >
+                    {{ errors.password_confirmation }}
+                  </span>
+                </div>
               </div>
-</div>
-<div class="row mb-3">
-              <label for="password-confirmation" class="col-sm-3 col-form-label">
-                パスワード (確認)
-                <span class="text-light bg-danger px-1 small">必須</span>
-              </label>
-              <div class="col-sm-9">
-              <input
-                type="password"
-                id="password-confirmation"
-                v-model="registerForm.password_confirmation"
-                class="form-control"
-                v-bind:class="{errorOutline: errors.password_confirmation}"
-              />
-              <span v-show="errors.password_confirmation" class="text-danger">
-                {{errors.password_confirmation}}
-              </span>
-              </div>
-</div>
               <div class="d-flex justify-content-center">
                 <button type="submit" class="btn btn-info p-2 m-2">
                   新規会員登録
@@ -254,7 +264,7 @@ export default {
 };
 </script>
 <style scoped>
-.errorOutline{
+.errorOutline {
   outline: 1px red solid;
 }
 </style>
