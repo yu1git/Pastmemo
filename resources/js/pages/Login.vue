@@ -21,6 +21,7 @@
               <div class="row mb-3">
                 <label for="login-email" class="col-sm-3 col-form-label">
                   メールアドレス
+                  <span class="text-light bg-danger px-1 small">必須</span>
                 </label>
                 <div class="col-sm-9">
                   <input
@@ -28,6 +29,7 @@
                     v-model="loginForm.email"
                     id="login-email"
                     class="form-control"
+                    v-bind:class="{errorOutline: errors.email}"
                   />
                   <span v-show="errors.email" class="text-danger">
                     {{ errors.email }}
@@ -37,6 +39,7 @@
               <div class="row mb-3">
                 <label for="login-password" class="col-sm-3 col-form-label">
                   パスワード
+                  <span class="text-light bg-danger px-1 small">必須</span>
                 </label>
                 <div class="col-sm-9">
                   <input
@@ -44,6 +47,7 @@
                     v-model="loginForm.password"
                     id="login-password"
                     class="form-control"
+                    v-bind:class="{errorOutline: errors.password}"
                   />
                   <span v-show="errors.password" class="text-danger">
                     {{ errors.password }}
@@ -69,6 +73,7 @@
               <div class="row mb-3">
                 <label for="username" class="col-sm-3 col-form-label">
                   名前
+                  <span class="text-light bg-danger px-1 small">必須</span>
                 </label>
                 <div class="col-sm-9">
                   <input
@@ -76,6 +81,7 @@
                     id="username"
                     v-model="registerForm.name"
                     class="form-control"
+                    v-bind:class="{errorOutline: errors.name}"
                   />
                   <span v-show="errors.name" class="text-danger">
                     {{ errors.name }}
@@ -85,6 +91,7 @@
               <div class="row mb-3">
               <label for="email" class="col-sm-3 col-form-label">
                 メールアドレス
+                <span class="text-light bg-danger px-1 small">必須</span>
               </label>
               <div class="col-sm-9">
               <input
@@ -92,6 +99,7 @@
                 id="email"
                 v-model="registerForm.email"
                 class="form-control"
+                v-bind:class="{errorOutline: errors.email}"
               />
               <span v-show="errors.email" class="text-danger">
                 {{ errors.email }}
@@ -99,46 +107,46 @@
               </div>
               </div>
 <div class="row mb-3">
-              <label for="password" class="col-sm-3 col-form-label"
-                >パスワード</label
-              >
+              <label for="password" class="col-sm-3 col-form-label">
+                パスワード
+                <span class="text-light bg-danger px-1 small">必須</span>
+              </label>
               <div class="col-sm-9">
               <input
                 type="password"
                 id="password"
                 v-model="registerForm.password"
                 class="form-control"
+                v-bind:class="{errorOutline: errors.password}"
               />
               <span v-show="errors.password" class="text-danger">
-                {{ errors.password }}
+                {{ errors.password }}<br/>
               </span>
+              <span style="font-size: 0.7rem;">8文字以上で入力して下さい</span>
               </div>
 </div>
 <div class="row mb-3">
-              <label for="password-confirmation" class="col-sm-3 col-form-label"
-                >パスワード (確認)</label
-              >
+              <label for="password-confirmation" class="col-sm-3 col-form-label">
+                パスワード (確認)
+                <span class="text-light bg-danger px-1 small">必須</span>
+              </label>
               <div class="col-sm-9">
               <input
                 type="password"
                 id="password-confirmation"
                 v-model="registerForm.password_confirmation"
                 class="form-control"
+                v-bind:class="{errorOutline: errors.password_confirmation}"
               />
-              <span v-show="errors.password_confirmation">{{
-                errors.password_confirmation
-              }}</span>
+              <span v-show="errors.password_confirmation" class="text-danger">
+                {{errors.password_confirmation}}
+              </span>
               </div>
 </div>
               <div class="d-flex justify-content-center">
                 <button type="submit" class="btn btn-info p-2 m-2">
                   新規会員登録
                 </button>
-              </div>
-              <div v-show="errorMessage">
-                <span class="text-xs text-red-500">
-                  {{ errorMessage }}
-                </span>
               </div>
             </form>
           </div>
@@ -155,7 +163,6 @@ export default {
   data() {
     return {
       tab: 1,
-      errorMessage: "",
       errors: {
         name: "",
         email: "",
@@ -202,22 +209,6 @@ export default {
     // エラー処理
     handleErrors(err) {
       console.log(err);
-      if (err.response && err.response.status === 422) {
-        const errorBag = err.response.data.errors;
-        if (errorBag.name) {
-          this.errorMessage = errorBag.name[0];
-        } else if (errorBag.email) {
-          this.errorMessage = errorBag.email[0];
-        } else if (errorBag.password) {
-          this.errorMessage = errorBag.password[0];
-        } else if (errorBag.password_confirmation) {
-          this.errorMessage = errorBag.password_confirmation[0];
-        } else {
-          this.errorMessage = err.response.message;
-        }
-      } else {
-        console.log(err.response);
-      }
     },
     // バリデーション
     validMsg(form) {
@@ -262,3 +253,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.errorOutline{
+  outline: 1px red solid;
+}
+</style>
