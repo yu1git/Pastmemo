@@ -1,12 +1,12 @@
 <template>
   <div class="container-fluid">
-    <div class="row justify-content-center">
       <!-- ▼メモが0の時、初回の説明画面を表示する -->
       <div v-if="$store.state.firstFlag">
         「New」ボタンを押してメモを新規作成してください。
       </div>
       <!-- ▲メモが0の時、初回の説明画面を表示する -->
       <div v-else>
+        <div class="row justify-content-center">
         <!-- ▼過去メモ表示・非表示でMemoListを表示する幅を変える -->
         <div
           v-bind:class="[$store.state.show === true ? 'col-md-9' : 'col-md-12']"

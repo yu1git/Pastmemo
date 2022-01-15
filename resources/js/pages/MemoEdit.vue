@@ -28,7 +28,7 @@
     <!-- ▼メモ編集画面 -->
     <div class="p-3 d-flex flex-column memo-box">
       <input
-        class="memo-title h5"
+        class="h5"
         style="border: none"
         type="text"
         v-model="memo.title"
@@ -42,7 +42,7 @@
         @input="flagChange"
       ></textarea>
       <div v-show="errorMessage">
-        <span class="text-xs text-red-500">
+        <span class="text-xs text-danger">
           {{ errorMessage }}
         </span>
       </div>
