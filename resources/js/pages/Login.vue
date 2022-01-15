@@ -19,6 +19,7 @@
             <div class="card" style="width: 80%">
               <div class="card-body">
                 <h5 class="card-title">ログイン</h5>
+                <p>登録済みの方はこちらからログインしてください</p>
                 <form @submit.prevent="loginSubmit">
                   <div class="row mb-3">
                     <label for="login-email" class="col-sm-3 col-form-label">
@@ -84,7 +85,7 @@
       </div>
       <!-- ▲Login Form -->
       <!-- ▼Register Form -->
-      <div v-show="tab === 2">
+      <div v-show="tab === 2" class="pb-3">
         <div class="card" style="width: 80%">
           <div class="card-body">
             <h5 class="card-title">新規ユーザー登録</h5>
