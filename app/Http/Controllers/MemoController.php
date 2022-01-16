@@ -18,7 +18,8 @@ class MemoController extends Controller
      */
     public function index()
     {
-        $memos = Memo::all();
+        // ログインユーザーのmemoのみを取り出す
+        $memos = Auth::user()->memos;
         return $memos;
     }
 
@@ -31,7 +32,11 @@ class MemoController extends Controller
     public function store(Request $request)
     {
         $memo = new Memo();
-        $memo->fill($request->all())->save();
+        // ログインユーザーのidと紐付ける
+        $memo->user_id = auth()->id();
+        $memo->title = $request->title;
+        $memo->content = $request->content;
+        $memo->save();
     }
 
     /**

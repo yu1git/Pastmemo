@@ -24,7 +24,9 @@ class CreateMemoRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'user_id' => 'required|integer',
+            'title' => 'string|max:20',
+            'content' => 'required|string'
         ];
     }
 }

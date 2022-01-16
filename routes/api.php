@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\MemoController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,20 +18,18 @@ use App\Http\Controllers\MemoController;
 |
 */
 
+// api/userのルート
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// function mapApiRoutes()
-// {
-//     Route::prefix('api')
-//          ->middleware('web') // ★ 'api' → 'web' に変更
-//          ->namespace($this->namespace)
-//          ->group(base_path('routes/api.php'));
-// }
-
-// メモ新規作成
-Route::apiResource('/memos',MemoController::class);
-
-// ログイン
-//Route::post('/login', 'Auth\LoginController@login')->name('login');
+// ログイン・ログアウト
+Route::post('/login',[LoginController::class, 'login']);
+Route::post('/logout',[LoginController::class, 'logout']);
+//会員登録
+Route::post('/register', [RegisterController::class, 'register']);
+// 認証済みでないと許可しない
+Route::group(["middleware" => ["auth:sanctum"]], function () {
+    // メモ新規作成
+    Route::apiResource('/memos',MemoController::class);
+});

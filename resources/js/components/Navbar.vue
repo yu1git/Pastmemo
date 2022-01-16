@@ -1,10 +1,12 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-info">
     <div class="container-fluid d-flex">
-      <RouterLink class="navbar-brand" to="/"> ホーム </RouterLink>
-      <!-- 検索フォーム -->
+      <RouterLink class="navbar-brand" :to="{ name: 'MemoList' }">
+        ホーム
+      </RouterLink>
+      <!-- ▼検索フォーム -->
       <ul class="navbar-nav flex-grow-1 p-2">
-        <div class="d-flex mr-auto"> 
+        <div class="d-flex mr-auto">
           <input
             v-model="filterQuery"
             class="form-control"
@@ -12,73 +14,66 @@
             placeholder="検索..."
             aria-label="検索..."
           />
-          <RouterLink 
-            tag="button" 
-            v-on:click="searchMemo" 
-            to="/Searched" 
+          <RouterLink
+            tag="button"
+            v-on:click="searchMemo"
+            to="/Searched"
             class="nav-link p-2"
-          >検索アイコンのみ</RouterLink>
+            >検索アイコンのみ</RouterLink
+          >
         </div>
       </ul>
-      <!-- /検索フォーム -->
-      <!-- メモ新規作成ボタン -->
-      <ul class="navbar-nav">
-        <RouterLink class="nav-link" to="/memoForm">New</RouterLink>
-      </ul>
-      <!-- /メモ新規作成ボタン -->
-      <!-- その他のボタン -->
+      <!-- ▲検索フォーム -->
+      <!-- ▼その他のボタン -->
       <ul>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbar"
-        aria-controls="navbar"
-        aria-expanded="false"
-        aria-label="ナビゲーションの切替"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbar">
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <!-- ログインボタン -->
-            <RouterLink class="nav-link" to="/login"
-              >Login / Register</RouterLink
-            >
-            <!-- /ログインボタン -->
-          </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="dropdown"
-              data-bs-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-              >ドロップダウン</a
-            >
-            <div class="dropdown-menu" aria-labelledby="dropdown">
-              <button 
-                  class="dropdown-item" 
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbar"
+          aria-controls="navbar"
+          aria-expanded="false"
+          aria-label="ナビゲーションの切替"
+        >
+          <span class="navbar-toggler-icon" ></span>
+        </button>
+        <!-- ▼トグルメニューの中身 -->
+        <div class="collapse navbar-collapse" id="navbar">
+          <ul class="navbar-nav me-auto">
+            <!-- ▼過去メモ非表示ボタン -->
+            <li class="nav-item">
+              <a 
+                  href="#"
+                  class="nav-link" 
                   @click="changeShow()"
-              >過去メモ非表示</button>
-              <a class="dropdown-item" href="#">リンク2</a>
-              <a class="dropdown-item" href="#">リンク3</a>
-            </div>
-          </li>
-        </ul>
-      </div>
+              >過去メモ非表示</a>
+            </li>
+            <!-- ▼過去メモ非表示ボタン -->
+            <!-- ▼ログイン・ユーザー登録ボタン -->
+            <li class="nav-item">
+              <RouterLink class="nav-link" to="/login">
+                ログイン・ユーザー登録
+              </RouterLink>
+            </li>
+            <!-- ▲ログイン・ユーザー登録ボタン -->
+            <!-- ▼ログアウトボタン -->
+            <li class="nav-item">
+              <a class="nav-link" href="#" @click="logoutButton">ログアウト</a>
+            </li>
+            <!-- ▲ログアウトボタン -->
+          </ul>
+        </div>
+        <!-- ▲トグルメニューの中身 -->
       </ul>
-      <!-- /その他のボタン -->
+      <!-- ▲その他のボタン -->
     </div>
   </nav>
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapActions } from "vuex";
 export default {
-  name:'Navbar',
+  name: "Navbar",
   data() {
     return {
       filterQuery: "",
@@ -86,15 +81,22 @@ export default {
   },
   methods: {
     ...mapMutations(["setFilterQuery"]),
-    //検索キーワードをstoreにセットする
+    ...mapActions({ logout: "logout" }),
+    // 検索キーワードをstoreにセットする
     searchMemo() {
       this.setFilterQuery(this.filterQuery);
       console.log("実行した");
     },
-    //過去メモの表示・非表示を切り替える
-    changeShow(){
-      this.$store.commit('changeShow')
-    }
+    // 過去メモの表示・非表示を切り替える
+    changeShow() {
+      this.$store.commit("changeShow");
+    },
+    // ログアウト
+    async logoutButton() {
+      // storeのlogoutアクションを呼び出す
+      await this.logout();
+      this.$router.replace({ name: "Login" });
+    },
   },
 };
 </script>

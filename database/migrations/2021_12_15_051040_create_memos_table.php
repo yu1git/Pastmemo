@@ -15,6 +15,8 @@ class CreateMemosTable extends Migration
     {
         Schema::create('memos', function (Blueprint $table) {
             $table->increments('id');
+            //user_idはuserテーブルのidを外部キーとする
+            $table->foreignId('user_id')->constrained();
             $table->string('title',20)->nullable();
             $table->text('content');
             $table->timestamps();

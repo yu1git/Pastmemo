@@ -1,8 +1,8 @@
 <template>
   <div class="memo-form">
     <form class="" @submit.prevent="addNewMemo">
-      <!-- ナビゲーションバー -->
-      <nav class="d-flex  mb-3">
+      <!-- ▼ナビゲーションバー -->
+      <nav class="d-flex mb-3">
         <h2 class="title p-2 flex-grow-1 ">New Memo</h2>
         <button
           @click="$router.go(-1)"
@@ -15,11 +15,11 @@
           新規メモ作成
         </button>
       </nav>
-      <!-- /ナビゲーションバー -->
-      <!-- メモ新規作成画面 -->
+      <!-- ▲ナビゲーションバー -->
+      <!-- ▼メモ新規作成画面 -->
       <div class="p-3 d-flex flex-column memo-box">
         <input
-          class="memo-title h5"
+          class="h5"
           style="border: none"
           type="text"
           v-model="newMemo.title"
@@ -35,12 +35,12 @@
           @input="flagChange"
         ></textarea>
         <div v-show="errorMessage">
-          <span class="text-xs text-red-500">
+          <span class="text-xs text-danger">
             {{ errorMessage }}
           </span>
         </div>
       </div>
-      <!-- /メモ新規作成画面 -->
+      <!-- ▲メモ新規作成画面 -->
     </form>
   </div>
 </template>
@@ -48,8 +48,10 @@
 <script>
 import axios from "axios";
 import { baseurl } from "../const";
+import { mapGetters } from "vuex";
 
 export default {
+  name: "MemoForm",
   data() {
     return {
       newMemo: {
@@ -111,6 +113,7 @@ export default {
     },
     // エラー処理
     handleErrors(err) {
+      console.log(err);
       if (err.response && err.response.status === 422) {
         const errorBag = err.response.data.errors;
         if (errorBag.title) {

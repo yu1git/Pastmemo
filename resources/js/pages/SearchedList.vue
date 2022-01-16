@@ -16,7 +16,7 @@
         v-bind:key="SearchedMemo"
       >
         <div class="card" style="height: 12rem">
-          <!-- クリックすると編集画面に移動 -->
+          <!-- ▼クリックすると編集画面に移動 -->
           <router-link
             :to="{ name: 'MemoEdit', params: { id: SearchedMemo.id } }"
             style="text-decoration: none"
@@ -32,7 +32,7 @@
               </div>
             </div>
           </router-link>
-          <!-- /クリックすると編集画面に移動 -->
+          <!-- ▲クリックすると編集画面に移動 -->
         </div>
       </div>
     </div>
