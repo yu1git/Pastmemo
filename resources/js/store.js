@@ -131,19 +131,19 @@ export const store = createStore({
          */
         //会員登録
         async register({ dispatch }, credentials) {
-            // await axios.get('/sanctum/csrf-cookie');
+            await axios.get('/sanctum/csrf-cookie', { withCredentials: true });
             // 新規ユーザーの作成
-            await axios.post('/api/register', credentials);
+            await axios.post('/api/register', credentials, { withCredentials: true });
             // 新規ユーザーでログイン
-            await axios.post('/api/login', credentials);
+            await axios.post('/api/login', credentials, { withCredentials: true });
             await dispatch('me');
         },
 
         //ログイン
         async login({ dispatch }, credentials) {
             // 用途不明のため一度コメントアウト
-            // await axios.get('/sanctum/csrf-cookie');
-            await axios.post('/api/login', credentials);
+            await axios.get('/sanctum/csrf-cookie', { withCredentials: true });
+            await axios.post('/api/login', credentials, { withCredentials: true });
             await dispatch('me');
         },
         async me({ commit }) {
@@ -168,7 +168,7 @@ export const store = createStore({
         //ログアウト
         async logout({ dispatch }) {
             // 用途不明のため一度コメントアウト
-            // await axios.get('/sanctum/csrf-cookie');
+            await axios.get('/sanctum/csrf-cookie');
             await axios.post('/api/logout');
             await dispatch('out');
         },

@@ -16,11 +16,12 @@
       <div v-show="tab === 1">
         <div class="row">
           <div class="col-sm-8 pb-3">
-            <div class="card" style="width: 80%">
+            <div class="card" style="width: 100%">
               <div class="card-body">
                 <h5 class="card-title">ログイン</h5>
                 <p>登録済みの方はこちらからログインしてください</p>
                 <form @submit.prevent="loginSubmit">
+                  <input type="hidden" name="_token" :value="csrf">
                   <div class="row mb-3">
                     <label for="login-email" class="col-sm-3 col-form-label">
                       メールアドレス
@@ -86,10 +87,11 @@
       <!-- ▲Login Form -->
       <!-- ▼Register Form -->
       <div v-show="tab === 2" class="pb-3">
-        <div class="card" style="width: 80%">
+        <div class="card" style="width: 100%">
           <div class="card-body">
             <h5 class="card-title">新規ユーザー登録</h5>
             <form @submit.prevent="registerSubmit">
+              <input type="hidden" name="_token" :value="csrf">
               <div class="row mb-3">
                 <label for="username" class="col-sm-3 col-form-label">
                   名前
@@ -192,6 +194,7 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       tab: 1,
       errors: {
         name: "",
