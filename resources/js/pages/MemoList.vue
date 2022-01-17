@@ -16,7 +16,7 @@
             <!-- ▼メモ新規作成ボタン -->
             <RouterLink
               class="btn btn-outline-info mt-2 d-flex align-items-center"
-              style="width: 5.75rem; height: 3rem"
+              style="width: 6.6rem; height: 3rem"
               to="/memoForm"
             >
               <svg
@@ -24,7 +24,7 @@
                 width="16"
                 height="16"
                 fill="currentColor"
-                class="bi bi-plus-circle-fill m-1"
+                class="bi bi-plus-circle-fill m-1 mr-2"
                 viewBox="0 0 16 16"
               >
                 <path
