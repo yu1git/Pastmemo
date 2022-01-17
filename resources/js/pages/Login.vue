@@ -10,13 +10,13 @@
       </button>
     </nav>
     <!-- ▲tabの数字を切り替え -->
-    <div class="container">
+    <div class="container d-flex justify-content-center">
       <!-- ▼tabの数字によってログインとRegisterの画面を切り替える -->
       <!-- ▼Login Form -->
       <div v-show="tab === 1">
         <div class="row">
           <div class="col-sm-8 pb-3">
-            <div class="card" style="width: 80%">
+            <div class="card" style="width: 100%">
               <div class="card-body">
                 <h5 class="card-title">ログイン</h5>
                 <p>登録済みの方はこちらからログインしてください</p>
@@ -81,15 +81,15 @@
           </div>
           <!-- ▼ユーザー登録への移動 -->
           <div class="col-sm-4 pb-3">
-            <div class="card" style="width: 80%; height: 100%">
+            <div class="card" style="width: 100%; height: 100%">
               <div class="card-body">
                 <h5 class="card-title">新規ユーザー登録</h5>
-                <p class="d-flex align-items-center" style="height: 40%">
+                <p class="d-flex align-items-center" style="height: 34%">
                   はじめての方はユーザー登録をしてください
                 </p>
                 <div class="d-flex justify-content-center">
                   <button @click="tab = 2" class="btn btn-info p-2 m-2 d-flex align-items-center">
-                    ユーザー登録画面へ
+                    ユーザー登録へ
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
