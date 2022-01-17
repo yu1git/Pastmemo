@@ -5,7 +5,7 @@
       <button
         @click="changeMemo()"
         class="btn btn-outline-info mt-2 d-flex align-items-center"
-        style="width: 5.75rem; height: 3rem"
+        style="width: 6.6rem; height: 3rem"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
