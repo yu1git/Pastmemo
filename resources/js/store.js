@@ -110,7 +110,6 @@ export const store = createStore({
          */
         async getMemos({ commit }) {
             try {
-                // axiosはデフォルトでbaseURLに自サーバーのURLを持つのでlocalhost~~は不要らしい（すみません）
                 const response = await axios.get("/api/memos")
                 // レスポンスを確認
                 console.log(response.data)
