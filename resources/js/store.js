@@ -110,7 +110,6 @@ export const store = createStore({
          */
         async getMemos({ commit }) {
             try {
-                // axiosはデフォルトでbaseURLに自サーバーのURLを持つのでlocalhost~~は不要らしい（すみません）
                 const response = await axios.get("/api/memos")
                 // レスポンスを確認
                 console.log(response.data)
@@ -131,7 +130,7 @@ export const store = createStore({
          */
         //会員登録
         async register({ dispatch }, credentials) {
-            // await axios.get('/sanctum/csrf-cookie');
+            await axios.get('/sanctum/csrf-cookie');
             // 新規ユーザーの作成
             await axios.post('/api/register', credentials);
             // 新規ユーザーでログイン
@@ -141,8 +140,7 @@ export const store = createStore({
 
         //ログイン
         async login({ dispatch }, credentials) {
-            // 用途不明のため一度コメントアウト
-            // await axios.get('/sanctum/csrf-cookie');
+            await axios.get('/sanctum/csrf-cookie');
             await axios.post('/api/login', credentials);
             await dispatch('me');
         },
@@ -167,25 +165,19 @@ export const store = createStore({
 
         //ログアウト
         async logout({ dispatch }) {
-            // 用途不明のため一度コメントアウト
-            // await axios.get('/sanctum/csrf-cookie');
+            await axios.get('/sanctum/csrf-cookie');
             await axios.post('/api/logout');
             await dispatch('out');
         },
         async out({ commit }) {
             try {
-                //const response = axios.get('/api/user');
-                //console.log(response.data);
-
                 // 認証情報を初期化
                 commit('setIsAuth', false);
-                // setUserを動かす？？
-                //commit('setUser', response.data);
                 commit('setUser', null);
             } catch (error) {
                 console.log(error)
 
-                // 認証情報を初期化？
+                // 認証情報を初期化
                 commit('setIsAuth', false);
                 commit('setUser', null);
             }

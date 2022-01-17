@@ -342,7 +342,9 @@ https://getbootstrap.jp/docs/4.2/utilities/flex/
             } catch (error) {
                 console.error(error)
             }
-        },    
+        },
+    →// axiosはデフォルトでbaseURLに自サーバーのURLを持つのでlocalhost~~は不要らしい
+    const response = await axios.get("/api/memos")
 
 ・毎回出てくる注意文を消す
         vue-router.esm-bundler.js?ec2d:72 [Vue Router warn]: The "next" callback was called more than once in one navigation guard when going from "/login?redirect=/" to "/memoForm". It should be called exactly one time in each navigation guard. This will fail in production.

@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-info">
     <div class="container-fluid d-flex">
-      <RouterLink class="navbar-brand  d-flex align-items-center" :to="{ name: 'MemoList' }">
+      <RouterLink class="navbar-brand d-flex align-items-center" :to="{ name: 'MemoList' }">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -31,17 +31,19 @@
             placeholder="検索..."
             aria-label="検索..."
           />
+          
           <RouterLink
             tag="button"
             v-on:click="searchMemo"
             to="/Searched"
-            class="nav-link p-2 border rounded-3"
+            class="nav-link p-2 myborder rounded-3 d-flex align-items-center"
+            style=""
             ><svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
               height="16"
               fill="currentColor"
-              class="bi bi-search"
+              class="bi bi-search m-1"
               viewBox="0 0 16 16"
             >
               <path
@@ -127,4 +129,7 @@ export default {
   },
 };
 </script>
-
+<style scoped>
+.myborder{border: solid rgba(255,255,255,.45); }
+.myborder:hover{border:solid rgba(255,255,255,.65);}
+</style>
