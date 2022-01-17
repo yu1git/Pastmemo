@@ -16,7 +16,7 @@
             <!-- ▼メモ新規作成ボタン -->
             <RouterLink
               class="btn btn-outline-info mt-2 d-flex align-items-center"
-              style="width: 5rem"
+              style="width: 5.75rem; height: 3rem"
               to="/memoForm"
             >
               <svg
