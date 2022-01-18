@@ -20,7 +20,8 @@
               <div class="card-body">
                 <h5 class="card-title">ログイン</h5>
                 <p>登録済みの方はこちらからログインしてください</p>
-                <form @submit.prevent="loginSubmit">
+                <form @submit.prevent="loginSubmit" action="/login" method="POST">
+                <input  type="hidden" name="_token" :value="csrf">
                   <div class="row mb-3">
                     <label for="login-email" class="col-sm-3 col-form-label">
                       メールアドレス
@@ -121,7 +122,8 @@
         <div class="card" style="width: 80%">
           <div class="card-body">
             <h5 class="card-title">新規ユーザー登録</h5>
-            <form @submit.prevent="registerSubmit">
+            <form @submit.prevent="registerSubmit" action="/register" method="POST">
+            <input  type="hidden" name="_token" :value="csrf">
               <div class="row mb-3">
                 <label for="username" class="col-sm-3 col-form-label">
                   名前
@@ -239,6 +241,7 @@ export default {
   data() {
     return {
       tab: 1,
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       errors: {
         name: "",
         email: "",

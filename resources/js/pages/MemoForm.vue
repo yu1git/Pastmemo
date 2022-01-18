@@ -1,6 +1,7 @@
 <template>
   <div class="memo-form">
-    <form class="" @submit.prevent="addNewMemo">
+    <form @submit.prevent="addNewMemo" action="/memo" method="POST">
+    <input type="hidden" name="_token" :value="csrf"> 
       <!-- ▼ナビゲーションバー -->
       <nav class="d-flex mb-3">
         <h2 class="title p-2 flex-grow-1">New Memo</h2>
@@ -86,6 +87,7 @@ export default {
   name: "MemoForm",
   data() {
     return {
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       newMemo: {
         title: "",
         content: "",

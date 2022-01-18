@@ -72,27 +72,31 @@
     </nav>
     <!-- ▲ナビゲーションバー -->
     <!-- ▼メモ編集画面 -->
-    <div class="p-3 d-flex flex-column memo-box">
-      <input
-        class="h5"
-        style="border: none"
-        type="text"
-        v-model="memo.title"
-        @input="flagChange"
-      />
-      <textarea
-        class="memo-content"
-        style="border: none; resize: none"
-        rows="10"
-        v-model="memo.content"
-        @input="flagChange"
-      ></textarea>
-      <div v-show="errorMessage">
-        <span class="text-xs text-danger">
-          {{ errorMessage }}
-        </span>
+    <form action="/memo" method="POST">
+      <input type="hidden" name="_token" :value="csrf" />
+
+      <div class="p-3 d-flex flex-column memo-box">
+        <input
+          class="h5"
+          style="border: none"
+          type="text"
+          v-model="memo.title"
+          @input="flagChange"
+        />
+        <textarea
+          class="memo-content"
+          style="border: none; resize: none"
+          rows="10"
+          v-model="memo.content"
+          @input="flagChange"
+        ></textarea>
+        <div v-show="errorMessage">
+          <span class="text-xs text-danger">
+            {{ errorMessage }}
+          </span>
+        </div>
       </div>
-    </div>
+    </form>
     <!-- ▲メモ編集画面 -->
   </div>
 </template>
@@ -105,6 +109,9 @@ export default {
   name: "MemoEdit",
   data() {
     return {
+      csrf: document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content"),
       memo: {
         title: "",
         content: ",",
