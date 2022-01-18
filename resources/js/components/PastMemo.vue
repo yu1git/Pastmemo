@@ -26,18 +26,16 @@
         <span class="flex-grow-1">ランダム</span>
       </button>
     </div>
-    <div class="p-3 memo-box" style="margin-top: 20px">
-      <div
-        v-for="(memo, index) in $store.state.memos"
-        v-bind:key="(memo, index)"
+
+    <div v-for="(memo, index) in $store.state.memos" v-bind:key="(memo, index)">
+      <!-- ▼クリックすると編集画面に移動 -->
+      <router-link
+        :to="{ name: 'MemoEdit', params: { id: memo.id } }"
+        v-if="index === $store.state.randomMemo"
+        style="text-decoration: none"
+        class="text-body"
       >
-        <!-- ▼クリックすると編集画面に移動 -->
-        <router-link
-          :to="{ name: 'MemoEdit', params: { id: memo.id } }"
-          v-if="index === $store.state.randomMemo"
-          style="text-decoration: none"
-          class="text-body"
-        >
+        <div class="p-3 memo-box" style="margin-top: 20px">
           <h6 v-if="index === $store.state.randomMemo" class="">
             {{ memo.title }}
           </h6>
@@ -47,9 +45,9 @@
           <div v-if="index === $store.state.randomMemo" class="text-end">
             <small>{{ makeDate(memo.updated_at) }}</small>
           </div>
-        </router-link>
-        <!-- ▲クリックすると編集画面に移動 -->
-      </div>
+        </div>
+      </router-link>
+      <!-- ▲クリックすると編集画面に移動 -->
     </div>
   </div>
 </template>

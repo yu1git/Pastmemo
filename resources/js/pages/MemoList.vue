@@ -42,13 +42,13 @@
               v-for="memo in $store.state.memos"
               v-bind:key="memo.id"
             >
-              <div class="card" style="height: 12rem">
-                <!-- ▼クリックすると編集画面に移動 -->
-                <router-link
-                  :to="{ name: 'MemoEdit', params: { id: memo.id } }"
-                  style="text-decoration: none"
-                  class="text-body"
-                >
+              <!-- ▼クリックすると編集画面に移動 -->
+              <router-link
+                :to="{ name: 'MemoEdit', params: { id: memo.id } }"
+                style="text-decoration: none"
+                class="text-body"
+              >
+                <div class="card" style="height: 12rem">
                   <div class="card-body">
                     <h6 class="card-title">{{ memo.title }}</h6>
                     <p class="card-text">{{ memo.content.slice(0, 24) }}</p>
@@ -58,9 +58,9 @@
                       }}</small>
                     </div>
                   </div>
-                </router-link>
-                <!-- ▲クリックすると編集画面に移動 -->
-              </div>
+                </div>
+              </router-link>
+              <!-- ▲クリックすると編集画面に移動 -->
             </div>
           </div>
         </div>

@@ -81,7 +81,6 @@
 <script>
 import axios from "axios";
 import { baseurl } from "../const";
-import { mapGetters } from "vuex";
 
 export default {
   name: "MemoForm",

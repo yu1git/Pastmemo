@@ -4,7 +4,10 @@
       <h4 class="text-center m-3 flex-grow-1">
         検索：{{ $store.state.filterQuery }}
       </h4>
-      <button @click="$router.go(-1)" class="btn btn-outline-info mt-2  d-flex align-items-center">
+      <button
+        @click="$router.go(-1)"
+        class="btn btn-outline-info mt-2 d-flex align-items-center"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -28,13 +31,13 @@
         v-for="SearchedMemo in SearchedMemos"
         v-bind:key="SearchedMemo"
       >
-        <div class="card" style="height: 12rem">
-          <!-- ▼クリックすると編集画面に移動 -->
-          <router-link
-            :to="{ name: 'MemoEdit', params: { id: SearchedMemo.id } }"
-            style="text-decoration: none"
-            class="text-body"
-          >
+        <!-- ▼クリックすると編集画面に移動 -->
+        <router-link
+          :to="{ name: 'MemoEdit', params: { id: SearchedMemo.id } }"
+          style="text-decoration: none"
+          class="text-body"
+        >
+          <div class="card" style="height: 12rem">
             <div class="card-body">
               <h6 class="card-title">{{ SearchedMemo.title }}</h6>
               <p class="card-text">{{ SearchedMemo.content }}</p>
@@ -44,9 +47,9 @@
                 }}</small>
               </div>
             </div>
-          </router-link>
-          <!-- ▲クリックすると編集画面に移動 -->
-        </div>
+          </div>
+        </router-link>
+        <!-- ▲クリックすると編集画面に移動 -->
       </div>
     </div>
   </div>
