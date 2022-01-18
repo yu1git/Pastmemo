@@ -58,7 +58,10 @@
                     </div>
                   </div>
                   <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-info p-2 m-2 d-flex align-items-center" style="width: 9rem; height: 3rem">
+                    <button 
+                      type="submit" 
+                      class="btn btn-info p-2 m-2 d-flex align-items-center" 
+                      style="width: 155px; height: 3rem">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
@@ -89,7 +92,7 @@
                 </p>
                 <div class="d-flex justify-content-center">
                   <button @click="tab = 2" class="btn btn-info p-2 m-2 d-flex align-items-center" 
-                  style="width: 9rem; height: 3rem">
+                  style="width: 155px; height: 3rem">
                     <span class="flex-grow-1">ユーザー登録へ</span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -204,7 +207,7 @@
               </div>
               <div class="d-flex justify-content-center">
                 <button type="submit" class="btn btn-info p-2 m-2 d-flex align-items-center" 
-                style="width: 10rem; height: 3rem">
+                style="width: 177px; height: 3rem">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
