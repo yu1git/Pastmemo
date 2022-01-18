@@ -31,7 +31,7 @@
                   d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"
                 />
               </svg>
-              <small>New</small>
+              <span class="flex-grow-1">New</span>
             </RouterLink>
             <!-- ▲メモ新規作成ボタン -->
           </div>
@@ -42,13 +42,13 @@
               v-for="memo in $store.state.memos"
               v-bind:key="memo.id"
             >
-              <div class="card" style="height: 12rem">
-                <!-- ▼クリックすると編集画面に移動 -->
-                <router-link
-                  :to="{ name: 'MemoEdit', params: { id: memo.id } }"
-                  style="text-decoration: none"
-                  class="text-body"
-                >
+              <!-- ▼クリックすると編集画面に移動 -->
+              <router-link
+                :to="{ name: 'MemoEdit', params: { id: memo.id } }"
+                style="text-decoration: none"
+                class="text-body"
+              >
+                <div class="card" style="height: 12rem">
                   <div class="card-body">
                     <h6 class="card-title">{{ memo.title }}</h6>
                     <p class="card-text">{{ memo.content.slice(0, 24) }}</p>
@@ -58,9 +58,9 @@
                       }}</small>
                     </div>
                   </div>
-                </router-link>
-                <!-- ▲クリックすると編集画面に移動 -->
-              </div>
+                </div>
+              </router-link>
+              <!-- ▲クリックすると編集画面に移動 -->
             </div>
           </div>
         </div>
