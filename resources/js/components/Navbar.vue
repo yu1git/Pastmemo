@@ -73,9 +73,10 @@
           <ul class="navbar-nav me-auto">
             <!-- ▼過去メモ非表示ボタン -->
             <li class="nav-item">
-              <a href="#" class="nav-link" @click="changeShow()"
-                >過去メモ非表示</a
-              >
+              <a href="#" class="nav-link" @click="changeShow()">
+                <span v-if="$store.state.show">過去メモ非表示</span>
+                <span v-else>過去メモ表示</span>
+              </a>
             </li>
             <!-- ▼過去メモ非表示ボタン -->
             <!-- ▼ログイン・ユーザー登録ボタン -->
