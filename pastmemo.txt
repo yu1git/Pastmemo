@@ -427,6 +427,10 @@ https://qiita.com/yyy752/items/d75f329d04e724e9d714
 http://taustation.com/laravel-acquiring-data-of-logged-in-user/
 ・メモを新規作成するときログインユーザーのidを紐づける
 https://nebikatsu.com/8570.html/
+・Herokuにデプロイする
+https://noauto-nolife.com/post/laravel-deploy-after-https-force/
+https://www.hypertextcandy.com/heroku-laravel-gotchas
+https://zenn.dev/shimotaroo/articles/8896edaf30f57d
 
 php artisan tinker
 \App\Models\User::factory()->create(['name' => 'genba neko', 'email' => 'neko@neko.jp', 'password' => bcrypt('nekoneko')]);
