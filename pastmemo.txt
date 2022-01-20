@@ -498,6 +498,23 @@ php artisan tinker
     pages/にページ追加→router.jsを編集。※import忘れずに
 
 テスト
+    ・LaravelのPHPUnitで単体テスト
+        テスト用データベースの用意(databaseフォルダ内)
+            touch database/database_test.sqlite
+        phpunit.xmlの<php></php>内に追記
+            <env name="DB_DATABASE" value="database\database_test.sqlite"/>
+        database/factories/UserFactory.php
+            ?
+        テストクラス作る
+            $ php artisan make:test HelloTest
+        テスト用データベースにマイグレーションする
+            $ php artisan config:clear
+            $ php artisan migrate --env=testing
+        テストを実行
+            $ ./vendor/bin/phpunit
+            こっちでもいい→$php artisan test
+
+
     テストライブラリを使う
 
     インメモリを使う？
