@@ -58,7 +58,10 @@
                     </div>
                   </div>
                   <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-info p-2 m-2 d-flex align-items-center" style="width: 9rem; height: 3rem">
+                    <button 
+                      type="submit" 
+                      class="btn btn-info p-2 m-2 d-flex align-items-center" 
+                      style="width: 155px; min-height: 3rem">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
@@ -89,7 +92,7 @@
                 </p>
                 <div class="d-flex justify-content-center">
                   <button @click="tab = 2" class="btn btn-info p-2 m-2 d-flex align-items-center" 
-                  style="width: 9rem; height: 3rem">
+                  style="width: 155px; min-height: 3rem;">
                     <span class="flex-grow-1">ユーザー登録へ</span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -115,7 +118,7 @@
       <!-- ▲Login Form -->
       <!-- ▼Register Form -->
       <div v-show="tab === 2" class="pb-3">
-        <div class="card" style="width: 80%">
+        <div class="card" style="width: 100%">
           <div class="card-body">
             <h5 class="card-title">新規ユーザー登録</h5>
             <form @submit.prevent="registerSubmit">
@@ -204,7 +207,7 @@
               </div>
               <div class="d-flex justify-content-center">
                 <button type="submit" class="btn btn-info p-2 m-2 d-flex align-items-center" 
-                style="width: 10rem; height: 3rem">
+                style="width: 177px; min-height: 3rem">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
