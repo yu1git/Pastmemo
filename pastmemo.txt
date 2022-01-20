@@ -506,7 +506,10 @@ php artisan tinker
         database/factories/UserFactory.php
             ?
         テストクラス作る
-            $ php artisan make:test HelloTest 
+            $ php artisan make:test HelloTest
+        テスト用データベースにマイグレーションする
+            $ php artisan config:clear
+            $ php artisan migrate --env=testing
         テストを実行
             $ ./vendor/bin/phpunit
             こっちでもいい→$php artisan test

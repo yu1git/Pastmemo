@@ -166,7 +166,7 @@ export const store = createStore({
         //ログアウト
         async logout({ dispatch }) {
             await axios.get('/sanctum/csrf-cookie');
-            await axios.post('/api/logout');
+            await axios.get('/api/logout');
             await dispatch('out');
         },
         async out({ commit }) {

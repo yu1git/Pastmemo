@@ -22,14 +22,14 @@
         <env name="APP_ENV" value="testing" force="true"/>
         <env name="BCRYPT_ROUNDS" value="4"/>
         <env name="CACHE_DRIVER" value="array"/>
-        <env name="DB_CONNECTION" value="sqlite"/>
-        <!--<env name="DB_DATABASE" value=":memory:"/>-->
-        <env name="DB_DATABASE" value="database\database_test.sqlite"/>
+        <!-- ▼単体テスト用データベース -->
+        <env name="DB_CONNECTION" value="testing_sqlite"/>
+        <env name="DB_DATABASE" value=":memory:"/>
+        <!--<env name="DB_DATABASE" value=".\database\database_test.sqlite"/>-->
+        <!-- ▲単体テスト用データベース -->
         <env name="MAIL_MAILER" value="array"/>
         <env name="QUEUE_CONNECTION" value="sync"/>
         <env name="SESSION_DRIVER" value="array"/>
         <env name="TELESCOPE_ENABLED" value="false"/>
-        <!-- 単体テスト用 -->
-        <env name="DB_DATABASE" value="database\database_test.sqlite"/>
     </php>
 </phpunit>

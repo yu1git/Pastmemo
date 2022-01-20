@@ -11,43 +11,43 @@ use App\Models\User;
 
 class HelloTest extends TestCase
 {
-    use RefreshDatabase;
+    // use RefreshDatabase;
 
-    private $accessToken = null;
+    // private $accessToken = null;
 
-    public function setUp(): void
-    {
-        parent::setUp();
+    // public function setUp(): void
+    // {
+    //     parent::setUp();
 
-        // テストユーザ作成
-        User::create([
-            'name' => 'sample user',
-            'email' => 'sample@sankosc.co.jp',
-            'password' => Hash::make('sample123'),
-        ]);
+    //     // テストユーザ作成
+    //     User::create([
+    //         'name' => 'sample user',
+    //         'email' => 'sample@sankosc.co.jp',
+    //         'password' => Hash::make('sample123'),
+    //     ]);
 
-        // 2.ログインAPIでアクセストークン取得
-        $response = $this->post('/api/login', [
-            'email' => 'sample@sankosc.co.jp',
-            'password' => 'sample123'
-        ]);
-        $response->assertOk();
-        // 3.アクセストークンを変数に保存しておく
-        $this->accessToken = $response->decodeResponseJson('access_token');
-    }
+    //     // 2.ログインAPIでアクセストークン取得
+    //     $response = $this->post('/api/login', [
+    //         'email' => 'sample@sankosc.co.jp',
+    //         'password' => 'sample123'
+    //     ]);
+    //     $response->assertOk();
+    //     // 3.アクセストークンを変数に保存しておく
+    //     $this->accessToken = $response->decodeResponseJson('access_token');
+    // }
     /**
      * @test
      * @group testing
      */
-    public function getWithAuth()
-    {
-        $response = $this->get('/api/user', [
-            'Authorization' => 'Bearer '.$this->accessToken
-        ]);
-        $response->assertOk()->assertJsonFragment([
-            'name' => 'sample user'
-        ]);
-    }
+    // public function getWithAuth()
+    // {
+    //     $response = $this->get('/api/user', [
+    //         'Authorization' => 'Bearer '.$this->accessToken
+    //     ]);
+    //     $response->assertOk()->assertJsonFragment([
+    //         'name' => 'sample user'
+    //     ]);
+    // }
 
     /**
     * A basic feature test example.
