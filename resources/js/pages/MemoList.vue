@@ -1,40 +1,48 @@
 <template>
   <div class="container-fluid">
-    <!-- ▼メモが0の時、初回の説明画面を表示する -->
-    <div v-if="$store.state.firstFlag">
-      「New」ボタンを押してメモを新規作成してください。
-    </div>
-    <!-- ▲メモが0の時、初回の説明画面を表示する -->
-    <div v-else>
-      <div class="row justify-content-center">
-        <!-- ▼過去メモ表示・非表示でMemoListを表示する幅を変える -->
-        <div
-          v-bind:class="[$store.state.show === true ? 'col-md-9' : 'col-md-12']"
-        >
-          <div class="d-flex mb-3 justify-content-center">
-            <h1 class="text-center m-3 flex-grow-1">Memo List</h1>
-            <!-- ▼メモ新規作成ボタン -->
-            <RouterLink
-              class="btn btn-outline-info mt-2 d-flex align-items-center"
-              style="width: 115px; min-height: 3rem"
-              to="/memoForm"
+    <div class="row justify-content-center">
+      <!-- ▼過去メモ表示・非表示でMemoListを表示する幅を変える -->
+      <div
+        v-bind:class="[$store.state.show === true ? 'col-md-9' : 'col-md-12']"
+      >
+        <div class="d-flex mb-3 justify-content-center">
+          <h1 class="text-center m-3 flex-grow-1">Memo List</h1>
+          <!-- ▼メモ新規作成ボタン -->
+          <RouterLink
+            class="btn btn-outline-info mt-2 d-flex align-items-center"
+            style="width: 115px; min-height: 3rem"
+            to="/memoForm"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-plus-circle-fill m-1 mr-2"
+              viewBox="0 0 16 16"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                class="bi bi-plus-circle-fill m-1 mr-2"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"
-                />
-              </svg>
-              <span class="flex-grow-1">New</span>
-            </RouterLink>
-            <!-- ▲メモ新規作成ボタン -->
-          </div>
+              <path
+                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"
+              />
+            </svg>
+            <span class="flex-grow-1">New</span>
+          </RouterLink>
+          <!-- ▲メモ新規作成ボタン -->
+        </div>
+        <!-- ▼メモが0の時、初回の説明画面を表示する -->
+        <div v-if="$store.state.firstFlag">
+           <div class="card" style="height: 12rem;width: 12rem">
+             <div class="card-body">
+             <h6 class="card-title">メモ</h6>
+             <p class="card-text">
+               「New」ボタンを押してメモを新規作成してください。
+             </p>
+             </div>
+
+           </div>
+        </div>
+        <!-- ▲メモが0の時、初回の説明画面を表示する -->
+        <div v-else>
           <div class="row justify-content-center">
             <div
               class="col-sm-2 col-xs-6 mb-3"
@@ -64,12 +72,12 @@
             </div>
           </div>
         </div>
-        <!-- ▼過去メモ -->
-        <div class="col-md-3" v-show="$store.state.show">
-          <PastMemo />
-        </div>
-        <!-- ▲過去メモ -->
       </div>
+      <!-- ▼過去メモ -->
+      <div class="col-md-3" v-show="$store.state.show">
+        <PastMemo />
+      </div>
+      <!-- ▲過去メモ -->
     </div>
   </div>
 </template>
