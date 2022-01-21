@@ -37,6 +37,6 @@ return [
     'max_age' => 0,
 
     //クッキーなどの認証の許可
-    'supports_credentials' => false,
+    'supports_credentials' => true,
 
 ];
