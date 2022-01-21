@@ -73,34 +73,34 @@ return [
         ],
         
         //ローカル環境
-        // 'pgsql' => [
-        //     'driver' => 'pgsql',
-        //     'url' => env('DATABASE_URL'),
-        //     'host' => env('DB_HOST', '127.0.0.1'),
-        //     'port' => env('DB_PORT', '5432'),
-        //     'database' => env('DB_DATABASE', 'forge'),
-        //     'username' => env('DB_USERNAME', 'forge'),
-        //     'password' => env('DB_PASSWORD', ''),
-        //     'charset' => 'utf8',
-        //     'prefix' => '',
-        //     'prefix_indexes' => true,
-        //     'schema' => 'public',
-        //     'sslmode' => 'prefer',
-        // ],
-
-        //本番環境Heroku
         'pgsql' => [
             'driver' => 'pgsql',
-            'host' => $DATABASE_URL["ec2-44-199-52-133.compute-1.amazonaws.com"],
-            'port' => $DATABASE_URL["5432"],
-            'database' => ltrim($DATABASE_URL["path"], "/"),
-            'username' => $DATABASE_URL["eugwcypqtbwsik"],
-            'password' => $DATABASE_URL["adf3df2d1392cc7e69f220ae923143373945aa503c01b4c8bcc46f8180a61fbf"],
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '5432'),
+            'database' => env('DB_DATABASE', 'forge'),
+            'username' => env('DB_USERNAME', 'forge'),
+            'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8',
             'prefix' => '',
+            'prefix_indexes' => true,
             'schema' => 'public',
-            'sslmode' => 'require',
+            'sslmode' => 'prefer',
         ],
+
+        //本番環境Heroku
+        // 'pgsql' => [
+        //     'driver' => 'pgsql',
+        //     'host' => $DATABASE_URL["ec2-44-199-52-133.compute-1.amazonaws.com"],
+        //     'port' => $DATABASE_URL["5432"],
+        //     'database' => ltrim($DATABASE_URL["path"], "/"),
+        //     'username' => $DATABASE_URL["eugwcypqtbwsik"],
+        //     'password' => $DATABASE_URL["adf3df2d1392cc7e69f220ae923143373945aa503c01b4c8bcc46f8180a61fbf"],
+        //     'charset' => 'utf8',
+        //     'prefix' => '',
+        //     'schema' => 'public',
+        //     'sslmode' => 'require',
+        // ],
 
         'sqlsrv' => [
             'driver' => 'sqlsrv',
