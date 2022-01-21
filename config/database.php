@@ -72,7 +72,6 @@ return [
             ]) : [],
         ],
         
-        //ローカル環境
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),

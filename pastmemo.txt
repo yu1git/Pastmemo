@@ -473,6 +473,8 @@ php artisan tinker
 開発
     php artisan serve
     npm run watch
+
+    ※本番環境とローカルの切り替え：const.jsとconfig/database.phpを変更
         
     モデルとマイグレーションを同時に作成
     php artisan make:model 名(最初大文字。単数形) --migration
