@@ -10,7 +10,7 @@
           <!-- ▼メモ新規作成ボタン -->
           <RouterLink
             class="btn btn-outline-info mt-2 d-flex align-items-center"
-            style="width: 115px; min-height: 3rem"
+            style="width: 115px; height: 3rem"
             to="/memoForm"
           >
             <svg
@@ -45,8 +45,8 @@
         <div v-else>
           <div class="row justify-content-center">
             <div
-              class="col-sm-2 col-xs-6 mb-3"
-              style="width: 12rem"
+              class="col-6 mb-3"
+              style="max-width: 12rem"
               v-for="memo in $store.state.memos"
               v-bind:key="memo.id"
             >
