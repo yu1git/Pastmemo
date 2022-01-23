@@ -14,13 +14,17 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        $faker = \Faker\Factory::create('ja_JP');
+
         DB::table('users')->insert([
             'name' => 'UserName',
             'email' => 'User@mail.com',
             'password' => bcrypt('12345678'),
+            'remember_token' => $faker->randomDigit,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
         
-        $faker = \Faker\Factory::create('ja_JP');
         for ($i = 0; $i < 10; $i++){
             $param = [
                 'name' => $faker->name,
