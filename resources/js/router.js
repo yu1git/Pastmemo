@@ -9,13 +9,13 @@ import SearchedList from './pages/SearchedList.vue'
 import MemoEdit from './pages/MemoEdit.vue'
 
 // 本番環境にデプロイするときこっちに変える？
-// const router = createRouter({
-//     history: createWebHistory(process.env.BASE_URL),
-//     routes: [
-
 export const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHistory(process.env.BASE_URL),
     routes: [
+
+// export const router = createRouter({
+//     history: createWebHistory(),
+//     routes: [
         {
             //最初の画面。メモをすべて表示
             path: '/',

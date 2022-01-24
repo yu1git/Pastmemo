@@ -43,7 +43,7 @@ export const store = createStore({
                         data = memo.title.indexOf(state.filterQuery) !== -1 ||
                         memo.content.indexOf(state.filterQuery) !== -1
                     }else{
-                        // titleがnullの時、titleは検索しない
+                        // titleがnullの時、titleの中身は検索しない
                         data = memo.content.indexOf(state.filterQuery) !== -1
                     }
                     return data;
