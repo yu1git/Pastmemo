@@ -146,7 +146,7 @@ export default {
     // メモ更新
     updateMemo() {
       this.flag = false;
-      if (this.memo.title.length > 20) {
+      if (this.memo.title != null && this.memo.title.length > 20) {
         this.errorMessage = "タイトルは20文字以内で入力してください";
         return;
       }
