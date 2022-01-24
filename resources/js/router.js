@@ -43,6 +43,7 @@ export const router = createRouter({
         {
             //メモ検索結果画面
             path: '/Searched',
+            name:'Searched',
             component: SearchedList,
             meta: {
                 isAuthenticated: true,

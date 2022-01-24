@@ -37,7 +37,6 @@
             v-on:click="searchMemo"
             to="/Searched"
             class="nav-link p-2 myborder rounded-3 d-flex align-items-center"
-            style=""
             ><svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"

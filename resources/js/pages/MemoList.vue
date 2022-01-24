@@ -46,7 +46,7 @@
           <div class="row justify-content-center">
             <div
               class="col-6 mb-3"
-              style="max-width: 12rem"
+              style="max-width: 12rem;"
               v-for="memo in $store.state.memos"
               v-bind:key="memo.id"
             >
@@ -61,9 +61,9 @@
                     <h6 class="card-title">{{ memo.title }}</h6>
                     <p class="card-text">{{ memo.content.slice(0, 24) }}</p>
                     <div class="text-end">
-                      <small class="card-text">{{
-                        makeDate(memo.updated_at)
-                      }}</small>
+                      <small class="card-text">
+                        {{ makeDate(memo.updated_at) }}
+                      </small>
                     </div>
                   </div>
                 </div>

@@ -27,7 +27,7 @@
     <div class="row justify-content-center">
       <div
         class="col-sm-2 col-xs-6 mb-3"
-        style="width: 12rem"
+        style="width: 12rem;"
         v-for="SearchedMemo in SearchedMemos"
         v-bind:key="SearchedMemo"
       >
@@ -37,14 +37,14 @@
           style="text-decoration: none"
           class="text-body"
         >
-          <div class="card" style="height: 12rem">
+          <div class="card" style="height: 12rem;">
             <div class="card-body">
               <h6 class="card-title">{{ SearchedMemo.title }}</h6>
               <p class="card-text">{{ SearchedMemo.content }}</p>
               <div class="text-end">
-                <small class="card-text">{{
-                  makeDate(SearchedMemo.updated_at)
-                }}</small>
+                <small class="card-text">
+                  {{ makeDate(SearchedMemo.updated_at) }}
+                </small>
               </div>
             </div>
           </div>
@@ -66,7 +66,7 @@ export default {
     // 検索した結果をstoreからもってくる
     SearchedMemos() {
       return this.$store.getters.filteredMemos;
-    },
+    }
   },
   methods: {
     //日付フォーマット

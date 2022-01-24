@@ -39,13 +39,16 @@ export const store = createStore({
             let data = state.memos;
             if (state.filterQuery != "") {
                 data = data.filter(function (memo) {
-                    return (
-                        memo.title.indexOf(state.filterQuery) !== -1 ||
+                    if(memo.title != null){
+                        data = memo.title.indexOf(state.filterQuery) !== -1 ||
                         memo.content.indexOf(state.filterQuery) !== -1
-                    );
+                    }else{
+                        // titleがnullの時、titleは検索しない
+                        data = memo.content.indexOf(state.filterQuery) !== -1
+                    }
+                    return data;
                 });
             }
-            console.log(data);
             return data;
         },
 
@@ -79,8 +82,6 @@ export const store = createStore({
         //検索キーワードをstateにセットする
         setFilterQuery: (state, filterQuery) => {
             state.filterQuery = filterQuery;
-            console.log("store実行した");
-            console.log(state.filterQuery);
         },
 
         //過去メモの表示・非表示を切り替える
@@ -122,6 +123,7 @@ export const store = createStore({
                     ? commit('setFirstFlag', true)
                     : commit('setFirstFlag', false);
             } catch (error) {
+                console.log("getMemosエラー");
                 console.error(error);
             }
         },
