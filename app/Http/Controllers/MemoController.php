@@ -78,10 +78,4 @@ class MemoController extends Controller
         Memo::where('id', $id)->delete();
     }
 
-    // public function __construct()
-    // {
-    //     // 認証が必要
-    //     $this->middleware('auth');
-    // }
-
 }

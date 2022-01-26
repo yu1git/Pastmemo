@@ -21,6 +21,16 @@
                 <h5 class="card-title">ログイン</h5>
                 <p>登録済みの方はこちらからログインしてください</p>
                 <form @submit.prevent="loginSubmit">
+                  <!-- ▼エラーメッセージ -->
+                  <div
+                    v-show="$store.state.errorFlag"
+                    class="alert alert-danger"
+                  >
+                    <span class="card-text">
+                      {{ $store.state.authErrorMessages }}
+                    </span>
+                  </div>
+                  <!-- ▲エラーメッセージ -->
                   <div class="row mb-3">
                     <label for="login-email" class="col-sm-3 col-form-label">
                       メールアドレス
@@ -58,10 +68,11 @@
                     </div>
                   </div>
                   <div class="d-flex justify-content-center">
-                    <button 
-                      type="submit" 
-                      class="btn btn-info p-2 m-2 d-flex align-items-center" 
-                      style="width: 155px; min-height: 3rem">
+                    <button
+                      type="submit"
+                      class="btn btn-info p-2 m-2 d-flex align-items-center"
+                      style="width: 155px; min-height: 3rem"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
@@ -91,8 +102,11 @@
                   はじめての方はユーザー登録をしてください
                 </p>
                 <div class="d-flex justify-content-center">
-                  <button @click="tab = 2" class="btn btn-info p-2 m-2 d-flex align-items-center" 
-                  style="width: 155px; min-height: 3rem;">
+                  <button
+                    @click="tab = 2"
+                    class="btn btn-info p-2 m-2 d-flex align-items-center"
+                    style="width: 155px; min-height: 3rem"
+                  >
                     <span class="flex-grow-1">ユーザー登録へ</span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -121,7 +135,15 @@
         <div class="card" style="width: 100%">
           <div class="card-body">
             <h5 class="card-title">新規ユーザー登録</h5>
+
             <form @submit.prevent="registerSubmit">
+              <!-- ▼エラーメッセージ -->
+              <div v-show="$store.state.errorFlag" class="alert alert-danger">
+                <span class="card-text">
+                  {{ $store.state.authErrorMessages }}
+                </span>
+              </div>
+              <!-- ▲エラーメッセージ -->
               <div class="row mb-3">
                 <label for="username" class="col-sm-3 col-form-label">
                   名前
@@ -206,8 +228,11 @@
                 </div>
               </div>
               <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-info p-2 m-2 d-flex align-items-center" 
-                style="width: 177px; min-height: 3rem">
+                <button
+                  type="submit"
+                  class="btn btn-info p-2 m-2 d-flex align-items-center"
+                  style="width: 177px; min-height: 3rem"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -284,6 +309,7 @@ export default {
     },
     // エラー処理
     handleErrors(err) {
+      console.log("エラー処理");
       console.log(err);
     },
     // バリデーション
@@ -310,7 +336,7 @@ export default {
       }
       if (!form.password) {
         this.errors.password = "パスワードを記入してください";
-      } else if (form.password < 8) {
+      } else if (form.password.length < 8) {
         this.errors.password = "パスワードは8文字以上で記入してください";
       } else {
         //2度目以降に正しい入力をしたとき、表示したエラーメッセージを空白に戻す

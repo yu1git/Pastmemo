@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
+use \Symfony\Component\HttpFoundation\Response;
 
 class LoginController extends Controller
 {
@@ -49,16 +51,26 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            return response()->json(['message' => 'Login successful'], 200);
+            $request->session()->regenerate();
+            return new JsonResponse(['message' => 'ログインしました']);
         }
 
-        return response()->json(['message' => 'User not found'], 422);
+        if ( env('APP_ENV') === 'local' ){
+            $email = $request->get('email');
+            $password = $request->get('password');
+            // 500エラー
+            return response()->json("User Not Found or password don't match. (email:{$email})(password:{$password}) ", Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+        else {
+            // 500エラー
+            return response()->json("User Not Found or password don't match.", Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     public function logout()
     {
         Auth::logout();
-        return response()->json(['message' => 'Logged out'], 200);
+        return response()->json(['message' => 'Logged out'], Response::HTTP_OK);
     }
 
 }
