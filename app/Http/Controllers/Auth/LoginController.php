@@ -43,7 +43,7 @@ class LoginController extends Controller
     //     $this->middleware('guest')->except('logout');
     // }
 
-    public function login(Request $request)
+    public function login(Request $request): JsonResponse
     {
         $credentials = $request->validate([
             'email' => 'required|email',
@@ -67,10 +67,12 @@ class LoginController extends Controller
         }
     }
 
-    public function logout()
+    public function logout(Request $request): JsonResponse
     {
         Auth::logout();
-        return response()->json(['message' => 'Logged out'], Response::HTTP_OK);
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return new JsonResponse(['message' => 'ログアウトしました']);
     }
 
 }

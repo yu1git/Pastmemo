@@ -31,6 +31,7 @@ export const store = createStore({
             user: null,
             // error情報を表示するためのフラグ
             errorFlag: false,
+            // エラーメッセージ
             authErrorMessages: null,
 
         }
@@ -107,10 +108,11 @@ export const store = createStore({
         setUser(state, value) {
             state.user = value;
         },
-        //authエラー処理
+        //authエラー処理用フラグ
         setErrorFlag(state, flag) {
             state.errorFlag = flag;
         },
+        //authエラーメッセージ
         setAuthErrorMessages(state, messages) {
             let msg  = messages.slice(32);
             if (msg === "400"){
