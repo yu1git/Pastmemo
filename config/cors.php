@@ -16,7 +16,7 @@ return [
     */
 
     //許可するCORSヘッダーを出力するパスの設定
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    'paths' => ['api/*', 'api/login','api/logout','api/register','sanctum/csrf-cookie'],
 
     //許可するHTTPメソッドの設定
     'allowed_methods' => ['*'],
