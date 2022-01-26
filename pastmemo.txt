@@ -432,6 +432,9 @@ https://nebikatsu.com/8570.html/
 https://noauto-nolife.com/post/laravel-deploy-after-https-force/
 https://www.hypertextcandy.com/heroku-laravel-gotchas
 https://zenn.dev/shimotaroo/articles/8896edaf30f57d
+・エラー
+https://shared.gmocloud.com/lp/iinkai/error/
+https://ja.m.wikipedia.org/wiki/HTTP%E3%82%B9%E3%83%86%E3%83%BC%E3%82%BF%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89
 
 php artisan tinker
 \App\Models\User::factory()->create(['name' => 'genba neko', 'email' => 'neko@neko.jp', 'password' => bcrypt('nekoneko')]);

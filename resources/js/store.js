@@ -112,8 +112,25 @@ export const store = createStore({
             state.errorFlag = flag;
         },
         setAuthErrorMessages(state, messages) {
-            state.authErrorMessages = messages;
-            console.log("setAuthErrorMessages"+ messages)
+            let msg  = messages.slice(32);
+            if (msg === "400"){
+                state.authErrorMessages = "400 Bad Request 不正なリクエストです";
+            }else if (msg === "401"){
+                state.authErrorMessages = "401 Unauthorized メールアドレス又はパスワードが間違っています";
+            }else if (msg === "408"){
+                state.authErrorMessages = "408 Request Timeout 少し時間をおいてからアクセスしてください";
+            }else if (msg === "422"){
+                state.authErrorMessages = "422 Unprocessable Entity 入力内容が間違っています";
+            }else if (msg === "500"){
+                state.authErrorMessages = "500 Internal Server Error サーバーエラーが発生しました";
+            }else if (msg === "503"){
+                state.authErrorMessages = "503 Service Unavailable サーバーにアクセスが集中しています。少し時間をおいてからアクセスしてください";
+            }else if (msg === "504"){
+                state.authErrorMessages = "504 Gateway Timeout 少し時間をおいてからアクセスしてください";
+            }else{
+                state.authErrorMessages = messages;
+            }
+            console.log("setAuthErrorMessages:"+ messages);
         },
     },
     // 非同期の処理を入れる
@@ -155,7 +172,7 @@ export const store = createStore({
                 console.log('registerエラー情報の表示');
                 console.log(error);
                 console.log(error.message);
-
+                // エラーメッセージを表示
                 commit('setAuthErrorMessages', error.message);
                 commit('setErrorFlag', true);
             }
@@ -171,7 +188,7 @@ export const store = createStore({
                 console.log('loginエラー情報の表示');
                 console.log(error);
                 console.log(error.message);
-            
+                // エラーメッセージを表示
                 commit('setAuthErrorMessages', error.message);
                 commit('setErrorFlag', true);
                 
@@ -179,16 +196,21 @@ export const store = createStore({
         },
         async me({ commit }) {
             try {
-                const response = await axios.get('/api/user');
+                const response = await axios.get('/api/user',{
+                    //認証のトークン
+                    headers:''
+                });
                 console.log('認証情報の表示');
                 console.log(response.data);
                 if (response.status === 200) {
+                    // エラーメッセージを非表示
                     commit('setErrorFlag', false);
                     // 認証情報を設定
                     commit('setIsAuth', true);
                     commit('setUser', response.data);
                 } else {
-                    commit('setAuthErrorMessages', response.data.errors);
+                    // エラーメッセージを表示
+                    commit('setAuthErrorMessages', response.message);
                     commit('setErrorFlag', true);
                 }
 
@@ -200,6 +222,10 @@ export const store = createStore({
                 // 認証情報を初期化
                 commit('setIsAuth', false);
                 commit('setUser', null);
+
+                // エラーメッセージを表示
+                commit('setAuthErrorMessages', error.message);
+                commit('setErrorFlag', true);
             }
         },
 

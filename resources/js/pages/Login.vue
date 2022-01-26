@@ -21,14 +21,17 @@
                 <h5 class="card-title">ログイン</h5>
                 <p>登録済みの方はこちらからログインしてください</p>
                 <form @submit.prevent="loginSubmit">
-                  <div class="row mb-3">
-                    <!-- ▼エラーメッセージ -->
-                    <span
-                      v-show="$store.state.errorFlag"
-                      class="alert alert-danger">
+                  <!-- ▼エラーメッセージ -->
+                  <div
+                    v-show="$store.state.errorFlag"
+                    class="alert alert-danger"
+                  >
+                    <span class="card-text">
                       {{ $store.state.authErrorMessages }}
                     </span>
-                    <!-- ▲エラーメッセージ -->
+                  </div>
+                  <!-- ▲エラーメッセージ -->
+                  <div class="row mb-3">
                     <label for="login-email" class="col-sm-3 col-form-label">
                       メールアドレス
                       <span class="text-light bg-danger px-1 small">必須</span>
@@ -132,12 +135,15 @@
         <div class="card" style="width: 100%">
           <div class="card-body">
             <h5 class="card-title">新規ユーザー登録</h5>
-            <!-- ▼エラーメッセージ -->
-            <span v-show="$store.state.errorFlag" class="alert alert-danger">
-              {{ $store.state.authErrorMessages }}
-            </span>
-            <!-- ▲エラーメッセージ -->
+
             <form @submit.prevent="registerSubmit">
+              <!-- ▼エラーメッセージ -->
+              <div v-show="$store.state.errorFlag" class="alert alert-danger">
+                <span class="card-text">
+                  {{ $store.state.authErrorMessages }}
+                </span>
+              </div>
+              <!-- ▲エラーメッセージ -->
               <div class="row mb-3">
                 <label for="username" class="col-sm-3 col-form-label">
                   名前
@@ -330,7 +336,7 @@ export default {
       }
       if (!form.password) {
         this.errors.password = "パスワードを記入してください";
-      } else if (form.password < 8) {
+      } else if (form.password.length < 8) {
         this.errors.password = "パスワードは8文字以上で記入してください";
       } else {
         //2度目以降に正しい入力をしたとき、表示したエラーメッセージを空白に戻す
