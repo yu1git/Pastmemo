@@ -1,5 +1,6 @@
 //import { reactive } from "vue";
 import { createStore } from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
 import axios from 'axios'
 //import { get } from 'lodash';
 
@@ -114,25 +115,25 @@ export const store = createStore({
         },
         //authエラーメッセージ
         setAuthErrorMessages(state, messages) {
-            let msg  = messages.slice(32);
-            if (msg === "400"){
+            let msg = messages.slice(32);
+            if (msg === "400") {
                 state.authErrorMessages = "400 Bad Request 不正なリクエストです";
-            }else if (msg === "401"){
+            } else if (msg === "401") {
                 state.authErrorMessages = "401 Unauthorized メールアドレス又はパスワードが間違っています";
-            }else if (msg === "408"){
+            } else if (msg === "408") {
                 state.authErrorMessages = "408 Request Timeout 少し時間をおいてからアクセスしてください";
-            }else if (msg === "422"){
+            } else if (msg === "422") {
                 state.authErrorMessages = "422 Unprocessable Entity 入力内容が間違っています";
-            }else if (msg === "500"){
+            } else if (msg === "500") {
                 state.authErrorMessages = "500 Internal Server Error サーバーエラーが発生しました";
-            }else if (msg === "503"){
+            } else if (msg === "503") {
                 state.authErrorMessages = "503 Service Unavailable サーバーにアクセスが集中しています。少し時間をおいてからアクセスしてください";
-            }else if (msg === "504"){
+            } else if (msg === "504") {
                 state.authErrorMessages = "504 Gateway Timeout 少し時間をおいてからアクセスしてください";
-            }else{
+            } else {
                 state.authErrorMessages = messages;
             }
-            console.log("setAuthErrorMessages:"+ messages);
+            console.log("setAuthErrorMessages:" + messages);
         },
     },
     // 非同期の処理を入れる
@@ -162,7 +163,7 @@ export const store = createStore({
          * auth
          */
         //会員登録
-        async register({commit, dispatch }, credentials) {
+        async register({ commit, dispatch }, credentials) {
             try {
                 await axios.get('/sanctum/csrf-cookie');
                 // 新規ユーザーの作成
@@ -193,14 +194,14 @@ export const store = createStore({
                 // エラーメッセージを表示
                 commit('setAuthErrorMessages', error.message);
                 commit('setErrorFlag', true);
-                
+
             }
         },
         async me({ commit }) {
             try {
-                const response = await axios.get('/api/user',{
+                const response = await axios.get('/api/user', {
                     //認証のトークン
-                    headers:''
+                    headers: ''
                 });
                 console.log('認証情報の表示');
                 console.log(response.data);
@@ -246,6 +247,11 @@ export const store = createStore({
                 commit('setUser', null);
             }
         },
-    }
+    },
+    plugins: [createPersistedState(
+        { 
+
+        }
+    )]
 })
 

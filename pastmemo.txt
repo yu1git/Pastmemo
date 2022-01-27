@@ -437,6 +437,8 @@ https://zenn.dev/shimotaroo/articles/8896edaf30f57d
 https://shared.gmocloud.com/lp/iinkai/error/
 https://ja.m.wikipedia.org/wiki/HTTP%E3%82%B9%E3%83%86%E3%83%BC%E3%82%BF%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89
 https://reffect.co.jp/vue/vue-axios-learn#i
+・セッション長持ちさせる：vuexはリロードすると消えてしまうので消えないようにする
+https://qiita.com/_masa_u/items/b58b92c283f4e770e094
 
 php artisan tinker
 \App\Models\User::factory()->create(['name' => 'genba neko', 'email' => 'neko@neko.jp', 'password' => bcrypt('nekoneko')]);
