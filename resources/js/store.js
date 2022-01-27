@@ -210,10 +210,6 @@ export const store = createStore({
                     // 認証情報を設定
                     commit('setIsAuth', true);
                     commit('setUser', response.data);
-                } else {
-                    // エラーメッセージを表示
-                    commit('setAuthErrorMessages', response.message);
-                    commit('setErrorFlag', true);
                 }
 
             } catch (error) {
