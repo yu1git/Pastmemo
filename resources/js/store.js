@@ -250,7 +250,10 @@ export const store = createStore({
     },
     plugins: [createPersistedState(
         { 
-
+            paths:[
+                'isAuth',
+                'user'
+            ]
         }
     )]
 })
