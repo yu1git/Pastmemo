@@ -188,14 +188,7 @@ export default {
     // エラー処理
     handleErrors(err) {
       if (err.response && err.response.status === 422) {
-        const errorBag = err.response.data.errors;
-        if (errorBag.title) {
-          this.errorMessage = errorBag.title[0];
-        } else if (errorBag.content) {
-          this.errorMessage = errorBag.content[0];
-        } else {
-          this.errorMessage = err.response.message;
-        }
+        this.errorMessage = err.response.message;
       } else {
         console.log(err.response);
       }

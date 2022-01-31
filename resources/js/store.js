@@ -194,7 +194,6 @@ export const store = createStore({
                 // エラーメッセージを表示
                 commit('setAuthErrorMessages', error.message);
                 commit('setErrorFlag', true);
-
             }
         },
         async me({ commit }) {

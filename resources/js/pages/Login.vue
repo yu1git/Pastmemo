@@ -178,6 +178,9 @@
                   <span v-show="errors.email" class="text-danger">
                     {{ errors.email }}
                   </span>
+                  <span style="font-size: 0.7rem">
+                    （例）User@mail.com
+                  </span>
                 </div>
               </div>
               <div class="row mb-3">
