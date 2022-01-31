@@ -15,7 +15,7 @@ class EnsureFrontendRequestsAreStateful extends BaseSanctumMiddleware
      */
     protected static function isEnvTesting(): bool
     {
-        return config('app<dot>env') === 'localhost';
+        return config('app.env') === 'testing';
     }
 
     /**

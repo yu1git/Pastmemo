@@ -250,9 +250,14 @@ export const store = createStore({
     },
     plugins: [createPersistedState(
         { 
+            // リロードしても消さない
             paths:[
                 'isAuth',
-                'user'
+                'user',
+                'show',
+                'filterQuery',
+                'serchFlag',
+                'memos'
             ]
         }
     )]
