@@ -145,24 +145,6 @@
               </div>
               <!-- ▲エラーメッセージ -->
               <div class="row mb-3">
-                <label for="username" class="col-sm-3 col-form-label">
-                  名前
-                  <span class="text-light bg-danger px-1 small">必須</span>
-                </label>
-                <div class="col-sm-9">
-                  <input
-                    type="text"
-                    id="username"
-                    v-model="registerForm.name"
-                    class="form-control"
-                    v-bind:class="{ errorOutline: errors.name }"
-                  />
-                  <span v-show="errors.name" class="text-danger">
-                    {{ errors.name }}
-                  </span>
-                </div>
-              </div>
-              <div class="row mb-3">
                 <label for="email" class="col-sm-3 col-form-label">
                   メールアドレス
                   <span class="text-light bg-danger px-1 small">必須</span>
@@ -268,7 +250,6 @@ export default {
     return {
       tab: 1,
       errors: {
-        name: "",
         email: "",
         password: "",
         password_confirmation: "",
@@ -278,7 +259,6 @@ export default {
         password: "",
       },
       registerForm: {
-        name: "",
         email: "",
         password: "",
         password_confirmation: "",
@@ -319,14 +299,6 @@ export default {
     validMsg(form) {
       let validEmail =
         /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9]{1,}$/;
-      if (!form.name) {
-        this.errors.name = "名前を記入してください";
-      } else if (form.name.length > 255) {
-        this.errors.name = "名前は255文字以内で記入してください";
-      } else {
-        //2度目以降に正しい入力をしたとき、表示したエラーメッセージを空白に戻す
-        this.errors.name = "";
-      }
       if (!form.email) {
         this.errors.email = "メールアドレスを記入してください";
       } else if (form.email.length > 255) {
