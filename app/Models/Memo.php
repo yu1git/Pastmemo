@@ -21,14 +21,4 @@ class Memo extends Model
     {
         return $this->belongsTo(User::class);
     }
-    // 保存時にログインユーザーのidをuser_idに保存する
-    // protected static function boot()
-    // {
-    //     parent::boot();
-
-    //     // 保存時user_idをログインユーザーに設定
-    //     self::saving(function($memo) {
-    //         $memo->user_id = \Auth::id();
-    //     });
-    // }
 }
