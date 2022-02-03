@@ -1,6 +1,6 @@
 # 過去メモ
 
-![pastmemo](https://user-images.githubusercontent.com/86947090/152261442-fb853a98-63f6-4694-aa0e-79ce797b6dfe.png)
+![pastmemoGit](https://user-images.githubusercontent.com/86947090/152261765-a24d6bdf-7359-424a-a84a-cf3eae632ecf.png)
 
 ## コンセプト
 過去、自分が考えたアイデアを思い出すきっかけをつくり、そのアイデアをさらに深める
