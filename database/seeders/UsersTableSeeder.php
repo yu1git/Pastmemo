@@ -17,6 +17,7 @@ class UsersTableSeeder extends Seeder
         $faker = \Faker\Factory::create('ja_JP');
 
         DB::table('users')->insert([
+            'name' => 'UserName',
             'email' => 'User@mail.com',
             'password' => bcrypt('12345678'),
             'remember_token' => $faker->randomDigit,
@@ -26,6 +27,7 @@ class UsersTableSeeder extends Seeder
         
         for ($i = 0; $i < 10; $i++){
             $param = [
+                'name' => $faker->name,
                 'email' => $faker->email,
                 'password' => $faker->password,
                 'remember_token' => $faker->randomDigit,
