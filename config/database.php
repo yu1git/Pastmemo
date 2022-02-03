@@ -18,7 +18,7 @@ return [
     //ローカル環境
     //'default' => env('DB_CONNECTION', 'mysql'),
     //本番環境Heroku
-    'default' => 'pgsql',
+    'default' => env('DB_CONNECTION', 'pgsql'),
     /*
     |--------------------------------------------------------------------------
     | Database Connections
