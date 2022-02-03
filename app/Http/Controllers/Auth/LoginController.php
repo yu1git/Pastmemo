@@ -61,10 +61,10 @@ class LoginController extends Controller
             // 500エラー
             return response()->json("User Not Found or password don't match. (email:{$email})(password:{$password}) ", Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-        else {
-            // 500エラー
-            return response()->json("User Not Found or password don't match.", Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
+        // else {
+        //     // 500エラー
+        //     return response()->json("User Not Found or password don't match.", Response::HTTP_INTERNAL_SERVER_ERROR);
+        // }
     }
 
     public function logout(Request $request): JsonResponse
