@@ -16,8 +16,8 @@ class RegisterRequest extends FormRequest {
     }
 
     public function rules() {
-        $message = "2RegisterRequestのrulesまできた";
-        dd($message);
+        //$message = "2RegisterRequestのrulesまできた";
+        //dd($message);
         return [
             'name'    => 'required|string|max:255',
             'email'    => 'required|string|email:strict,dns,spoof|max:255|unique:users',
