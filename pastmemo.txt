@@ -398,6 +398,7 @@ https://getbootstrap.jp/docs/4.2/utilities/flex/
         </li>
 
 ・名前を登録する必要がなかったので消す。Login.vue seeders migrations registerController.php RegisterRequest.php Models/user.php UserFactory.php
+    →500エラー：required消して、null許容する？
 
 ＜参考＞
 ・jsonからとってきてデータ一覧を表示
