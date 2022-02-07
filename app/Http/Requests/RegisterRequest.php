@@ -10,8 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RegisterRequest extends FormRequest {
     public function authorize() {
-        $message = "1RegisterRequestのauthorizeまできた";
-        dd($message);
+        //$message = "1RegisterRequestのauthorizeまできた";
+        //dd($message);
         return true;
     }
 
