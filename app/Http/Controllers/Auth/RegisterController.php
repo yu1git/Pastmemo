@@ -47,7 +47,7 @@ class RegisterController extends Controller
 
     // 会員登録
     public function register(RegisterRequest $request) {
-        $message = "RegisterControllerまできた";
+        $message = "3RegisterControllerまできた";
         dd($message,$request);
         User::create([
             'name' =>  $request->name,
