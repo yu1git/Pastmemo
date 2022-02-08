@@ -398,7 +398,14 @@ https://getbootstrap.jp/docs/4.2/utilities/flex/
         </li>
 
 ・名前を登録する必要がなかったので消す。Login.vue seeders migrations registerController.php RegisterRequest.php Models/user.php UserFactory.php
-    →500エラー：required消して、null許容する？
+    →500エラー:Emailのバリデーションを行うSpoofCheckValidationクラスは、PHPのintl拡張モジュールが必要
+        exception: "LogicException"
+        file: "/app/vendor/egulias/email-validator/src/Validation/SpoofCheckValidation.php"
+        line: 20
+        message: "The Egulias\\EmailValidator\\Validation\\SpoofCheckValidation class requires the Intl extension."
+    原因：heroku環境のPHPのバージョンにintlっていう拡張モジュールがデフォルトでインストールされていない
+    https://devcenter.heroku.com/ja/articles/php-support#extensions
+    →composer.json  のrequireに"ext-intl":"*" を追加して、composer update  を行う
 
 ＜参考＞
 ・jsonからとってきてデータ一覧を表示
