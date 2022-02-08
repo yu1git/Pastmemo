@@ -50,7 +50,6 @@ class RegisterController extends Controller
         //$message = "3RegisterControllerまできた";
         //dd($message,$request);
         User::create([
-            'name' =>  $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
