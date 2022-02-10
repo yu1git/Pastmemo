@@ -8,7 +8,8 @@ use App\Models\User;
 
 class Memo extends Model
 {
-    //protected $guarded = ['id'];
+    //
+    protected $guarded = ['id'];
 
     //Mass Assignment（割り当て許可）の設定
     protected $fillable =
