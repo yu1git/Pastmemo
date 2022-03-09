@@ -407,6 +407,9 @@ https://getbootstrap.jp/docs/4.2/utilities/flex/
     https://devcenter.heroku.com/ja/articles/php-support#extensions
     →composer.json  のrequireに"ext-intl":"*" を追加して、composer update  を行う
 
+・CSRFが本来ならsetされていないとだめだが、500エラーサーバーエラー時はsetされていない。
+    →herokuの設定のSANCTUM_STATEFUL_DOMAINSとSESSION_DOMAINの「/」と空白を取ったらいけた。
+
 ＜参考＞
 ・jsonからとってきてデータ一覧を表示
 https://blog.capilano-fw.com/?p=432#Vue
