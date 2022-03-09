@@ -407,6 +407,9 @@ https://getbootstrap.jp/docs/4.2/utilities/flex/
     https://devcenter.heroku.com/ja/articles/php-support#extensions
     →composer.json  のrequireに"ext-intl":"*" を追加して、composer update  を行う
 
+
+
+
 ＜参考＞
 ・jsonからとってきてデータ一覧を表示
 https://blog.capilano-fw.com/?p=432#Vue
@@ -452,6 +455,13 @@ https://reffect.co.jp/vue/vue-axios-learn#i
 https://qiita.com/_masa_u/items/b58b92c283f4e770e094
 ・500エラー　session store not set on request
 https://laracasts.com/discuss/channels/laravel/sanctum-throws-session-store-not-set-on-request
+・Modelsのguardedとfillableについて
+https://laravel.hatenablog.com/entry/2013/10/24/005050
+https://qol-kk.com/wp2/blog/2021/08/25/post-3003/
+・中間テーブル作成
+https://zakkuri.life/%E3%80%90laravel%E3%80%91%E4%B8%AD%E9%96%93%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B-%E5%9F%BA%E6%9C%AC%E7%B7%A8/
+https://readouble.com/laravel/8.x/ja/migrations.html
+
 
 php artisan tinker
 \App\Models\User::factory()->create(['name' => 'genba neko', 'email' => 'neko@neko.jp', 'password' => bcrypt('nekoneko')]);
@@ -521,6 +531,9 @@ php artisan tinker
     $ php artisan make:request リクエスト名(CreateMemoRequest)
 
     pages/にページ追加→router.jsを編集。※import忘れずに
+
+    中間テーブルの作成
+        命名規則：2つのテーブルをアルファベット順に並べ、テーブル名 (単数形) を_ (アンダーバー) で繋げる
 
 テスト
     ・LaravelのPHPUnitで単体テスト
