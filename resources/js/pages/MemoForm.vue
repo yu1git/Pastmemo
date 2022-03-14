@@ -59,6 +59,17 @@
           placeholder="タイトル"
           @input="flagChange"
         />
+
+        <!--Vue-Select-->
+        <div class="row">
+          <div class="col-3">
+            <v-select :options="options" v-model="selectTest"></v-select>
+          </div>
+        </div>
+        <div class="pt-2">
+          選択されているデータ： <span v-text="selectTest"></span>
+        </div>
+
         <textarea
           class="memo-content"
           style="border: none; resize: none"
@@ -93,6 +104,7 @@ export default {
       errorMessage: "",
       //メモの入力が始まっているか確認するフラグ
       flag: false,
+      options: ["太郎", "次郎", "三郎", "花子"],
     };
   },
 

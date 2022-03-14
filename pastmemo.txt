@@ -407,7 +407,11 @@ https://getbootstrap.jp/docs/4.2/utilities/flex/
     https://devcenter.heroku.com/ja/articles/php-support#extensions
     →composer.json  のrequireに"ext-intl":"*" を追加して、composer update  を行う
 
-
+・Vue-Selectをnpmでインストールしようと思ったが、vue3に対応しているのがまだベータ版だったのでとりあえずCDNで使う
+    <link rel="stylesheet" href="https://unpkg.com/vue-select@latest/dist/vue-select.css">
+    <script src="https://unpkg.com/vue-select@latest"></script>
+    →npmでインストール
+    $npm install vue-select@beta
 
 
 ＜参考＞
