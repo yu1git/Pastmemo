@@ -2,7 +2,6 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import { router } from './router.js'
 import { store } from './store.js'
-import vSelect from 'vue-select'
 
 createApp(App)
     .use(router)
@@ -20,7 +19,7 @@ require('./bootstrap');
 window.Vue = require('vue').default;
 
 // Vue Select
-Vue.component('v-select', vSelect)
+Vue.component('v-select', require('vue-select').default);
 
 /**
  * The following block of code may be used to automatically register your
